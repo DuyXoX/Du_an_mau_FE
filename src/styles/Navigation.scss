@@ -1,0 +1,10 @@
+.nav-link:nth-child(3) {
+    color: white;
+    background-color: #ffaa6d;
+    border-radius: .3rem;
+}
+
+.nav-link:hover:nth-child(3) {
+    color: #ffaa6d;
+    background-color: #ffddc4;
+}
