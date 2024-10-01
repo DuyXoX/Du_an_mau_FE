@@ -1,10 +1,25 @@
-.nav-link:nth-child(3) {
+.navbar-brand {
     color: white;
-    background-color: #ffaa6d;
-    border-radius: .3rem;
+
+    &:hover {
+        color: #ffeb55;
+    }
 }
 
-.nav-link:hover:nth-child(3) {
-    color: #ffaa6d;
-    background-color: #ffddc4;
+.navbar-collapse {
+    .nav-link {
+        color: white;
+
+        &:hover {
+            color: #ffeb55;
+        }
+    }
+}
+
+.navbar {
+    .form-control {
+        &:focus {
+            box-shadow: none;
+        }
+    }
 }

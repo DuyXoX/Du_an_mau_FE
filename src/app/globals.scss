@@ -1,11 +1,11 @@
 ::selection {
   /* Dùng để tô màu khi bôi đen toàn bộ Web */
-  background-color: #ffaa6d;
-  color: #fff6f0;
+  background-color: #2a534f;
+  color: #f3fffe;
 }
 
 body {
-  background: #fff6f0;
+  // background: #f3fffe;
 }
 
 section {
@@ -17,56 +17,40 @@ section {
 }
 
 .navbar-brand:hover {
-  color: #ffaa6d;
+  color: #2a534f;
   opacity: 80%;
 }
 
 .nav-link:hover {
-  color: #ffddc4;
+  color: #f3fffe;
 }
 
-.text-orange {
-  color: #ffaa6d;
+.text-green {
+  color: #2a534f;
 }
 
-.bg-orange {
-  background-color: #ffaa6d;
+.bg-green {
+  background-color: #2a534f;
 }
 
 .bg-banner {
-  background-color: #fff2d4;
-}
-
-.btn-orange {
-  color: white;
-  border: 1px solid #ffddc4;
-  background-color: #ffaa6d;
-}
-
-.btn-orange:hover {
-  color: #ffaa6d;
-  background: #ffddc4;
-}
-
-.btn-orange:active {
-  color: #ffaa6d !important;
-  background: #fff6f0 !important;
+  background-color: #f3fffe;
 }
 
 .btn-green {
-  color: #198754;
-  border: 1px solid #198754;
-  background-color: #e8f7e8;
-}
-
-.btn-green:hover {
   color: white;
-  background: #e8f7e8;
-}
+  border: 1px solid #f3fffe;
+  background-color: #2a534f;
 
-.btn-green:active {
-  color: #198754 !important;
-  background: #e8f7e8 !important;
+  &:hover {
+    color: #ffeb55;
+    background: #256d67;
+  }
+
+  &:active {
+    color: #ffeb55 !important;
+    background: #2a534f !important;
+  }
 }
 
 .paddingY-3 {
