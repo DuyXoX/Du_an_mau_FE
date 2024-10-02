@@ -26,23 +26,23 @@ const SliderMain = () => {
                     arrows: false, // Xóa bỏ nút điều hướng trái phải khi có 1 slide
                 }
             },
-            {
-                breakpoint: 992, // tạo ra 1 breakpoint cho màn hình có độ rộng 992px 
-                settings: {
-                    centerMode: true, //Chia nữa các slider hai bên chỉ để slider ở giữa là nguyên vẹn
-                    arrows: false, // Xóa bỏ nút điều hướng trái phải khi có 1 slide
-                    slidesToShow: 1, // Số slide hiển thị tại một thời điểm
-                    className: "w-100"
-                }
-            },
-            {
-                breakpoint: 576, // tạo ra 1 breakpoint cho màn hình có độ rộng 576px
-                settings: {
-                    centerMode: true, //Chia nữa các slider hai bên chỉ để slider ở giữa là nguyên vẹn
-                    arrows: false, // Xóa bỏ nút điều hướng trái phải khi có 1 slide
-                    slidesToShow: 1, // Số slide hiển thị tại một thời điểm
-                }
-            }
+            // {
+            //     breakpoint: 992, // tạo ra 1 breakpoint cho màn hình có độ rộng 992px 
+            //     settings: {
+            //         // centerMode: true, //Chia nữa các slider hai bên chỉ để slider ở giữa là nguyên vẹn
+            //         arrows: false, // Xóa bỏ nút điều hướng trái phải khi có 1 slide
+            //         slidesToShow: 1, // Số slide hiển thị tại một thời điểm
+            //         className: "w-100"
+            //     }
+            // },
+            // {
+            //     breakpoint: 576, // tạo ra 1 breakpoint cho màn hình có độ rộng 576px
+            //     settings: {
+            //         // centerMode: true, //Chia nữa các slider hai bên chỉ để slider ở giữa là nguyên vẹn
+            //         arrows: false, // Xóa bỏ nút điều hướng trái phải khi có 1 slide
+            //         slidesToShow: 1, // Số slide hiển thị tại một thời điểm
+            //     }
+            // }
         ]
     };
     return (

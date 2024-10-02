@@ -1,0 +1,34 @@
+.nav-link {
+    &:hover {
+        color: #ffeb55;
+    }
+}
+
+.img-product {}
+
+.img-hover {
+    background: lightgray;
+    position: relative;
+    transition: all 0.7s ease-in-out;
+
+    &::before {
+        content: "";
+        position: absolute;
+        height: 100%;
+        width: 100%;
+        background-color: black;
+        opacity: .5;
+        top: 0;
+        left: 0;
+        transform: translateX(-100%);
+        transition: all 0.7s ease-in-out;
+    }
+
+    &:hover {
+        color: #f3f3f3;
+
+        &::before {
+            transform: scale(7) translate(-20px);
+        }
+    }
+}

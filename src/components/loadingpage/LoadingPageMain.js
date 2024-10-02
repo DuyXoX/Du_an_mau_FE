@@ -12,13 +12,22 @@ import loadingpage_05 from '../../assets/imgs/loadingpage/loadingpage_05.png';
 import loadingpage_06 from '../../assets/imgs/loadingpage/loadingpage_06.png';
 import loadingpage_07 from '../../assets/imgs/loadingpage/loadingpage_07.jpg';
 import loadingpage_bg from '../../assets/imgs/loadingpage/loadingpage_bg.png';
-import product_01 from '../../assets/imgs/product/product_xa_lat.webp';
+import product_xa_lat from '../../assets/imgs/product/product_xa_lat.webp';
+import product_oi from '../../assets/imgs/product/product_oi.webp';
+import product_man_cut from '../../assets/imgs/product/product_man_cut.webp';
+import product_thanh_long from '../../assets/imgs/product/product_thanh_long.webp';
+import product_kho_qua from '../../assets/imgs/product/product_kho_qua.webp';
+import product_ca_tim from '../../assets/imgs/product/product_ca_tim.webp';
+import product_ca_rot from '../../assets/imgs/product/product_ca_rot.webp';
+import product_bap_cai from '../../assets/imgs/product/product_bap_cai.webp';
+import Link from 'next/link';
+
 
 const LoadingPageMain = () => {
     return (
         <section style={{ paddingTop: '0px' }}>
             <Container>
-                <div style={{ backgroundImage: `url(${loadingpage_bg.src})` }} className='position-relative' >
+                <div style={{ background: `url(${loadingpage_bg.src})`, backgroundRepeat: 'no-repeat' }} className='position-relative' >
                     <Row>
                         <Col lg={6} className='d-flex justify-content-end align-items-center'>
                             <div style={{ maxWidth: '380px' }} className=''>
@@ -105,109 +114,118 @@ const LoadingPageMain = () => {
                     </Row>
                     <Row>
                         <Col sm={6} lg={3} className='py-2'>
-                            <div className='border border1 bg-white position-relative'>
-                                <Image src={product_01}
-                                    className='img-fluid d-block mx-auto'
+                            <div className='h-100 border border1 bg-white'>
+                                <Image src={product_xa_lat}
+                                    style={{ maxHeight: '250px', objectFit: 'cover' }}
+                                    className='w-100 d-block mx-auto'
                                     alt='Xà lách'
                                 />
-                                <h6 style={{ bottom: '1%' }}
-                                    className='text-center text-green position-absolute start-50 translate-middle'
+                                <Link href='/product/' style={{ bottom: '1%' }}
+                                    className='py-3 nav-link fw-bold text-center'
                                 >
                                     Xà lách
-                                </h6>
+                                </Link>
                             </div>
                         </Col>
                         <Col sm={6} lg={3} className='py-2'>
-                            <div className='border border1 bg-white position-relative'>
-                                <Image src={product_01}
-                                    className='img-fluid d-block mx-auto'
-                                    alt='Xà lách'
+                            <div className='h-100 border border1 bg-white'>
+                                <Image src={product_oi}
+                                    style={{ maxHeight: '250px', objectFit: 'cover' }}
+                                    className='w-100 d-block mx-auto'
+                                    alt='Ổi'
                                 />
-                                <h6 style={{ bottom: '1%' }}
-                                    className='text-center text-green position-absolute start-50 translate-middle'
+                                <Link href='/product/' style={{ bottom: '1%' }}
+                                    className='py-3 nav-link fw-bold text-center'
                                 >
-                                    Xà lách
-                                </h6>
+                                    Ổi
+                                </Link>
                             </div>
                         </Col>
                         <Col sm={6} lg={3} className='py-2'>
-                            <div className='border border1 bg-white position-relative'>
-                                <Image src={product_01}
-                                    className='img-fluid d-block mx-auto'
-                                    alt='Xà lách'
+                            <div className='h-100 border border1 bg-white'>
+                                <Image src={product_man_cut}
+                                    style={{ maxHeight: '250px', objectFit: 'cover' }}
+                                    className='w-100 d-block mx-auto'
+                                    alt='Măng cụt'
                                 />
-                                <h6 style={{ bottom: '1%' }}
-                                    className='text-center text-green position-absolute start-50 translate-middle'
+                                <Link href='/product/' style={{ bottom: '1%' }}
+                                    className='py-3 nav-link fw-bold text-center'
                                 >
-                                    Xà lách
-                                </h6>
+                                    Măng cụt
+                                </Link>
                             </div>
                         </Col>
                         <Col sm={6} lg={3} className='py-2'>
-                            <div className='border border1 bg-white position-relative'>
-                                <Image src={product_01}
-                                    className='img-fluid d-block mx-auto'
-                                    alt='Xà lách'
+                            <div className='h-100 border border1 bg-white'>
+                                <Image src={product_thanh_long}
+                                    style={{ maxHeight: '250px', objectFit: 'cover' }}
+                                    className='w-100 d-block mx-auto'
+                                    alt='Thanh long'
                                 />
-                                <h6 style={{ bottom: '1%' }}
-                                    className='text-center text-green position-absolute start-50 translate-middle'
+                                <Link href='/product/' style={{ bottom: '1%' }}
+                                    className='py-3 nav-link fw-bold text-center'
                                 >
-                                    Xà lách
-                                </h6>
+                                    Thanh long
+                                </Link>
                             </div>
                         </Col>
                         <Col sm={6} lg={3} className='py-2'>
-                            <div className='border border1 bg-white position-relative'>
-                                <Image src={product_01}
-                                    className='img-fluid d-block mx-auto'
-                                    alt='Xà lách'
+                            <div className='h-100 border border1 bg-white'>
+                                <Image src={product_kho_qua}
+                                    style={{ maxHeight: '250px', objectFit: 'cover' }}
+                                    className='w-100 d-block mx-auto'
+                                    alt='Khổ qua'
                                 />
-                                <h6 style={{ bottom: '1%' }}
-                                    className='text-center text-green position-absolute start-50 translate-middle'
+                                <Link href='/product/' style={{ bottom: '1%' }}
+                                    className='py-3 nav-link fw-bold text-center'
                                 >
-                                    Xà lách
-                                </h6>
+                                    Khổ qua
+                                </Link>
                             </div>
                         </Col>
                         <Col sm={6} lg={3} className='py-2'>
-                            <div className='border border1 bg-white position-relative'>
-                                <Image src={product_01}
-                                    className='img-fluid d-block mx-auto'
-                                    alt='Xà lách'
+                            <div className='h-100 border border1 bg-white'>
+                                <Image src={product_ca_tim}
+                                    style={{ maxHeight: '250px', objectFit: 'cover' }}
+                                    className='w-100 d-block mx-auto'
+                                    alt='Cà tím'
                                 />
-                                <h6 style={{ bottom: '1%' }}
-                                    className='text-center text-green position-absolute start-50 translate-middle'
+                                <Link href='/product/' style={{ bottom: '1%' }}
+                                    className='py-3 nav-link fw-bold text-center'
                                 >
-                                    Xà lách
-                                </h6>
+                                    Cà tím
+                                </Link>
                             </div>
                         </Col>
                         <Col sm={6} lg={3} className='py-2'>
-                            <div className='border border1 bg-white position-relative'>
-                                <Image src={product_01}
-                                    className='img-fluid d-block mx-auto'
-                                    alt='Xà lách'
+                            <div className='h-100 border border1 bg-white'>
+                                <Image src={product_ca_rot}
+                                    style={{ maxHeight: '250px', objectFit: 'cover' }}
+                                    className='w-100 d-block mx-auto'
+                                    alt='Cà rốt'
                                 />
-                                <h6 style={{ bottom: '1%' }}
-                                    className='text-center text-green position-absolute start-50 translate-middle'
+                                <Link href='/product/' style={{ bottom: '1%' }}
+                                    className='py-3 nav-link fw-bold text-center'
                                 >
-                                    Xà lách
-                                </h6>
+                                    Cà rốt
+                                </Link>
                             </div>
                         </Col>
                         <Col sm={6} lg={3} className='py-2'>
-                            <div className='border border1 bg-white position-relative'>
-                                <Image src={product_01}
-                                    className='img-fluid d-block mx-auto'
-                                    alt='Xà lách'
+                            <div className='h-100 border border1 bg-white'>
+                                <Image src={product_bap_cai}
+                                    style={{ maxHeight: '250px', objectFit: 'cover' }}
+                                    className='w-100 d-block mx-auto'
+                                    alt='Bắp cải'
                                 />
-                                <h6 style={{ bottom: '1%' }}
-                                    className='text-center text-green position-absolute start-50 translate-middle'
+                                <Link href='/product/' style={{ bottom: '1%' }}
+                                    className='py-3 nav-link fw-bold text-center'
                                 >
-                                    Xà lách
-                                </h6>
+                                    Bắp cải
+                                </Link>
                             </div>
                         </Col>
+
                     </Row>
                     <Button variant='green' className='mt-3 d-block mx-auto'>
                         Xem tất cả sản phẩm
