@@ -8,6 +8,7 @@ import { apiClient } from '@/service/apiServive';
 import { toast } from 'react-toastify';
 import InputDangKyTuVan from '../inputGroup/InputDangKyTuVan';
 import loadingpage_bg from '../../assets/imgs/loadingpage/loadingpage_bg.png';
+import ScrollAnimation from '../animation/ScrollAnimation';
 
 
 const LoadingPageDangky = () => {
@@ -134,30 +135,34 @@ const LoadingPageDangky = () => {
     };
     return (
         <section id="dang-ky-tu-van">
-            <Container>
+            <Container fluid='xxl'>
                 <Row style={{ '--bs-gutter-x': 'none', border: '3px solid #d9d9d9', background: `url(${loadingpage_bg.src})`, backgroundRepeat: 'no-repeat' }} className='rounded-5'>
                     <Col md={6} className="">
                         <div className='px-3 px-md-5 my-5'>
-                            <h2 className='fw-semibold'>
-                                Hãy liên hệ với chúng tôi
-                            </h2>
-                            <InputDangKyTuVan
-                                formData={formData}
-                                errors={errors}
-                                checkError={checkError}
-                                handleChange={handleChange}
-                                handleSubmit={handleSubmit}
-                            />
+                            <ScrollAnimation animationClass='animation-left'>
+                                <h2 className='fw-semibold'>
+                                    Hãy liên hệ với chúng tôi
+                                </h2>
+                            </ScrollAnimation>
+                            <ScrollAnimation animationClass='animation-left'>
+                                <InputDangKyTuVan
+                                    formData={formData}
+                                    errors={errors}
+                                    checkError={checkError}
+                                    handleChange={handleChange}
+                                    handleSubmit={handleSubmit}
+                                />
+                            </ScrollAnimation>
                         </div>
                     </Col>
                     <Col md={6} className="d-flex align-items-center">
-                        <div className='px-3 px-md-5 my-5'>
+                        <ScrollAnimation animationClass='animation-right px-3 px-md-5 my-5'>
                             <Image
                                 className='img-fluid'
                                 src={avatarform}
-                                alt='Đăng ký khóa học'
+                                alt='Đăng ký tư vấn'
                             />
-                        </div>
+                        </ScrollAnimation>
                     </Col>
                 </Row>
             </Container>

@@ -15,6 +15,7 @@ import product_cam from '../../assets/imgs/product/product_cam.webp';
 import product_ngo_gai from '../../assets/imgs/product/product_ngo_gai.webp';
 import product_ngo_ri from '../../assets/imgs/product/product_ngo_ri.webp';
 import product_ngo_om from '../../assets/imgs/product/product_ngo_om.webp';
+import ScrollAnimation from '../animation/ScrollAnimation';
 
 
 const SliderRauCu = () => {
@@ -57,7 +58,7 @@ const SliderRauCu = () => {
     return (
         <div className='py-5 w-100 d-block mx-auto slider-teacher'>
             <Slider {...settings}>
-                <div className='px-2'>
+                <ScrollAnimation animationClass='animation-bottom px-2'>
                     <Image src={product_trung_cut}
                         className="w-100 h-auto"
                         alt="images-shrimp"
@@ -75,8 +76,8 @@ const SliderRauCu = () => {
                             </span>
                         </div>
                     </div>
-                </div>
-                <div className='px-2'>
+                </ScrollAnimation>
+                <ScrollAnimation animationClass='animation-bottom px-2'>
                     <Image src={product_thit_bo}
                         className="w-100 h-auto"
                         alt="images-shrimp"
@@ -94,8 +95,8 @@ const SliderRauCu = () => {
                             </span>
                         </div>
                     </div>
-                </div>
-                <div className='px-2'>
+                </ScrollAnimation>
+                <ScrollAnimation animationClass='animation-bottom px-2'>
                     <Image src={product_cot_let}
                         className="w-100 h-auto"
                         alt="images-shrimp"
@@ -113,8 +114,8 @@ const SliderRauCu = () => {
                             </span>
                         </div>
                     </div>
-                </div>
-                <div className='px-2'>
+                </ScrollAnimation>
+                <ScrollAnimation animationClass='animation-bottom px-2'>
                     <Image src={product_cam}
                         className="w-100 h-auto"
                         alt="images-shrimp"
@@ -132,8 +133,8 @@ const SliderRauCu = () => {
                             </span>
                         </div>
                     </div>
-                </div>
-                <div className='px-2'>
+                </ScrollAnimation>
+                <ScrollAnimation animationClass='animation-bottom px-2'>
                     <Image src={product_ngo_gai}
                         className="w-100 h-auto"
                         alt="images-shrimp"
@@ -151,8 +152,8 @@ const SliderRauCu = () => {
                             </span>
                         </div>
                     </div>
-                </div>
-                <div className='px-2'>
+                </ScrollAnimation>
+                <ScrollAnimation animationClass='animation-bottom px-2'>
                     <Image src={product_ngo_ri}
                         className="w-100 h-auto"
                         alt="images-shrimp"
@@ -170,8 +171,8 @@ const SliderRauCu = () => {
                             </span>
                         </div>
                     </div>
-                </div>
-                <div className='px-2'>
+                </ScrollAnimation>
+                <ScrollAnimation animationClass='animation-bottom px-2'>
                     <Image src={product_ngo_om}
                         className="w-100 h-auto"
                         alt="images-shrimp"
@@ -189,7 +190,7 @@ const SliderRauCu = () => {
                             </span>
                         </div>
                     </div>
-                </div>
+                </ScrollAnimation>
             </Slider>
         </div>
     );

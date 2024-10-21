@@ -1,0 +1,35 @@
+body {
+    background: #f9f9f9;
+}
+
+.separator {
+    position: relative;
+    padding-left: 15px;
+    /* Điều chỉnh khoảng cách giữa thanh và nội dung */
+}
+
+.separator::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 1px;
+    /* Độ rộng của thanh */
+    height: 80%;
+    /* Chiều cao của thanh */
+    background-color: #dfdfdf;
+    /* Màu của thanh */
+}
+
+.btn-custom {
+    background-color: white;
+
+    &:hover {
+        border: solid 1px #2a534f !important;
+    }
+
+    &:active {
+        border: solid 1px #2a534f !important;
+    }
+}

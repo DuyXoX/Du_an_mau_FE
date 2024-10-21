@@ -62,8 +62,9 @@ const Navigation = () => {
                         {isAuthenticated === null ?
                             <></>
                             : !isAuthenticated ?
-                                <div>
-                                    <Link href="/dang-nhap" className='nav-link me-3'>Đăng nhập</Link>
+                                <div className='d-flex'>
+                                    <Link href="/dang-nhap" className='nav-link'>Đăng nhập</Link>
+                                    <span className='mx-1 text-white'>/</span>
                                     <Link href="/dang-ky" className='nav-link'>Đăng ký</Link>
                                 </div>
                                 :

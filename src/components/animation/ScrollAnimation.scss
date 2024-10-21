@@ -1,0 +1,43 @@
+.animation-left {
+    opacity: 0; // Ẩn phần tử ban đầu
+    transform: translateX(-80px); //Dịch chuyển phần tử từ trái qua phải 80px 
+    transition: all 0.5s ease; // Hiệu ứng chuyển đổi 
+}
+
+.animation-left.active {
+    opacity: 1; // Hiển thị phần tử khi nó xuất hiện 
+    transform: translateX(0); // Đặt lại vị trí ban đầu 
+}
+
+.animation-right {
+    opacity: 0; // Ẩn phần tử ban đầu
+    transform: translateX(80px); //Dịch chuyển phần tử từ phải qua trái 80px 
+    transition: all 0.5s ease; // Hiệu ứng chuyển đổi 
+}
+
+.animation-right.active {
+    opacity: 1; // Hiển thị phần tử khi nó xuất hiện 
+    transform: translateX(0); // Đặt lại vị trí ban đầu 
+}
+
+.animation-top {
+    opacity: 0; // Ẩn phần tử ban đầu
+    transform: translateY(-80px); //Dịch chuyển phần tử xuống 80px 
+    transition: all 0.5s ease; // Hiệu ứng chuyển đổi 
+}
+
+.animation-top.active {
+    opacity: 1; // Hiển thị phần tử khi nó xuất hiện 
+    transform: translateY(0); // Đặt lại vị trí ban đầu 
+}
+
+.animation-bottom {
+    opacity: 0; // Ẩn phần tử ban đầu
+    transform: translateY(80px); //Dịch chuyển phần tử lên 80px 
+    transition: all 0.5s ease; // Hiệu ứng chuyển đổi 
+}
+
+.animation-bottom.active {
+    opacity: 1; // Hiển thị phần tử khi nó xuất hiện 
+    transform: translateY(0); // Đặt lại vị trí ban đầu 
+}

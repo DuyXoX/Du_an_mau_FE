@@ -6,6 +6,7 @@ import LoadingPageTwo from '../loadingpage/LoadingPageTwo';
 import LoadingPageThree from '../loadingpage/LoadingPageThree';
 import LoadingPageFour from '../loadingpage/LoadingPageFour';
 import LoadingPageDangky from '../loadingpage/LoadingPageDangky';
+import BackToTop from '../backto/BackToTop';
 
 const TrangChuMain = () => {
     return (
@@ -16,6 +17,7 @@ const TrangChuMain = () => {
             <LoadingPageThree />
             <LoadingPageFour />
             <LoadingPageDangky />
+            <BackToTop />
         </>
     );
 };

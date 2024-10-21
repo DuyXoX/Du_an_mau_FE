@@ -47,7 +47,7 @@ const SliderMain = () => {
     };
     return (
         <section style={{ paddingTop: '0px' }}>
-            <Container>
+            <Container fluid='xxl' style={{ '--bs-gutter-x': 'none' }}>
                 <div className='w-100 d-block mx-auto slider-teacher'>
                     <Slider {...settings}>
                         <div className=''>

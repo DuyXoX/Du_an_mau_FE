@@ -12,8 +12,8 @@ const Footer = () => {
     };
 
     return (
-        <footer className="mt-5 bg-orange">
-            <Container>
+        <footer className="mt-5 bg-custom">
+            <Container fluid='xxl'>
                 <Row>
                     <Col>
                         <div className='pt-5'>

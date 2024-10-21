@@ -3,28 +3,31 @@
 import React from 'react';
 import { Button, Col, Container, Row } from 'react-bootstrap';
 import SliderRauCu from '../sliders/SliderRauCu';
+import ScrollAnimation from '../animation/ScrollAnimation';
 
 const LoadingPageFour = () => {
     return (
         <section>
-            <Container>
+            <Container fluid='xxl'>
                 <Row>
                     <Col>
-                        <div className=''>
+                        <ScrollAnimation animationClass='animation-left'>
                             <h2 className='text-green text-center'>
                                 Tin tức mới nhất
                             </h2>
-                        </div>
+                        </ScrollAnimation>
                     </Col>
                 </Row>
                 <Row>
                     <Col>
-                        <div className=''>
+                        <ScrollAnimation animationClass='animation-'>
                             <SliderRauCu />
-                            <Button variant='green' className='d-block mx-auto'>
-                                Xem tất cả
-                            </Button>
-                        </div>
+                            <ScrollAnimation animationClass='animation-bottom'>
+                                <Button variant='green' className='d-block mx-auto'>
+                                    Xem tất cả
+                                </Button>
+                            </ScrollAnimation>
+                        </ScrollAnimation>
                     </Col>
                 </Row>
             </Container>

@@ -21,100 +21,115 @@ import product_ca_tim from '../../assets/imgs/product/product_ca_tim.webp';
 import product_ca_rot from '../../assets/imgs/product/product_ca_rot.webp';
 import product_bap_cai from '../../assets/imgs/product/product_bap_cai.webp';
 import Link from 'next/link';
+import ScrollAnimation from '../animation/ScrollAnimation';
 
 
 const LoadingPageMain = () => {
     return (
         <section style={{ paddingTop: '0px' }}>
-            <Container>
+            <Container fluid='xxl'>
                 <div style={{ background: `url(${loadingpage_bg.src})`, backgroundRepeat: 'no-repeat' }} className='position-relative' >
                     <Row>
-                        <Col lg={6} className='d-flex justify-content-end align-items-center'>
+                        <Col md={6} className='d-flex justify-content-center justify-content-md-end align-items-center'>
                             <div style={{ maxWidth: '380px' }} className=''>
-                                <h2 className='text-green'>
-                                    Về chúng tôi
-                                </h2>
-                                <p style={{ fontSize: '12px' }}>
-                                    Thương hiệu đã trải qua một hành trình phát triển nhiều kinh nghiệm khi bắt đầu từ một cơ sở nhỏ vào tháng 06/2006 cho đến nay. Với hơn 17 năm hoạt động trong lĩnh vực thực phẩm sạch và an toàn chúng tôi đã phát triển thành một doanh nghiệp lớn vững mạnh với quy mô khoảng hơn 500 công nhân viên, cung cấp thực phẩm cho nhiều đơn vị trên địa bàn TP. Hồ Chí Minh và Bình Dương.
-                                </p>
-                                <Button variant='green' className=''>
-                                    Xem thêm
-                                </Button>
+                                <ScrollAnimation animationClass='animation-left'>
+                                    <h2 className='text-green'>
+                                        Về chúng tôi
+                                    </h2>
+                                </ScrollAnimation>
+                                <ScrollAnimation animationClass='animation-right'>
+                                    <p style={{ fontSize: '12px' }}>
+                                        Thương hiệu đã trải qua một hành trình phát triển nhiều kinh nghiệm khi bắt đầu từ một cơ sở nhỏ vào tháng 06/2006 cho đến nay. Với hơn 17 năm hoạt động trong lĩnh vực thực phẩm sạch và an toàn chúng tôi đã phát triển thành một doanh nghiệp lớn vững mạnh với quy mô khoảng hơn 500 công nhân viên, cung cấp thực phẩm cho nhiều đơn vị trên địa bàn TP. Hồ Chí Minh và Bình Dương.
+                                    </p>
+                                </ScrollAnimation>
+                                <ScrollAnimation animationClass='animation-bottom'>
+                                    <Button variant='green' className=''>
+                                        Xem thêm
+                                    </Button>
+                                </ScrollAnimation>
                             </div>
                         </Col>
-                        <Col lg={6}>
-                            <div className='d-flex justify-content-center align-items-center'>
-                                <Image src={loadingpage_01} className='img-fluid' alt='ảnh giới thiệu về chúng tôi' />
-                            </div>
+                        <Col md={6}>
+                            <ScrollAnimation animationClass='animation-right'>
+                                <div className='d-flex justify-content-center align-items-center'>
+                                    <Image src={loadingpage_01} className='img-fluid' alt='ảnh giới thiệu về chúng tôi' />
+                                </div>
+                            </ScrollAnimation>
                         </Col>
                     </Row>
                     <Row>
                         <Col>
                             <div className=''>
-                                <h2 className='text-center text-green'>
-                                    Các Sản Phẩm Nổi Bật
-                                </h2>
-                                <div className='d-flex flex-wrap justify-content-center align-items-center'>
-                                    <div className='p-3'>
-                                        <Image
-                                            width={50}
-                                            height={50}
-                                            src={loadingpage_03}
-                                            alt='Tất cả sản phẩm'
-                                            className='d-block mx-auto' />
-                                        <h6 className='d-none d-md-block pt-3 text-green'>
-                                            Tất cả sản phẩm
-                                        </h6>
+                                <ScrollAnimation animationClass='animation-left'>
+                                    <h2 className='text-center text-green'>
+                                        Các Sản Phẩm Nổi Bật
+                                    </h2>
+                                </ScrollAnimation>
+                                <ScrollAnimation animationClass='animation-right'>
+                                    <div className='d-flex flex-wrap justify-content-center align-items-center'>
+                                        <div className='p-3'>
+                                            <Image
+                                                width={50}
+                                                height={50}
+                                                src={loadingpage_03}
+                                                alt='Tất cả sản phẩm'
+                                                className='d-block mx-auto' />
+                                            <h6 className='d-none d-md-block pt-3 text-green'>
+                                                Tất cả sản phẩm
+                                            </h6>
+                                        </div>
+                                        <div className='p-3'>
+                                            <Image
+                                                width={50}
+                                                height={50}
+                                                src={loadingpage_04}
+                                                alt='Tất cả sản phẩm'
+                                                className='d-block mx-auto' />
+                                            <h6 className='d-none d-md-block pt-3 text-green'>
+                                                Rau củ
+                                            </h6>
+                                        </div>
+                                        <div className='p-3'>
+                                            <Image
+                                                width={50}
+                                                height={50}
+                                                src={loadingpage_05}
+                                                alt='Tất cả sản phẩm'
+                                                className='d-block mx-auto' />
+                                            <h6 className='d-none d-md-block pt-3 text-green'>
+                                                Trái cây
+                                            </h6>
+                                        </div>
+                                        <div className='p-3'>
+                                            <Image
+                                                width={50}
+                                                height={50}
+                                                src={loadingpage_06}
+                                                alt='Tất cả sản phẩm'
+                                                className='d-block mx-auto' />
+                                            <h6 className='d-none d-md-block pt-3 text-green'>
+                                                Thịt & Thủy Hải Sản
+                                            </h6>
+                                        </div>
+                                        <div className=''>
+                                            <Image
+                                                width={50}
+                                                height={50}
+                                                src={loadingpage_07}
+                                                alt='Tất cả sản phẩm'
+                                                className='d-block mx-auto' />
+                                            <h6 className='d-none d-md-block pt-3 text-green'>
+                                                Gia vị & Thực phẩm khô
+                                            </h6>
+                                        </div>
                                     </div>
-                                    <div className='p-3'>
-                                        <Image
-                                            width={50}
-                                            height={50}
-                                            src={loadingpage_04}
-                                            alt='Tất cả sản phẩm'
-                                            className='d-block mx-auto' />
-                                        <h6 className='d-none d-md-block pt-3 text-green'>
-                                            Rau củ                                        </h6>
-                                    </div>
-                                    <div className='p-3'>
-                                        <Image
-                                            width={50}
-                                            height={50}
-                                            src={loadingpage_05}
-                                            alt='Tất cả sản phẩm'
-                                            className='d-block mx-auto' />
-                                        <h6 className='d-none d-md-block pt-3 text-green'>
-                                            Trái cây                                        </h6>
-                                    </div>
-                                    <div className='p-3'>
-                                        <Image
-                                            width={50}
-                                            height={50}
-                                            src={loadingpage_06}
-                                            alt='Tất cả sản phẩm'
-                                            className='d-block mx-auto' />
-                                        <h6 className='d-none d-md-block pt-3 text-green'>
-                                            Thịt & Thủy Hải Sản
-                                        </h6>
-                                    </div>
-                                    <div className=''>
-                                        <Image
-                                            width={50}
-                                            height={50}
-                                            src={loadingpage_07}
-                                            alt='Tất cả sản phẩm'
-                                            className='d-block mx-auto' />
-                                        <h6 className='d-none d-md-block pt-3 text-green'>
-                                            Gia vị & Thực phẩm khô
-                                        </h6>
-                                    </div>
-                                </div>
+                                </ScrollAnimation>
                             </div>
                         </Col>
                     </Row>
                     <Row>
                         <Col sm={6} lg={3} className='py-2'>
-                            <div className='h-100 border border1 bg-white'>
+                            <ScrollAnimation animationClass='animation-bottom h-100 border border1 bg-white'>
                                 <Image src={product_xa_lat}
                                     style={{ maxHeight: '250px', objectFit: 'cover' }}
                                     className='w-100 d-block mx-auto'
@@ -125,10 +140,10 @@ const LoadingPageMain = () => {
                                 >
                                     Xà lách
                                 </Link>
-                            </div>
+                            </ScrollAnimation>
                         </Col>
                         <Col sm={6} lg={3} className='py-2'>
-                            <div className='h-100 border border1 bg-white'>
+                            <ScrollAnimation animationClass='animation-bottom h-100 border border1 bg-white'>
                                 <Image src={product_oi}
                                     style={{ maxHeight: '250px', objectFit: 'cover' }}
                                     className='w-100 d-block mx-auto'
@@ -139,10 +154,10 @@ const LoadingPageMain = () => {
                                 >
                                     Ổi
                                 </Link>
-                            </div>
+                            </ScrollAnimation>
                         </Col>
                         <Col sm={6} lg={3} className='py-2'>
-                            <div className='h-100 border border1 bg-white'>
+                            <ScrollAnimation animationClass='animation-bottom h-100 border border1 bg-white'>
                                 <Image src={product_man_cut}
                                     style={{ maxHeight: '250px', objectFit: 'cover' }}
                                     className='w-100 d-block mx-auto'
@@ -153,10 +168,10 @@ const LoadingPageMain = () => {
                                 >
                                     Măng cụt
                                 </Link>
-                            </div>
+                            </ScrollAnimation>
                         </Col>
                         <Col sm={6} lg={3} className='py-2'>
-                            <div className='h-100 border border1 bg-white'>
+                            <ScrollAnimation animationClass='animation-bottom h-100 border border1 bg-white'>
                                 <Image src={product_thanh_long}
                                     style={{ maxHeight: '250px', objectFit: 'cover' }}
                                     className='w-100 d-block mx-auto'
@@ -167,10 +182,10 @@ const LoadingPageMain = () => {
                                 >
                                     Thanh long
                                 </Link>
-                            </div>
+                            </ScrollAnimation>
                         </Col>
                         <Col sm={6} lg={3} className='py-2'>
-                            <div className='h-100 border border1 bg-white'>
+                            <ScrollAnimation animationClass='animation-bottom h-100 border border1 bg-white'>
                                 <Image src={product_kho_qua}
                                     style={{ maxHeight: '250px', objectFit: 'cover' }}
                                     className='w-100 d-block mx-auto'
@@ -181,10 +196,10 @@ const LoadingPageMain = () => {
                                 >
                                     Khổ qua
                                 </Link>
-                            </div>
+                            </ScrollAnimation>
                         </Col>
                         <Col sm={6} lg={3} className='py-2'>
-                            <div className='h-100 border border1 bg-white'>
+                            <ScrollAnimation animationClass='animation-bottom h-100 border border1 bg-white'>
                                 <Image src={product_ca_tim}
                                     style={{ maxHeight: '250px', objectFit: 'cover' }}
                                     className='w-100 d-block mx-auto'
@@ -195,10 +210,10 @@ const LoadingPageMain = () => {
                                 >
                                     Cà tím
                                 </Link>
-                            </div>
+                            </ScrollAnimation>
                         </Col>
                         <Col sm={6} lg={3} className='py-2'>
-                            <div className='h-100 border border1 bg-white'>
+                            <ScrollAnimation animationClass='animation-bottom h-100 border border1 bg-white'>
                                 <Image src={product_ca_rot}
                                     style={{ maxHeight: '250px', objectFit: 'cover' }}
                                     className='w-100 d-block mx-auto'
@@ -209,10 +224,10 @@ const LoadingPageMain = () => {
                                 >
                                     Cà rốt
                                 </Link>
-                            </div>
+                            </ScrollAnimation>
                         </Col>
                         <Col sm={6} lg={3} className='py-2'>
-                            <div className='h-100 border border1 bg-white'>
+                            <ScrollAnimation animationClass='animation-bottom h-100 border border1 bg-white'>
                                 <Image src={product_bap_cai}
                                     style={{ maxHeight: '250px', objectFit: 'cover' }}
                                     className='w-100 d-block mx-auto'
@@ -223,9 +238,8 @@ const LoadingPageMain = () => {
                                 >
                                     Bắp cải
                                 </Link>
-                            </div>
+                            </ScrollAnimation>
                         </Col>
-
                     </Row>
                     <Button variant='green' className='mt-3 d-block mx-auto'>
                         Xem tất cả sản phẩm
