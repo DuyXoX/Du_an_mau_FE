@@ -1,7 +1,3 @@
-body {
-    background: #f9f9f9;
-}
-
 .separator {
     position: relative;
     padding-left: 15px;
@@ -22,6 +18,25 @@ body {
     /* Màu của thanh */
 }
 
+.separator-top {
+    position: relative;
+    // padding-left: 15px;
+    /* Điều chỉnh khoảng cách giữa thanh và nội dung */
+}
+
+.separator-top::before {
+    content: '';
+    position: absolute;
+    top: 0%;
+    transform: translateY(-50%);
+    width: 100%;
+    /* Độ rộng của thanh */
+    height: 1px;
+    /* Chiều cao của thanh */
+    background-color: #dfdfdf;
+    /* Màu của thanh */
+}
+
 .btn-custom {
     background-color: white;
 
@@ -31,5 +46,50 @@ body {
 
     &:active {
         border: solid 1px #2a534f !important;
+    }
+}
+
+input[type='number'] {
+    -moz-appearance: textfield;
+    /* Firefox */
+}
+
+input[type='number']::-webkit-inner-spin-button,
+input[type='number']::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    /* Chrome, Safari, Edge */
+    margin: 0;
+    /* Đảm bảo không có khoảng cách */
+}
+
+@media (max-width:992px) {
+    .card-product {
+        .price {
+            font-size: xx-small;
+        }
+
+        .text-sale {
+            font-size: 8px !important;
+        }
+
+        .icon-start {
+            font-size: small;
+        }
+
+        .love-buy {
+            font-size: calc(.05rem + 1vw) !important;
+        }
+    }
+}
+
+@media (max-width:576px) {
+    .card-product {
+        .btn {
+            font-size: calc(.5rem + 1vw) !important
+        }
+
+        .love-buy {
+            font-size: 6px !important;
+        }
     }
 }

@@ -71,6 +71,10 @@ section {
   width: 90% !important;
 }
 
+.shadow-custom {
+  box-shadow: 0 2px 5px rgba(0, 0, 0, .25) !important;
+}
+
 .fancy-title {
   color: #a5a5a5;
   position: relative;
@@ -85,6 +89,7 @@ section {
   position: absolute;
   top: 50%;
   height: 1px;
+  /* Độ rộng của thanh */
   width: 15%;
   /* Độ dài của vạch kẻ */
   background-color: #c8c8c8;
