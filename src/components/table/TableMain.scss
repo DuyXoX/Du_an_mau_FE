@@ -1,0 +1,18 @@
+.table-container {
+    max-width: calc(100vw - 6.5rem);
+    transition: all .3s;
+}
+
+.p-paginator-page {
+    border-radius: 50rem;
+}
+
+.p-dropdown-items {
+    padding-left: unset;
+}
+
+@media (min-width:1201px) {
+    .table-container {
+        max-width: calc(100vw - 23.5rem);
+    }
+}

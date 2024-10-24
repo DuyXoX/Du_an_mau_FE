@@ -1,8 +1,6 @@
 'use client'
 import Cookies from "js-cookie";
-import { useRouter } from "next/navigation";
 import { toast } from "react-toastify";
-
 
 const setCookie = (name, value) => {
     Cookies.set(name, value, {

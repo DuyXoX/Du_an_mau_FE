@@ -1,0 +1,72 @@
+.buttons__burger {
+    --size: 2rem;
+    --clr: #2a534f;
+    width: var(--size);
+    height: calc(0.7 * var(--size));
+    cursor: pointer;
+    position: relative;
+    display: block;
+
+    #burger {
+        display: none;
+        width: 100%;
+        height: 100%;
+
+        &:checked~span:nth-of-type(1) {
+            transform: translateY(-30%) rotate(40deg);
+            width: 50%;
+            top: 50%;
+        }
+
+        &:checked~span:nth-of-type(3) {
+            transform: translateY(-70%) rotate(-40deg);
+            width: 50%;
+            top: 50%;
+        }
+    }
+
+    span {
+        display: block;
+        position: absolute;
+        width: 100%;
+        border-radius: 0.5rem;
+        border: 2px solid var(--clr);
+        background-color: var(--clr);
+        transition: 0.15s ease-in-out;
+
+        &:nth-of-type(1) {
+            top: 0;
+            right: 0;
+            transform-origin: right center;
+        }
+
+        &:nth-of-type(2) {
+            top: 50%;
+            transform: translateY(-50%);
+        }
+
+        &:nth-of-type(3) {
+            top: 100%;
+            right: 0;
+            transform-origin: right center;
+            transform: translateY(-100%);
+        }
+    }
+}
+
+@media (max-width:1200px) {
+    .logo.container {
+        width: 79px !important;
+        min-width: 79px !important;
+    }
+
+    .css-9r463o {
+        width: 79px !important;
+        min-width: 79px !important;
+    }
+
+    .css-9r463o.ps-collapsed {
+        width: 0px !important;
+        min-width: 0px !important;
+    }
+}

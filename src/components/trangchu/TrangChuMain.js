@@ -7,10 +7,15 @@ import LoadingPageThree from '../loadingpage/LoadingPageThree';
 import LoadingPageFour from '../loadingpage/LoadingPageFour';
 import LoadingPageDangky from '../loadingpage/LoadingPageDangky';
 import BackToTop from '../backto/BackToTop';
+import Header from '@/layouts/Header';
+import Navigation from '@/layouts/Navigation';
+import Footer from '@/layouts/Footer';
 
 const TrangChuMain = () => {
     return (
         <>
+            <Header />
+            <Navigation />
             <SliderMain />
             <LoadingPageMain />
             <LoadingPageTwo />
@@ -18,6 +23,7 @@ const TrangChuMain = () => {
             <LoadingPageFour />
             <LoadingPageDangky />
             <BackToTop />
+            <Footer />
         </>
     );
 };

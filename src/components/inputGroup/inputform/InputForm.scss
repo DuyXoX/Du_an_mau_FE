@@ -1,0 +1,22 @@
+input:-webkit-autofill {
+    /* Dùng để thay đổi khi nhập input đề xuất không bị nền xanh */
+    -webkit-box-shadow: white !important;
+}
+
+.inputGroup {
+
+    input,
+    textarea {
+        &:focus {
+            ~label {
+                background-color: white !important;
+            }
+        }
+
+        &.has-value {
+            ~label {
+                background-color: white !important;
+            }
+        }
+    }
+}

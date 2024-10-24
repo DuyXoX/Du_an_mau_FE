@@ -1,0 +1,35 @@
+.cursor-hover {
+    &:hover {
+        background-color: #ededed;
+    }
+}
+
+@media (max-width:767px) {
+    .dropdown-content {
+        inset: 50px auto auto -75px !important;
+
+        .cursor {
+            font-size: small;
+        }
+    }
+}
+
+@media (max-width: 576px) {
+    .col-hamberger {
+        width: 50%;
+    }
+
+    .ic-bell {
+        font-size: 18px !important;
+    }
+
+    .img-avatar {
+        width: 45px !important;
+        height: 45px !important;
+    }
+
+    .dropdown-content {
+        inset: 50px auto auto -85px !important;
+        transform: translate(-20px, 25px) !important;
+    }
+}
