@@ -21,28 +21,30 @@ const DangNhap = () => {
     }, [router, ss_account]);
 
     const [formData, setFormData] = useState({
-        account: '',
-        password: '',
+        Account: '',
+        MatKhau: '',
     });
 
     const [errors, setErrors] = useState({
-        account: '',
-        password: '',
+        Account: '',
+        MatKhau: '',
     });
 
     const [checkError, setCheckError] = useState(true);
 
     const validate = (name, value) => {
         switch (name) {
-            case 'account':
+            case 'Account':
                 if (!value) {
-                    return 'Vui lòng nhập email của bạn';
-                } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(value)) {
-                    return 'Định dạng email của bạn chưa đúng';
+                    return 'Vui lòng nhập tài khoản của bạn';
+                } else if (value.length < 8) {
+                    return 'Tài khoản phải có ít nhất 8 ký tự';
+                } else if (value.length > 50) {
+                    return 'Tài khoản không thể dài hơn 50 ký tự';
                 } else {
                     return '';
                 }
-            case 'password':
+            case 'MatKhau':
                 if (!value) {
                     return 'Vui lòng nhập mật khẩu của bạn';
                 } else if (value.length < 8) {
@@ -98,14 +100,14 @@ const DangNhap = () => {
 
         try {
             const response = await postData('/login', formData);
-            const { message, warning, error, ss_account, account_user } = response;
+            const { message, warning, error, ss_account } = response;
 
-            // console.log('check response: ', response);
+            console.log('check response: ', ss_account);
 
             if (response && message) {
                 setCookie('ss_account', ss_account);
-                setCookie('account_user', account_user);
                 showToast('success', message, loading);
+                router.push('/thong-tin/nguoi-dung');
                 return;
             }
             if (response && warning) {

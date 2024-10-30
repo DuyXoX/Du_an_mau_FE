@@ -37,7 +37,7 @@ const SidebarHeader = () => {
                             priority // Ưu tiên tải hình ảnh này
                         />
                         <span className='d-none d-xl-inline'>
-                            {!context.hamberger ? ' Fresco' : ''}
+                            {!context.hamberger ? 'Nông Sản' : ''}
                         </span>
                     </Navbar.Brand>
                 </Container>

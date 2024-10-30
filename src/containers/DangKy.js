@@ -18,17 +18,17 @@ const DangKy = () => {
     }, [router, ss_account]);
 
     const [formData, setFormData] = useState({
-        username: '',
-        account: '',
-        password: '',
-        confirmPassword: '',
+        TenDangNhap: '',
+        Account: '',
+        MatKhau: '',
+        NhapLaiMatKhau: ''
     });
 
     const [errors, setErrors] = useState({
-        username: '',
-        account: '',
-        password: '',
-        confirmPassword: '',
+        TenDangNhap: '',
+        Account: '',
+        MatKhau: '',
+        NhapLaiMatKhau: ''
     });
 
     const [checkError, setCheckError] = useState(true);

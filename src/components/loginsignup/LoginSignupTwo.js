@@ -21,38 +21,39 @@ const LoginSignupTwo = ({ login, formData, errors, checkError, handleChange, han
             <InputGroup>
                 {!login &&
                     <div className="inputGroup">
-                        <input type="text" name='username' required
-                            value={formData.username}
+                        <input type="text" name='TenDangNhap' required
+                            value={formData.TenDangNhap}
                             onChange={handleChange}
                         />
-                        <label>Tên</label>
-                        {errors.username &&
+                        <label>Tên Đăng Nhập</label>
+                        {errors.TenDangNhap &&
                             <span
                                 style={{ fontSize: '.75rem' }}
-                                className='text-orange'>
-                                {errors.username}
+                                className='text-green'>
+                                {errors.TenDangNhap}
                             </span>
                         }
                     </div>
                 }
                 <div className="inputGroup">
-                    <input type="email" name='account' required
-                        value={formData.account}
+                    <input type="text" name='Account' required
+                        value={formData.Account}
                         onChange={handleChange}
                     />
-                    <label>Email</label>
-                    {errors.account &&
+                    <label>Tài Khoản</label>
+                    {errors.Account &&
                         <span
                             style={{ fontSize: '.75rem' }}
-                            className='text-orange'>
-                            {errors.account}
+                            className='text-green'>
+                            {errors.Account}
                         </span>
                     }
                 </div>
+
                 <div className="inputGroup">
                     <div className='position-relative'>
-                        <input type={showPassword ? "text" : "password"} name='password' required autoComplete="off"
-                            value={formData.password}
+                        <input type={showPassword ? "text" : "MatKhau"} name='MatKhau' required autoComplete="off"
+                            value={formData.MatKhau}
                             onChange={handleChange}
                         />
                         <label>Mật khẩu</label>
@@ -63,11 +64,11 @@ const LoginSignupTwo = ({ login, formData, errors, checkError, handleChange, han
                             {showPassword ? <FaEyeSlash /> : <FaEye />}
                         </span>
                     </div>
-                    {errors.password &&
+                    {errors.MatKhau &&
                         <span
                             style={{ fontSize: '.75rem' }}
-                            className='text-orange'>
-                            {errors.password}
+                            className='text-green'>
+                            {errors.MatKhau}
                         </span>
                     }
                 </div>
@@ -89,7 +90,7 @@ const LoginSignupTwo = ({ login, formData, errors, checkError, handleChange, han
                         {errors.confirmPassword &&
                             <span
                                 style={{ fontSize: '.75rem' }}
-                                className='text-orange'>
+                                className='text-green'>
                                 {errors.confirmPassword}
                             </span>
                         }
@@ -100,21 +101,21 @@ const LoginSignupTwo = ({ login, formData, errors, checkError, handleChange, han
             <div style={{ fontSize: '10px' }} className='d-flex justify-content-between'>
                 {login ?
                     <Link
-                        className='text-orange nav-link'
+                        className='text-green nav-link'
                         href={'/dang-ky'}
                     >
                         Đăng ký tài khoản mới.
                     </Link>
                     :
                     <Link
-                        className='text-orange nav-link'
+                        className='text-green nav-link'
                         href={'/dang-nhap'}
                     >
                         Đăng nhập tài khoản.
                     </Link>
                 }
                 <Link
-                    className='text-orange nav-link'
+                    className='text-green nav-link'
                     href={'/quen-mat-khau'}
                 >
                     Quên mật khẩu?
@@ -127,7 +128,7 @@ const LoginSignupTwo = ({ login, formData, errors, checkError, handleChange, han
                         type='submit'
                         style={{ minWidth: '150px' }}
                         className='p-2 mt-5'
-                        variant='orange'
+                        variant='green'
                         disabled={checkError}
                     >
                         Đăng nhập
@@ -137,7 +138,7 @@ const LoginSignupTwo = ({ login, formData, errors, checkError, handleChange, han
                         type='submit'
                         style={{ minWidth: '150px' }}
                         className='p-2 mt-5'
-                        variant='orange'
+                        variant='green'
                         disabled={checkError}
                     >
                         Đăng ký

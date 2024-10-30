@@ -8,13 +8,8 @@ import { toast } from 'react-toastify';
 const DeleteModal = ({ formTable, rowData, endpoint, updateData }) => {
     const [showDeleteModal, setShowDeleteModal] = useState(false);
     const tableLabels = new Map([//Sử lý data để trả về định dạng
-        ['hocvien', ' học viên '],
-        ['giaovien', ' giáo viên '],
-        ['lichhoc', ' lịch học '],
-        ['baitap', ' bài tập '],
-        ['khoahoc', ' khóa học '],
-        ['phongtap', ' phòng tập '],
-        ['thongbao', ' thông báo ']
+        ['nguoidung', ' người dùng '],
+        ['sanpham', ' sản phẩm '],
     ]);
 
     const label = tableLabels.get(formTable) || '';
@@ -25,7 +20,7 @@ const DeleteModal = ({ formTable, rowData, endpoint, updateData }) => {
 
     const handleSubmitDelete = async () => {
         const loading = toast.loading('Đang xử lý yêu cầu.');
-        const ID = rowData._id;
+        const ID = rowData.NguoiDungId;
         // console.log('check: ', ID);
         toggleShowDeleteModal(false);
         try {
@@ -70,17 +65,17 @@ const DeleteModal = ({ formTable, rowData, endpoint, updateData }) => {
             >
                 <Modal.Header closeButton>
                     <Modal.Title>
-                        Xác nhận xóa <span className='text-orange'>{rowData?.account}</span>
+                        Xác nhận xóa <span className='text-green'>{rowData?.TenDangNhap}</span>
                     </Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                    Bạn có chắc chắn muốn xóa {label} tên <span className='text-orange'>{rowData?.username}</span> không?
+                    Bạn có chắc chắn muốn xóa {label} tên <span className='text-green'>{rowData?.TenDangNhap}</span> không?
                 </Modal.Body>
                 <Modal.Footer>
                     <Button variant="secondary" onClick={() => toggleShowDeleteModal(false)}>
                         Hủy
                     </Button>
-                    <Button variant="orange" onClick={() => { handleSubmitDelete() }}>
+                    <Button variant="green" onClick={() => { handleSubmitDelete() }}>
                         Xác nhận
                     </Button>
                 </Modal.Footer>

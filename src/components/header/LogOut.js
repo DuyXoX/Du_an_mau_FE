@@ -22,9 +22,10 @@ const LogOut = ({ info }) => {
         }
         return;
     };
+    // console.log('check: ', info);
 
     useEffect(() => {
-        const userName = info.infoUser.username;
+        const userName = info.id.TenDangNhap;
         setUsername(userName);
         // console.log('check contextInfo: ', userName);
 

@@ -4,7 +4,7 @@ import { InfoUser } from "@/containers/context/InfoUser";
 import QuanLy from "./QuanLy";
 
 export const metadata = {
-    title: "Fresco - Quản lý",
+    title: "Nông Sản - Quản lý",
     description: "",
 };
 

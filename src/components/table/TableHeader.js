@@ -8,6 +8,7 @@ import DeletesModal from '../modals/cruds/DeletesModal';
 import { TableContext } from '@/containers/context/getdata/TableData';
 import { TableInfoContext } from '@/containers/context/getdata/TableInfo';
 
+
 const TableHeader = () => {
     const { updateData, selectedDatas, toggleSelectedDatas } = useContext(TableContext);//Lấy data đã có trong context
     const { formTable, endpoint } = useContext(TableInfoContext);
@@ -23,6 +24,8 @@ const TableHeader = () => {
     };
 
     // console.log('check re render');
+    // console.log('check: ', formTable);
+
 
     return (
         <div className='p-3'>

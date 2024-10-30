@@ -1,41 +1,35 @@
 import React, { useEffect } from 'react';
 
 const InputGroup = ({ children }) => {
-    useEffect(() => {
+    const applyHasValueClass = () => {
         const inputs = document.querySelectorAll('.inputGroup input, .inputGroup textarea, .inputGroup select');
-
         inputs.forEach((input) => {
-            // Xử lý cho input và textarea với sự kiện blur
-            if (input.tagName === 'INPUT' || input.tagName === 'TEXTAREA') {
-                input.addEventListener('blur', () => {
-                    if (input.value) {
-                        input.classList.add('has-value');
-                    } else {
-                        input.classList.remove('has-value');
-                    }
-                });
-            }
-
-            // Xử lý cho select với sự kiện change
-            if (input.tagName === 'SELECT') {
-                input.addEventListener('change', () => {
-                    if (input.value) {
-                        input.classList.add('has-value');
-                    } else {
-                        input.classList.remove('has-value');
-                    }
-                });
+            if (input.value) {
+                input.classList.add('has-value');
+            } else {
+                input.classList.remove('has-value');
             }
         });
+    };
 
-        // Cleanup sự kiện khi component unmount
+    useEffect(() => {
+        applyHasValueClass(); // Kiểm tra và áp dụng lớp khi thành phần gắn kết hoặc cập nhật
+
+        // Thêm trình lắng nghe sự kiện cho các sự kiện làm mờ và thay đổi
+        const inputs = document.querySelectorAll('.inputGroup input, .inputGroup textarea, .inputGroup select');
+        inputs.forEach((input) => {
+            input.addEventListener('blur', applyHasValueClass);
+            input.addEventListener('change', applyHasValueClass);
+        });
+
+        // Người nghe sự kiện dọn dẹp không ngừng nghỉ
         return () => {
             inputs.forEach((input) => {
-                input.removeEventListener('blur', null);
-                input.removeEventListener('change', null);
+                input.removeEventListener('blur', applyHasValueClass);
+                input.removeEventListener('change', applyHasValueClass);
             });
         };
-    }, []);
+    }, []); // Chỉ phụ thuộc vào gắn kết và ngắt
 
     return (
         <>

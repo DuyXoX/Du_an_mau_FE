@@ -5,7 +5,7 @@ import Cookies from 'js-cookie';
 import { toast } from 'react-toastify';
 import useSWR from 'swr';
 
-const URL = process.env.NEXT_PUBLIC_API_URL || 'https://nodejs-setup.onrender.com/api';
+const URL = process.env.NEXT_PUBLIC_API_URL || 'https://doman.com/api';
 // console.log('check api: ', URL);
 
 const apiClient = axios.create({ // Tạo một instance của axios với cấu hình cơ bản
@@ -16,25 +16,6 @@ const apiClient = axios.create({ // Tạo một instance của axios với cấu
     withCredentials: true,// Đảm bảo gửi cookie cùng với các request
 });
 
-// Helper để thêm token vào header
-// const addAuthHeader = async (config) => {
-//     const token = Cookies.get('ss_account');
-
-//     if (token) {
-//         const decodedToken = jwt.decode(token); // Giải mã token để kiểm tra thời gian hết hạn
-//         const currentTime = Math.floor(Date.now() / 1000);
-
-//         if (decodedToken && decodedToken.exp < currentTime) {
-//             // Token đã hết hạn, thực hiện refresh
-//             await apiClient.post('/refreshtoken');
-//             const newToken = Cookies.get('ss_account');
-//             config.headers['Authorization'] = `Bearer ${newToken}`;
-//         } else {
-//             config.headers['Authorization'] = `Bearer ${token}`;
-//         }
-//     }
-//     return config;
-// };
 const addAuthHeader = (config) => {
     const token = Cookies.get('ss_account');
     if (token) {
@@ -53,7 +34,7 @@ const handleAuthError = async (error) => {
 
         // Nếu không có token hoặc request là để refresh token thì không cố gắng refresh
         if (!token || originalRequest.url.includes('/refreshtoken')) {
-            clearCookiesAndRedirect();
+            // clearCookiesAndRedirect();
             return Promise.reject(error);
         }
 
@@ -65,11 +46,11 @@ const handleAuthError = async (error) => {
             originalRequest.headers['Authorization'] = `Bearer ${newToken}`;
             return apiClient(originalRequest);
         } catch (refreshError) {
-            clearCookiesAndRedirect();
+            // clearCookiesAndRedirect();
             return Promise.reject(refreshError);
         }
     } else {
-        clearCookiesAndRedirect();
+        // clearCookiesAndRedirect();
         return Promise.reject(error);
     }
 };

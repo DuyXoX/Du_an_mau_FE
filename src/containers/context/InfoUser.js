@@ -1,7 +1,7 @@
 'use client'
 
 import React, { createContext, useEffect, useMemo, useState } from 'react';
-import { jwtVerify, jwtVerifyAuthen } from '@/service/jwtAuthen';
+import { jwtVerify } from '@/service/jwtAuthen';
 import Cookies from 'js-cookie';
 import { clearCookiesAndRedirect } from '@/components/reuses/Cookie';
 
@@ -14,17 +14,13 @@ const InfoUser = ({ children }) => {
     useEffect(() => {
         const fetchUserInfo = async () => {
             const ss_account = Cookies.get('ss_account')
-            const account_user = Cookies.get('account_user');
 
-            if (ss_account && account_user) {
+            if (ss_account) {
                 try {
-                    const infoUser = await jwtVerify(account_user);
-                    const infoUserAuthen = await jwtVerifyAuthen(ss_account);
+                    // console.log('check: ', ss_account);
+                    const decoded = await jwtVerify(ss_account);
                     setIsAuthenticated(true);
-                    setInfo({
-                        infoUser,
-                        infoUserAuthen
-                    });
+                    setInfo(decoded);
                     // console.log('check authen: ', infoUserAuthen.role);
                 } catch (error) {
                     console.error('Error verifying JWT:', error);

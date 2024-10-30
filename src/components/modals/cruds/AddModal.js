@@ -3,8 +3,9 @@ import { Button, Modal } from 'react-bootstrap';
 import showToast from '@/components/reuses/Toast';
 import { toast } from 'react-toastify';
 import { TableInfoContext } from '@/containers/context/getdata/TableInfo';
-import { postData } from '@/service/apiServive';
 import InputFormNguoiDung from '@/components/inputGroup/inputform/InputFormNguoiDung';
+import { postData } from '@/service/apiServive';
+import InputFormSanPham from '@/components/inputGroup/inputform/InputFormSanPham';
 
 const AddModal = ({ formTable, endpoint, updateData, showAddModal, toggleShowAddModal }) => {
     const { typeData, validate } = useContext(TableInfoContext);
@@ -17,7 +18,8 @@ const AddModal = ({ formTable, endpoint, updateData, showAddModal, toggleShowAdd
         ['sanpham', ' sản phẩm '],
     ]);
     const tableComponents = useMemo(() => ({//Sử lý data để trả về định dạng
-        hocvien: InputFormNguoiDung,
+        nguoidung: InputFormNguoiDung,
+        sanpham: InputFormSanPham,
     }), []);
 
     const label = tableLabels.get(formTable) || '';
@@ -123,7 +125,7 @@ const AddModal = ({ formTable, endpoint, updateData, showAddModal, toggleShowAdd
                     <Button
                         type='submit'
                         disabled={checkError}
-                        variant="orange">
+                        variant="green">
                         Xác nhận
                     </Button>
                 </Modal.Footer>

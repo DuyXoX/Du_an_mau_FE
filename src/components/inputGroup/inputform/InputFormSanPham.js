@@ -5,99 +5,100 @@ import './InputForm.scss';
 import '../InputGroup.scss';
 import { Form } from 'react-bootstrap';
 
-const InputFormNguoiDung = ({ formData, errors, handleChange }) => {
-    const [showPassword, setShowPassword] = useState(false);
-
-    const toggleShowPassword = () => {
-        setShowPassword(!showPassword);
-    };
+const InputFormSanPham = ({ formData, errors, handleChange }) => {
 
     return (
         <InputGroup>
             <div className="inputGroup">
-                <input type="text" name='TenDangNhap' required
-                    value={formData.TenDangNhap}
+                <input type="text" name='TenSanPham' required
+                    value={formData.TenSanPham}
                     onChange={handleChange}
                 />
-                <label>Tên Đăng Nhập</label>
-                {errors.TenDangNhap &&
+                <label>Tên Sản Phẩm</label>
+                {errors.TenSanPham &&
                     <span
                         style={{ fontSize: '.75rem' }}
                         className='text-orange'>
-                        {errors.TenDangNhap}
+                        {errors.TenSanPham}
                     </span>
                 }
             </div>
             <div className="inputGroup">
-                <input type="email" name='Account' required
-                    value={formData.Account}
+                <input type="text" name='MoTa' required
+                    value={formData.MoTa}
                     onChange={handleChange}
                 />
-                <label>Tài khoản</label>
-                {errors.Account &&
+                <label>Mô Tả</label>
+                {errors.MoTa &&
                     <span
                         style={{ fontSize: '.75rem' }}
                         className='text-orange'>
-                        {errors.Account}
+                        {errors.MoTa}
                     </span>
                 }
             </div>
             <div className="inputGroup">
-                <div className='position-relative'>
-                    <input type={showPassword ? "text" : "password"} name='MatKhau' required autoComplete="off"
-                        value={formData.MatKhau}
-                        onChange={handleChange}
-                    />
-                    <label>Mật khẩu</label>
-                    <span
-                        className="eye-icon"
-                        onClick={toggleShowPassword}
-                    >
-                        {showPassword ? <FaEyeSlash /> : <FaEye />}
-                    </span>
-                </div>
-                {errors.MatKhau &&
+                <input type="text" name='Gia' required
+                    value={formData.Gia}
+                    onChange={handleChange}
+                />
+                <label>Giá</label>
+                {errors.Gia &&
                     <span
                         style={{ fontSize: '.75rem' }}
                         className='text-orange'>
-                        {errors.MatKhau}
+                        {errors.Gia}
                     </span>
                 }
             </div>
             <div className="inputGroup">
-                <input type="text" name='DiaChi' required
-                    value={formData.DiaChi}
+                <input type="number" name='SoLuongKho' required
+                    value={formData.SoLuongKho}
                     onChange={handleChange}
                 />
-                <label>Địa chỉ</label>
-                {errors.DiaChi &&
+                <label>Số Lượng Kho</label>
+                {errors.SoLuongKho &&
                     <span
                         style={{ fontSize: '.75rem' }}
                         className='text-orange'>
-                        {errors.DiaChi}
+                        {errors.SoLuongKho}
                     </span>
                 }
             </div>
             <div className="inputGroup">
-                <input type="numberphone" name='SoDienThoai' required
-                    value={formData.SoDienThoai}
+                <input type="number" name='LoaiSanPhamId' required
+                    value={formData.LoaiSanPhamId}
                     onChange={handleChange}
                 />
-                <label>SĐT</label>
-                {errors.SoDienThoai &&
+                <label>Loại Sản Phẩm</label>
+                {errors.LoaiSanPhamId &&
                     <span
                         style={{ fontSize: '.75rem' }}
                         className='text-orange'>
-                        {errors.SoDienThoai}
+                        {errors.LoaiSanPhamId}
+                    </span>
+                }
+            </div>
+            <div className="inputGroup">
+                <input type="text" name='HinhAnh' required
+                    value={formData.HinhAnh}
+                    onChange={handleChange}
+                />
+                <label>Hình Ảnh</label>
+                {errors.HinhAnh &&
+                    <span
+                        style={{ fontSize: '.75rem' }}
+                        className='text-orange'>
+                        {errors.HinhAnh}
                     </span>
                 }
             </div>
 
-            <div className='inputGroup'>
+            {/* <div className='inputGroup'>
                 <Form.Select
                     required
-                    name="VaiTro"
-                    value={formData.VaiTro}
+                    name="role"
+                    value={formData.role}
                     onChange={handleChange}
                     aria-label="Chọn vai trò"
                 >
@@ -106,17 +107,17 @@ const InputFormNguoiDung = ({ formData, errors, handleChange }) => {
                     <option value="quanly">Quản lý</option>
                     <option value="admin">Admin</option>
                 </Form.Select>
-                {errors.VaiTro &&
+                {errors.role &&
                     <span
                         style={{ fontSize: '.75rem' }}
                         className='text-orange'>
                         {errors.role}
                     </span>
                 }
-            </div>
+            </div> */}
 
         </InputGroup>
     );
 };
 
-export default InputFormNguoiDung;
+export default InputFormSanPham;

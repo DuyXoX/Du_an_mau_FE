@@ -6,6 +6,7 @@ import { FaPen } from "react-icons/fa";
 import { toast } from 'react-toastify';
 import InputFormNguoiDung from '@/components/inputGroup/inputform/InputFormNguoiDung';
 import { putData } from '@/service/apiServive';
+import InputFormSanPham from '@/components/inputGroup/inputform/InputFormSanPham';
 
 const UpdateModal = ({ formTable, endpoint, rowData, updateData }) => {
     // console.log('check formTable: ', formTable);
@@ -20,7 +21,8 @@ const UpdateModal = ({ formTable, endpoint, rowData, updateData }) => {
         ['sanpham', ' sản phẩm '],
     ]);
     const tableComponents = useMemo(() => ({//Sử lý data để trả về định dạng
-        hocvien: InputFormNguoiDung,
+        nguoidung: InputFormNguoiDung,
+        sanpham: InputFormSanPham,
     }), []);
 
     const label = tableLabels.get(formTable) || '';
@@ -71,7 +73,7 @@ const UpdateModal = ({ formTable, endpoint, rowData, updateData }) => {
             // console.log('check formErrors', formErrors);
             return;
         }
-        const userId = formData._id;
+        const userId = formData.NguoiDungId;
         const loading = toast.loading('Đang xử lý yêu cầu.');
         setCheckError(true);
 
@@ -160,7 +162,7 @@ const UpdateModal = ({ formTable, endpoint, rowData, updateData }) => {
                         <Button
                             type='submit'
                             disabled={checkError}
-                            variant="orange">
+                            variant="green">
                             Xác nhận
                         </Button>
                     </Modal.Footer>

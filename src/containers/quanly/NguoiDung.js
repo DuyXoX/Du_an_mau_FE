@@ -5,40 +5,40 @@ import Cookies from 'js-cookie';
 import { HeadeTitleContext } from '../context/HeadeTitle';
 import { clearCookiesAndRedirect } from '@/components/reuses/Cookie';
 import TableMain from '@/components/table/TableMain';
-import { TableData } from '../context/getdata/TableData';
-import { TableInfo } from '../context/getdata/TableInfo';
-import ValidateHocVien from '../validations/ValidateHocVien';
+import ValidateHocVien from '../validations/ValidateNguoiDung';
 import LoadTable from '@/components/loading/LoadTable';
 import { useGetData } from '@/service/apiServive';
+import { TableData } from '../context/getdata/TableData';
+import { TableInfo } from '../context/getdata/TableInfo';
 
 const NguoiDung = () => {
     const { toggleHeadTitle } = useContext(HeadeTitleContext);
-    const { data, error, isLoading, mutate } = useGetData('/user');
+    const { data, error, isLoading, mutate } = useGetData('/users');
 
     const ss_account = Cookies.get('ss_account');
-    const account_user = Cookies.get('account_user');
     const typeData = {
-        _id: '',
-        username: '',
-        account: '',
-        password: '',
-        role: '',
+        TenDangNhap: '',
+        Account: '',
+        MatKhau: '',
+        DiaChi: '',
+        SoDienThoai: '',
+        VaiTro: ''
     };
     const validate = ValidateHocVien;
 
     useEffect(() => {
-        if (!ss_account || !account_user) {
+        if (!ss_account) {
             clearCookiesAndRedirect();
         }
         toggleHeadTitle('Quản Lý Thông Tin Người Dùng');
-    }, [toggleHeadTitle, ss_account, account_user]);
+    }, [toggleHeadTitle, ss_account]);
 
     if (isLoading) return <LoadTable />;
     if (error) {
         console.log('check error: ', error.message);
         return <div>Đã có lỗi sảy ra!</div>;
     }
-    // console.log('check');
+    // console.log('check', data);
 
     return (
         <TableData
@@ -49,7 +49,7 @@ const NguoiDung = () => {
                 formTable='nguoidung'
                 typeData={typeData}
                 validate={validate}
-                endpoint={'/user'}
+                endpoint={'/users'}
             >
                 <TableMain />
             </TableInfo>
