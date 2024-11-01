@@ -8,7 +8,7 @@ import { TableInfoContext } from '@/containers/context/getdata/TableInfo';
 import { TableContext } from '@/containers/context/getdata/TableData';
 import Image from 'next/image';
 
-const SanPham = () => {
+const LoaiSanPham = () => {
     const { datas, updateData, selectedDatas, toggleSelectedDatas } = useContext(TableContext);//Lấy data đã có trong context
     const { formTable, endpoint } = useContext(TableInfoContext);
     const [globalFilter, setGlobalFilter] = useState(null); // Bộ lọc tìm kiếm toàn cục
@@ -22,15 +22,6 @@ const SanPham = () => {
         }, 300);
     }, []);
 
-    const ImageProduct = (rowData) => {
-        return (
-            <>
-                <Image src={`${process.env.NEXT_PUBLIC_API_URL}/${rowData?.HinhAnh}`} width={50} height={50} alt='Ảnh sản phẩm' />
-            </>
-        )
-        // console.log('check: ', rowData.HinhAnh);
-
-    }
     // Thực hiện lấy data của hàng và thực hiện trức năng (logic lấy data đc thư viện PrimeReact thực hiện từ DataTable)
     const OptionEditDelete = useCallback((rowData) => {
         return (<>
@@ -57,7 +48,7 @@ const SanPham = () => {
             value={datas}
             selection={selectedDatas}
             onSelectionChange={(e) => toggleSelectedDatas(e.value)} // Cập nhật giá trị khi chọn dòng
-            dataKey="SanPhamId" //Key dử liệu
+            dataKey="LoaiSanPhamId" //Key dử liệu
             paginator //Phân trang
             rows={10} //Số hàng mặc định
             rowsPerPageOptions={[5, 10, 25]}
@@ -67,16 +58,11 @@ const SanPham = () => {
             header={<TableTitle handleSearch={handleSearch} />}
         >
             <Column selectionMode="multiple" exportable={false}></Column>
-            <Column field="SanPhamId" header="ID" sortable style={{ maxWidth: '3rem' }} className="text-truncate"></Column>
-            <Column field="TenSanPham" header="Tên Sản Phẩm" sortable style={{ minWidth: '12rem' }}></Column>
-            <Column field="MoTa" header="Mô Tả" sortable style={{ maxWidth: '3rem' }} className='text-truncate'></Column>
-            <Column field="Gia" header="Giá" sortable style={{ maxWidth: '8rem' }} className='text-truncate'></Column>
-            <Column field="SoLuongKho" header="Số Lượng Kho" sortable style={{ maxWidth: '8rem' }} className='text-truncate'></Column>
-            <Column field="LoaiSanPhamId" header="Loại" sortable style={{ maxWidth: '8rem' }} className='text-truncate'></Column>
-            <Column field="HinhAnh" header="Hình" sortable body={ImageProduct}></Column>
+            <Column field="LoaiSanPhamId" header="ID" sortable style={{ minWidth: '12rem' }}></Column>
+            <Column field="TenLoai" header="Loại Sản Phẩm" sortable style={{ maxWidth: '3rem' }} className="text-truncate"></Column>
             <Column header="Tùy chọn" body={OptionEditDelete}></Column>
         </DataTable>
     );
 };
 
-export default memo(SanPham);
+export default memo(LoaiSanPham);

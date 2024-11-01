@@ -10,6 +10,9 @@ const URL = process.env.NEXT_PUBLIC_API_URL || 'https://doman.com/api';
 
 const apiClient = axios.create({ // Tạo một instance của axios với cấu hình cơ bản
     baseURL: URL, // Địa chỉ API server Node.js của bạn
+    headers: {
+        'Content-Type': 'application/json',
+    },
     withCredentials: true,// Đảm bảo gửi cookie cùng với các request
 });
 
@@ -31,7 +34,7 @@ const handleAuthError = async (error) => {
 
         // Nếu không có token hoặc request là để refresh token thì không cố gắng refresh
         if (!token || originalRequest.url.includes('/refreshtoken')) {
-            // clearCookiesAndRedirect();
+            clearCookiesAndRedirect();
             return Promise.reject(error);
         }
 
@@ -43,11 +46,11 @@ const handleAuthError = async (error) => {
             originalRequest.headers['Authorization'] = `Bearer ${newToken}`;
             return apiClient(originalRequest);
         } catch (refreshError) {
-            // clearCookiesAndRedirect();
+            clearCookiesAndRedirect();
             return Promise.reject(refreshError);
         }
     } else {
-        // clearCookiesAndRedirect();
+        clearCookiesAndRedirect();
         return Promise.reject(error);
     }
 };

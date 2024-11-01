@@ -11,10 +11,15 @@ const DeletesModal = ({ formTable, endpoint, updateData, selectedDatas, toggleSe
     const tableDatas = new Map([//Sử lý data để trả về định dạng
         ['nguoidung', 'NguoiDungId'],
         ['sanpham', 'SanPhamId'],
+        ['loaisanpham', 'LoaiSanPhamId'],
+
     ]);
     const tableNames = new Map([//Sử lý data để trả về định dạng
         ['nguoidung', 'TenDangNhap'],
         ['sanpham', 'TenSanPham'],
+        ['loaisanpham', 'TenLoai'],
+
+
     ]);
     const dataId = tableDatas.get(formTable) || '';
     const dataName = tableNames.get(formTable) || '';

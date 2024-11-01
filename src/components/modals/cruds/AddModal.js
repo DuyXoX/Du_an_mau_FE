@@ -3,9 +3,10 @@ import { Button, Modal } from 'react-bootstrap';
 import showToast from '@/components/reuses/Toast';
 import { toast } from 'react-toastify';
 import { TableInfoContext } from '@/containers/context/getdata/TableInfo';
-import InputFormNguoiDung from '@/components/inputGroup/inputform/InputFormNguoiDung';
 import { postData } from '@/service/apiServive';
+import InputFormNguoiDung from '@/components/inputGroup/inputform/InputFormNguoiDung';
 import InputFormSanPham from '@/components/inputGroup/inputform/InputFormSanPham';
+import InputFormLoaiSanPham from '@/components/inputGroup/inputform/InputFormLoaiSanPham';
 
 const AddModal = ({ formTable, endpoint, updateData, showAddModal, toggleShowAddModal }) => {
     const { typeData, validate } = useContext(TableInfoContext);
@@ -16,10 +17,12 @@ const AddModal = ({ formTable, endpoint, updateData, showAddModal, toggleShowAdd
     const tableLabels = new Map([//Sử lý data để trả về định dạng
         ['nguoidung', ' người dùng '],
         ['sanpham', ' sản phẩm '],
+        ['loaisanpham', ' loại sản phẩm '],
     ]);
     const tableComponents = useMemo(() => ({//Sử lý data để trả về định dạng
         nguoidung: InputFormNguoiDung,
         sanpham: InputFormSanPham,
+        loaisanpham: InputFormLoaiSanPham,
     }), []);
 
     const label = tableLabels.get(formTable) || '';
@@ -40,10 +43,6 @@ const AddModal = ({ formTable, endpoint, updateData, showAddModal, toggleShowAdd
             }
             return { ...prevData, [name]: value };
         });
-        // setFormData((prevData) => ({
-        //     ...prevData,
-        //     [name]: value,
-        // }));
 
         const newErrors = {
             ...errors,
@@ -74,19 +73,28 @@ const AddModal = ({ formTable, endpoint, updateData, showAddModal, toggleShowAdd
             return;
         }
 
-        // console.log('check formData: ', formData);
+        let uploadData;
+        // Kiểm tra xem formData có chứa file không
+        const hasFile = Object.values(formData).some(value => value instanceof File);
         const loading = toast.loading('Đang xử lý yêu cầu.');
+
+        if (hasFile) {
+            // Sử dụng FormData nếu có file
+            uploadData = new FormData();
+            Object.keys(formData).forEach((key) => {
+                uploadData.append(key, formData[key]);
+            });
+        } else {
+            // Gửi dữ liệu dạng JSON nếu không có file
+            uploadData = formData;
+        }
         setCheckError(true);
 
-        // Tạo FormData và thêm từng trường vào
-        const uploadData = new FormData();
-        Object.keys(formData).forEach((key) => {
-            uploadData.append(key, formData[key]);
-        });
-        // console.log("Upload Data:", Array.from(uploadData.entries()));
+        // console.log('check formData: ', formData);
+        // console.log("Upload Data:", uploadData);
 
         try {
-            const response = await postData(endpoint, uploadData);
+            const response = await postData(endpoint, uploadData);//Lưu ý check uploadData hình ảh phải có dịnh binary
             const { message, warning, error } = response;
             // console.log('check response: ', response);
 

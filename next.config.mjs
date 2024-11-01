@@ -46,6 +46,9 @@ const nextConfig = {
             },
         ];
     },
+    images: {
+        domains: ['localhost'], // Thêm dòng này để cho phép ảnh từ localhost
+    },
 };
 
 export default nextConfig;

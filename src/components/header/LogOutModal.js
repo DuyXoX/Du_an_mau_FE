@@ -16,7 +16,7 @@ const LogOutModal = () => {
         setShowLogoutModal(false);
         const loading = toast.loading('Đang xử lý yêu cầu.');
         try {
-            const response = await postData('/logout', formData);
+            const response = await postData('/user/logout', formData);
             const { message, error } = response;
             // console.log('check response: ', error);
 

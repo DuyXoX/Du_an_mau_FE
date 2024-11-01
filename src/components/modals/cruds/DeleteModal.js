@@ -14,10 +14,14 @@ const DeleteModal = ({ formTable, rowData, endpoint, updateData }) => {
     const tableDatas = new Map([//Sử lý data để trả về định dạng
         ['nguoidung', 'NguoiDungId'],
         ['sanpham', 'SanPhamId'],
+        ['loaisanpham', 'LoaiSanPhamId'],
+
     ]);
     const tableNames = new Map([//Sử lý data để trả về định dạng
         ['nguoidung', 'TenDangNhap'],
         ['sanpham', 'TenSanPham'],
+        ['loaisanpham', 'TenLoai'],
+
     ]);
 
     const label = tableLabels.get(formTable) || '';

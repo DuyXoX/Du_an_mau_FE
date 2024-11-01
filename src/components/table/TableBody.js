@@ -2,6 +2,7 @@ import React, { useContext, useMemo } from 'react';
 import { TableInfoContext } from '@/containers/context/getdata/TableInfo';
 import NguoiDung from './bodyTable/NguoiDung';
 import SanPham from './bodyTable/SanPham';
+import LoaiSanPham from './bodyTable/LoaiSanPham';
 
 
 const TableBody = () => {
@@ -9,6 +10,7 @@ const TableBody = () => {
     const tableComponents = useMemo(() => ({//Sử lý data để trả về định dạng
         nguoidung: NguoiDung,
         sanpham: SanPham,
+        loaisanpham: LoaiSanPham,
     }), []);
 
     const ComponentToRender = tableComponents[formTable] || null;

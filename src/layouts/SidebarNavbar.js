@@ -44,6 +44,7 @@ const SidebarNavbar = () => {
                     {/* suffix={<FaUser /> Sử dụng để giảo ngược vị trí icon về cuối*/}
                     <MenuItem icon={<FaUser />} component={<Link href="nguoi-dung" />}> Người dùng</MenuItem>
                     <MenuItem icon={<FaUserTie />} component={<Link href="san-pham" />}> Sản phẩm</MenuItem>
+                    <MenuItem icon={<FaUserTie />} component={<Link href="loai-san-pham" />}> Loại Sản phẩm</MenuItem>
                     <MenuItem icon={<FaRegCalendarAlt />} component={<Link href="hoa-don" />}> Hóa đơn</MenuItem>
                     <MenuItem icon={<FaBell />} component={<Link href="thong-bao" />}> Thông Báo</MenuItem>
                 </Menu>

@@ -7,6 +7,7 @@ import { toast } from 'react-toastify';
 import InputFormNguoiDung from '@/components/inputGroup/inputform/InputFormNguoiDung';
 import { putData } from '@/service/apiServive';
 import InputFormSanPham from '@/components/inputGroup/inputform/InputFormSanPham';
+import InputFormLoaiSanPham from '@/components/inputGroup/inputform/InputFormLoaiSanPham';
 
 const UpdateModal = ({ formTable, endpoint, rowData, updateData }) => {
     // console.log('check formTable: ', formTable);
@@ -19,14 +20,19 @@ const UpdateModal = ({ formTable, endpoint, rowData, updateData }) => {
     const tableLabels = new Map([//Sử lý data để trả về định dạng
         ['nguoidung', ' người dùng '],
         ['sanpham', ' sản phẩm '],
+        ['loaisanpham', ' loại sản phẩm '],
+
     ]);
     const tableDatas = new Map([//Sử lý data để trả về định dạng
         ['nguoidung', 'NguoiDungId'],
         ['sanpham', 'SanPhamId'],
+        ['loaisanpham', 'LoaiSanPhamId'],
     ]);
     const tableComponents = useMemo(() => ({//Sử lý data để trả về định dạng
         nguoidung: InputFormNguoiDung,
         sanpham: InputFormSanPham,
+        loaisanpham: InputFormLoaiSanPham,
+
     }), []);
 
     const label = tableLabels.get(formTable) || '';
@@ -44,11 +50,14 @@ const UpdateModal = ({ formTable, endpoint, rowData, updateData }) => {
     };
 
     const handleChange = useCallback((e) => {
-        const { name, value } = e.target;
-        setFormData((prevData) => ({
-            ...prevData,
-            [name]: value,
-        }));
+        const { name, value, files } = e.target;
+        setFormData((prevData) => {
+            if (name === 'HinhAnh' && files) {
+                // Cập nhật formData với file ảnh duy nhất
+                return { ...prevData, [name]: files[0] };
+            }
+            return { ...prevData, [name]: value };
+        });
 
         const newErrors = {
             ...errors,
@@ -78,15 +87,28 @@ const UpdateModal = ({ formTable, endpoint, rowData, updateData }) => {
             // console.log('check formErrors', formErrors);
             return;
         }
+        let uploadData;
+        // Kiểm tra xem formData có chứa file không
+        const hasFile = Object.values(formData).some(value => value instanceof File);
+
+        if (hasFile) {
+            // Sử dụng FormData nếu có file
+            uploadData = new FormData();
+            Object.keys(formData).forEach((key) => {
+                uploadData.append(key, formData[key]);
+            });
+        } else {
+            // Gửi dữ liệu dạng JSON nếu không có file
+            uploadData = formData;
+        }
         const Id = formData[dataId];
         const loading = toast.loading('Đang xử lý yêu cầu.');
         setCheckError(true);
 
-        // console.log('check formData: ', Id);
+        // return console.log('check formData: ', Id);
 
         try {
-            const response = await putData(`${endpoint}/${Id}`, formData);
-            // const response = await postData('/user', formData);
+            const response = await putData(`${endpoint}/${Id}`, uploadData);//Lưu ý check uploadData hình ảh phải có dịnh binary
             const { message, warning, error } = response;
             // console.log('check response: ', response);
 

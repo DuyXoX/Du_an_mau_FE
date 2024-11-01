@@ -29,7 +29,7 @@ const InputFormNguoiDung = ({ formData, errors, handleChange }) => {
                 }
             </div>
             <div className="inputGroup">
-                <input type="email" name='Account' required
+                <input type="text" name='Account' required
                     value={formData.Account}
                     onChange={handleChange}
                 />

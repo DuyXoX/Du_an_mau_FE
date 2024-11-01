@@ -13,7 +13,7 @@ import { TableInfo } from '../context/getdata/TableInfo';
 
 const NguoiDung = () => {
     const { toggleHeadTitle } = useContext(HeadeTitleContext);
-    const { data, error, isLoading, mutate } = useGetData('/users');
+    const { data, error, isLoading, mutate } = useGetData('/user');
 
     const ss_account = Cookies.get('ss_account');
     const typeData = {
@@ -49,7 +49,7 @@ const NguoiDung = () => {
                 formTable='nguoidung'
                 typeData={typeData}
                 validate={validate}
-                endpoint={'/users'}
+                endpoint={'/user'}
             >
                 <TableMain />
             </TableInfo>

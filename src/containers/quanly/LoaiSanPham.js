@@ -9,28 +9,23 @@ import LoadTable from '@/components/loading/LoadTable';
 import { useGetData } from '@/service/apiServive';
 import { TableData } from '../context/getdata/TableData';
 import { TableInfo } from '../context/getdata/TableInfo';
-import ValidateSanPham from '../validations/ValidateSanPham';
+import ValidateLoaiSanPham from '../validations/ValidateLoaiSanPham';
 
-const SanPham = () => {
+const LoaiSanPham = () => {
     const { toggleHeadTitle } = useContext(HeadeTitleContext);
-    const { data, error, isLoading, mutate } = useGetData('/sanpham');
+    const { data, error, isLoading, mutate } = useGetData('/loaisanpham');
 
     const ss_account = Cookies.get('ss_account');
     const typeData = {
-        TenSanPham: '',
-        MoTa: '',
-        Gia: '',
-        SoLuongKho: '',
-        LoaiSanPhamId: '',
-        HinhAnh: []
+        TenLoai: ''
     };
-    const validate = ValidateSanPham;
+    const validate = ValidateLoaiSanPham;
 
     useEffect(() => {
         if (!ss_account) {
             clearCookiesAndRedirect();
         }
-        toggleHeadTitle('Quản Lý Thông Tin Sản Phẩm');
+        toggleHeadTitle('Quản Lý Loại Sản Phẩm');
     }, [toggleHeadTitle, ss_account]);
 
     if (isLoading) return <LoadTable />;
@@ -46,10 +41,10 @@ const SanPham = () => {
             mutate={mutate}//Lấy lại data mới nhất truyền vào cho context
         >
             <TableInfo
-                formTable='sanpham'
+                formTable='loaisanpham'
                 typeData={typeData}
                 validate={validate}
-                endpoint={'/sanpham'}
+                endpoint={'/loaisanpham'}
             >
                 <TableMain />
             </TableInfo>
@@ -57,4 +52,4 @@ const SanPham = () => {
     );
 };
 
-export default memo(SanPham);
+export default memo(LoaiSanPham);
