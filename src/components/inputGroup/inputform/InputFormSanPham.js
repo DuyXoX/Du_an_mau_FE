@@ -80,11 +80,14 @@ const InputFormSanPham = ({ formData, errors, handleChange }) => {
                 }
             </div>
             <div className="inputGroup">
-                <input type="text" name='HinhAnh' required
-                    value={formData.HinhAnh}
+                <input
+                    type="file"
+                    name='HinhAnh'
+                    required
+                    accept="image/*"
                     onChange={handleChange}
                 />
-                <label>Hình Ảnh</label>
+                {/* <label>Hình Ảnh</label> */}
                 {errors.HinhAnh &&
                     <span
                         style={{ fontSize: '.75rem' }}

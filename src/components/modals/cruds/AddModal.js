@@ -32,11 +32,18 @@ const AddModal = ({ formTable, endpoint, updateData, showAddModal, toggleShowAdd
     });
 
     const handleChange = useCallback((e) => {
-        const { name, value } = e.target;
-        setFormData((prevData) => ({
-            ...prevData,
-            [name]: value,
-        }));
+        const { name, value, files } = e.target;
+        setFormData((prevData) => {
+            if (name === 'HinhAnh' && files) {
+                // Cập nhật formData với file ảnh duy nhất
+                return { ...prevData, [name]: files[0] };
+            }
+            return { ...prevData, [name]: value };
+        });
+        // setFormData((prevData) => ({
+        //     ...prevData,
+        //     [name]: value,
+        // }));
 
         const newErrors = {
             ...errors,
@@ -66,12 +73,20 @@ const AddModal = ({ formTable, endpoint, updateData, showAddModal, toggleShowAdd
             // console.log('check formErrors', formErrors);
             return;
         }
+
         // console.log('check formData: ', formData);
         const loading = toast.loading('Đang xử lý yêu cầu.');
         setCheckError(true);
 
+        // Tạo FormData và thêm từng trường vào
+        const uploadData = new FormData();
+        Object.keys(formData).forEach((key) => {
+            uploadData.append(key, formData[key]);
+        });
+        // console.log("Upload Data:", Array.from(uploadData.entries()));
+
         try {
-            const response = await postData(endpoint, formData);
+            const response = await postData(endpoint, uploadData);
             const { message, warning, error } = response;
             // console.log('check response: ', response);
 
@@ -101,7 +116,7 @@ const AddModal = ({ formTable, endpoint, updateData, showAddModal, toggleShowAdd
             onHide={() => { handleClose() }}
             backdrop="static" //Ngăn chặn việc bấm ra ngoài
         >
-            <form onSubmit={handleSubmit}>
+            <form enctype="multipart/form-data" onSubmit={handleSubmit}>
                 <Modal.Header closeButton>
                     <Modal.Title className='text-orange'>
                         Thêm {label} mới

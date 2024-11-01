@@ -110,7 +110,7 @@ const InputFormNguoiDung = ({ formData, errors, handleChange }) => {
                     <span
                         style={{ fontSize: '.75rem' }}
                         className='text-orange'>
-                        {errors.role}
+                        {errors.VaiTro}
                     </span>
                 }
             </div>

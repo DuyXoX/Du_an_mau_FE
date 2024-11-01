@@ -18,15 +18,12 @@ const SanPham = () => {
 
     const ss_account = Cookies.get('ss_account');
     const typeData = {
-        SanPhamId: '',
         TenSanPham: '',
         MoTa: '',
         Gia: '',
         SoLuongKho: '',
-        ThoiGianTao: '',
-        ThoiGianCapNhat: '',
         LoaiSanPhamId: '',
-        HinhAnh: ''
+        HinhAnh: []
     };
     const validate = ValidateSanPham;
 

@@ -20,12 +20,17 @@ const UpdateModal = ({ formTable, endpoint, rowData, updateData }) => {
         ['nguoidung', ' người dùng '],
         ['sanpham', ' sản phẩm '],
     ]);
+    const tableDatas = new Map([//Sử lý data để trả về định dạng
+        ['nguoidung', 'NguoiDungId'],
+        ['sanpham', 'SanPhamId'],
+    ]);
     const tableComponents = useMemo(() => ({//Sử lý data để trả về định dạng
         nguoidung: InputFormNguoiDung,
         sanpham: InputFormSanPham,
     }), []);
 
     const label = tableLabels.get(formTable) || '';
+    const dataId = tableDatas.get(formTable) || '';
     const ComponentToRender = tableComponents[formTable] || null;
 
     const handleClose = (() => {
@@ -73,14 +78,14 @@ const UpdateModal = ({ formTable, endpoint, rowData, updateData }) => {
             // console.log('check formErrors', formErrors);
             return;
         }
-        const userId = formData.NguoiDungId;
+        const Id = formData[dataId];
         const loading = toast.loading('Đang xử lý yêu cầu.');
         setCheckError(true);
 
-        // console.log('check formData: ', userId);
+        // console.log('check formData: ', Id);
 
         try {
-            const response = await putData(`${endpoint}/${userId}`, formData);
+            const response = await putData(`${endpoint}/${Id}`, formData);
             // const response = await postData('/user', formData);
             const { message, warning, error } = response;
             // console.log('check response: ', response);
@@ -116,11 +121,13 @@ const UpdateModal = ({ formTable, endpoint, rowData, updateData }) => {
 
     const editData = (data) => {
         // console.log('check data: ', data);
-        const keysToNormalize = ['role', 'expertise']; // Danh sách các thuộc tính cần xử lý
+        const keysToNormalize = ['VaiTro', 'expertise']; // Danh sách các thuộc tính cần xử lý
         const normalizedData = normalizeData(data, keysToNormalize);
         setFormData(normalizedData);
         toggleShowUpdateModal(true)
     };
+
+    // console.log('check: ', rowData);
     // console.log('check re render');
 
 

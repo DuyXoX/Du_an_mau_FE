@@ -60,7 +60,7 @@ const LogOutModal = () => {
                     <Button variant="secondary" onClick={() => setShowLogoutModal(false)}>
                         Hủy
                     </Button>
-                    <Button variant="orange" onClick={() => { handleLogout() }}>
+                    <Button variant="green" onClick={() => { handleLogout() }}>
                         Đăng xuất
                     </Button>
                 </Modal.Footer>

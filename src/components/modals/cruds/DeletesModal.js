@@ -8,9 +8,19 @@ const DeletesModal = ({ formTable, endpoint, updateData, selectedDatas, toggleSe
     // Kiểm tra xem có bao nhiêu hàng đã chọn
     const isMultiple = Array.isArray(selectedDatas) && selectedDatas.length > 1;
     // console.log('check isMultiple: ', isMultiple);
+    const tableDatas = new Map([//Sử lý data để trả về định dạng
+        ['nguoidung', 'NguoiDungId'],
+        ['sanpham', 'SanPhamId'],
+    ]);
+    const tableNames = new Map([//Sử lý data để trả về định dạng
+        ['nguoidung', 'TenDangNhap'],
+        ['sanpham', 'TenSanPham'],
+    ]);
+    const dataId = tableDatas.get(formTable) || '';
+    const dataName = tableNames.get(formTable) || '';
 
     // Lấy danh sách các Datas để gửi tới API xóa nhiều
-    const IDs = selectedDatas.map((data) => data._id);//Trả về ["...","..."] là đúng sau đó sử lý ở BE sau!
+    const IDs = selectedDatas.map((data) => data[dataId]);//Trả về ["...","..."] là đúng sau đó sử lý ở BE sau!
     // console.log('check: ', IDs);
     // console.log('check selectedDatas: ', selectedDatas[0].username);
 
@@ -60,7 +70,7 @@ const DeletesModal = ({ formTable, endpoint, updateData, selectedDatas, toggleSe
                 <Modal.Title>
                     {isMultiple
                         ? `Xác nhận xóa ${selectedDatas.length} ${label}`
-                        : selectedDatas ? <p>Xác nhận xóa {label} <span className='text-orange'>{selectedDatas[0]?.account || ''}</span></p>
+                        : selectedDatas ? <p>Xác nhận xóa {label} <span className='text-orange'>{selectedDatas[0]?.[dataName] || ''}</span></p>
                             : ''
                     }
                 </Modal.Title>
@@ -68,7 +78,7 @@ const DeletesModal = ({ formTable, endpoint, updateData, selectedDatas, toggleSe
             <Modal.Body>
                 {isMultiple
                     ? `Bạn có chắc chắn muốn xóa ${selectedDatas.length} ${label} đã chọn không?`
-                    : selectedDatas ? <p>Bạn có chắc chắn muốn xóa {label} tên <span className='text-orange'>{selectedDatas[0]?.username || ''}</span> không?</p>
+                    : selectedDatas ? <p>Bạn có chắc chắn muốn xóa {label} tên <span className='text-orange'>{selectedDatas[0]?.[dataName] || ''}</span> không?</p>
                         : ''
                 }
             </Modal.Body>

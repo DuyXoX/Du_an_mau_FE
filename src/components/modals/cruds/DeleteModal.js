@@ -11,8 +11,18 @@ const DeleteModal = ({ formTable, rowData, endpoint, updateData }) => {
         ['nguoidung', ' người dùng '],
         ['sanpham', ' sản phẩm '],
     ]);
+    const tableDatas = new Map([//Sử lý data để trả về định dạng
+        ['nguoidung', 'NguoiDungId'],
+        ['sanpham', 'SanPhamId'],
+    ]);
+    const tableNames = new Map([//Sử lý data để trả về định dạng
+        ['nguoidung', 'TenDangNhap'],
+        ['sanpham', 'TenSanPham'],
+    ]);
 
     const label = tableLabels.get(formTable) || '';
+    const dataId = tableDatas.get(formTable) || '';
+    const dataName = tableNames.get(formTable) || '';
 
     const toggleShowDeleteModal = (e) => {
         setShowDeleteModal(e);
@@ -20,7 +30,7 @@ const DeleteModal = ({ formTable, rowData, endpoint, updateData }) => {
 
     const handleSubmitDelete = async () => {
         const loading = toast.loading('Đang xử lý yêu cầu.');
-        const ID = rowData.NguoiDungId;
+        const ID = rowData[dataId];
         // console.log('check: ', ID);
         toggleShowDeleteModal(false);
         try {
@@ -65,11 +75,11 @@ const DeleteModal = ({ formTable, rowData, endpoint, updateData }) => {
             >
                 <Modal.Header closeButton>
                     <Modal.Title>
-                        Xác nhận xóa <span className='text-green'>{rowData?.TenDangNhap}</span>
+                        Xác nhận xóa <span className='text-green'>{rowData?.[dataName]}</span>
                     </Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                    Bạn có chắc chắn muốn xóa {label} tên <span className='text-green'>{rowData?.TenDangNhap}</span> không?
+                    Bạn có chắc chắn muốn xóa {label} tên <span className='text-green'>{rowData?.[dataName]}</span> không?
                 </Modal.Body>
                 <Modal.Footer>
                     <Button variant="secondary" onClick={() => toggleShowDeleteModal(false)}>

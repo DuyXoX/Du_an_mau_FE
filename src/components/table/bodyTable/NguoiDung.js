@@ -60,7 +60,7 @@ const NguoiDung = () => {
             <Column field="NguoiDungId" header="ID" sortable style={{ maxWidth: '3rem' }} className="text-truncate"></Column>
             <Column field="TenDangNhap" header="Tên" sortable style={{ minWidth: '5rem' }}></Column>
             <Column field="Account" header="Tài khoản" sortable style={{ maxWidth: '8rem' }} className="text-truncate"></Column>
-            <Column field="MatKhau" header="Mật khẩu" sortable style={{ maxWidth: '8rem' }} className='text-truncate'></Column>
+            <Column field="MatKhau" header="Mật khẩu" sortable style={{ maxWidth: '3rem' }} className='text-truncate'></Column>
             <Column field="DiaChi" header="Địa chỉ" sortable style={{ maxWidth: '8rem' }} className='text-truncate'></Column>
             <Column field="SoDienThoai" header="SĐT" sortable style={{ maxWidth: '8rem' }} className='text-truncate'></Column>
             <Column field="VaiTro" header="Vai trò" sortable ></Column>

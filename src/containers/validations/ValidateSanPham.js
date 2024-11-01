@@ -21,7 +21,7 @@ const ValidateSanPham = (name, value) => {
             error = !value ? 'Vui lòng nhập loại sản phẩm của bạn' : '';
             break;
         case 'HinhAnh':
-            error = !value ? 'Vui lòng nhập mật khẩu của bạn' : '';
+            error = !value ? 'Vui lòng thêm hình ảnh sản phẩm' : '';
             break;
         default:
             break;

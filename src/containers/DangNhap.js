@@ -102,12 +102,12 @@ const DangNhap = () => {
             const response = await postData('/login', formData);
             const { message, warning, error, ss_account } = response;
 
-            console.log('check response: ', ss_account);
+            // console.log('check response: ', ss_account);
 
             if (response && message) {
                 setCookie('ss_account', ss_account);
                 showToast('success', message, loading);
-                router.push('/thong-tin/nguoi-dung');
+                router.push('/quan-ly/nguoi-dung');
                 return;
             }
             if (response && warning) {
