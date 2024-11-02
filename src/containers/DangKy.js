@@ -35,7 +35,7 @@ const DangKy = () => {
 
     const validate = (name, value) => {
         switch (name) {
-            case 'username':
+            case 'TenDangNhap':
                 if (!value) {
                     return 'Vui lòng nhập tên của bạn';
                 } else if (value.length < 8) {
@@ -45,23 +45,22 @@ const DangKy = () => {
                 } else {
                     return '';
                 }
-            case 'account':
+            case 'Account':
                 if (!value) {
-                    return 'Vui lòng nhập email của bạn';
-                } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(value)) {
-                    return 'Định dạng email của bạn chưa đúng';
+                    return 'Vui lòng nhập tài khoản của bạn';
+                } else if (value.length < 8) {
+                    return 'Tài khoản phải có ít nhất 8 ký tự';
                 } else if (value.length > 50) {
-                    return 'Email không thể dài hơn 50 ký tự';
+                    return 'Tài khoản không thể dài hơn 50 ký tự';
                 } else {
                     return '';
                 }
-            case 'password':
+            case 'MatKhau':
                 if (!value) {
                     return 'Vui lòng nhập mật khẩu của bạn';
                 } else if (value.length < 8) {
                     return 'Mật khẩu phải có ít nhất 8 ký tự';
-                }
-                else if (value.length > 20) {
+                } else if (value.length > 20) {
                     return 'Mật khẩu không thể dài hơn 20 ký tự';
                 }
                 else {
@@ -76,7 +75,7 @@ const DangKy = () => {
                 else if (value.length > 20) {
                     return 'Mật khẩu không thể dài hơn 20 ký tự';
                 }
-                else if (value !== formData.password) {
+                else if (value !== formData.MatKhau) {
                     return 'Mật khẩu xác thực phải giống nhau';
                 }
                 else {

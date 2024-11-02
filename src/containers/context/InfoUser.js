@@ -13,14 +13,18 @@ const InfoUser = ({ children }) => {
 
     useEffect(() => {
         const fetchUserInfo = async () => {
-            const ss_account = Cookies.get('ss_account')
+            const ss_account = Cookies.get('ss_account');
+            const account_user = Cookies.get('account_user');
 
             if (ss_account) {
                 try {
                     // console.log('check: ', ss_account);
                     const decoded = await jwtVerify(ss_account);
                     setIsAuthenticated(true);
-                    setInfo(decoded);
+                    setInfo({
+                        decoded,
+                        account_user
+                    });
                     // console.log('check authen: ', infoUserAuthen.role);
                 } catch (error) {
                     console.error('Error verifying JWT:', error);

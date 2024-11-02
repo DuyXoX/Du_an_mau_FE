@@ -13,6 +13,7 @@ const setCookie = (name, value) => {
 
 const clearCookiesAndRedirect = () => {
     Cookies.remove('ss_account', { path: '/' });
+    Cookies.remove('account_user', { path: '/' });
 
     if (window.location.pathname !== '/dang-nhap') {
         toast.warning('Vui lòng đăng nhập lại.', {

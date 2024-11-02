@@ -25,9 +25,9 @@ const LogOut = ({ info }) => {
     // console.log('check: ', info);
 
     useEffect(() => {
-        const userName = info.id.TenDangNhap;
+        const userName = info.account_user;
         setUsername(userName);
-        // console.log('check contextInfo: ', userName);
+        // return console.log('check contextInfo: ', userName);
 
         document.addEventListener('mousedown', handleClickOutside);
         return () => {
@@ -47,7 +47,7 @@ const LogOut = ({ info }) => {
         >
             <div className='me-4 ps-4 border-start cursor d-none d-md-inline'>
                 <h5 style={{ fontSize: '0.75rem' }} className='text-center fw-light'>
-                    Học Viên
+                    Người Dùng
                     <p className='fs-5 fw-semibold mb-0'>{username ? username : 'Tên'}</p>
                 </h5>
             </div>
@@ -57,7 +57,7 @@ const LogOut = ({ info }) => {
                     src={avatar}
                     width={75}
                     height={75}
-                    alt='ảnh học viên/giáo viên'
+                    alt='ảnh người dùng'
                 />
             </div>
             <div

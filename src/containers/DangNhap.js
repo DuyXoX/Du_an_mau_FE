@@ -100,12 +100,14 @@ const DangNhap = () => {
 
         try {
             const response = await postData('/login', formData);
-            const { message, warning, error, ss_account } = response;
+            const { message, warning, error, ss_account, account_user } = response;
 
             // console.log('check response: ', ss_account);
 
             if (response && message) {
                 setCookie('ss_account', ss_account);
+                setCookie('account_user', account_user);
+
                 showToast('success', message, loading);
                 router.push('/quan-ly/nguoi-dung');
                 return;
