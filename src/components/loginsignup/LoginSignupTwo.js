@@ -52,7 +52,7 @@ const LoginSignupTwo = ({ login, formData, errors, checkError, handleChange, han
 
                 <div className="inputGroup">
                     <div className='position-relative'>
-                        <input type={showPassword ? "text" : "MatKhau"} name='MatKhau' required autoComplete="off"
+                        <input type={showPassword ? "text" : "password"} name='MatKhau' required autoComplete="off"
                             value={formData.MatKhau}
                             onChange={handleChange}
                         />
