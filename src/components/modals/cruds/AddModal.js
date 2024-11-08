@@ -38,8 +38,8 @@ const AddModal = ({ formTable, endpoint, updateData, showAddModal, toggleShowAdd
         const { name, value, files } = e.target;
         setFormData((prevData) => {
             if (name === 'HinhAnh' && files) {
-                // Cập nhật formData với file ảnh duy nhất
-                return { ...prevData, [name]: files[0] };
+                // Cập nhật formData với tất cả file ảnh
+                return { ...prevData, [name]: Array.from(files) }; // Chuyển đổi FileList thành mảng
             }
             return { ...prevData, [name]: value };
         });
@@ -58,6 +58,30 @@ const AddModal = ({ formTable, endpoint, updateData, showAddModal, toggleShowAdd
             setCheckError(true);
         }
     }, [errors, validate, setFormData]);
+    // const handleChange = useCallback((e) => {
+    //     const { name, value, files } = e.target;
+    //     setFormData((prevData) => {
+    //         if (name === 'HinhAnh' && files) {
+    //             // Cập nhật formData với file ảnh duy nhất
+    //             return { ...prevData, [name]: files[0] };
+    //         }
+    //         return { ...prevData, [name]: value };
+    //     });
+
+    //     const newErrors = {
+    //         ...errors,
+    //         [name]: validate(name, value),
+    //     };
+
+    //     setErrors(newErrors);
+
+    //     // Kiểm tra nếu không có lỗi nào thì cập nhật checkError thành false
+    //     if (Object.values(newErrors).every((error) => error === '')) {
+    //         setCheckError(false);
+    //     } else {
+    //         setCheckError(true);
+    //     }
+    // }, [errors, validate, setFormData]);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -75,14 +99,20 @@ const AddModal = ({ formTable, endpoint, updateData, showAddModal, toggleShowAdd
 
         let uploadData;
         // Kiểm tra xem formData có chứa file không
-        const hasFile = Object.values(formData).some(value => value instanceof File);
+        const hasFile = Object.values(formData).some(value => Array.isArray(value) && value.length > 0);
         const loading = toast.loading('Đang xử lý yêu cầu.');
 
         if (hasFile) {
             // Sử dụng FormData nếu có file
             uploadData = new FormData();
             Object.keys(formData).forEach((key) => {
-                uploadData.append(key, formData[key]);
+                if (Array.isArray(formData[key])) {
+                    formData[key].forEach(file => {
+                        uploadData.append(key, file); // Thêm từng file vào FormData
+                    });
+                } else {
+                    uploadData.append(key, formData[key]);
+                }
             });
         } else {
             // Gửi dữ liệu dạng JSON nếu không có file

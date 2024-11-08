@@ -25,7 +25,14 @@ const SanPham = () => {
     const ImageProduct = (rowData) => {
         return (
             <>
-                <Image src={`${process.env.NEXT_PUBLIC_API_URL}/${rowData?.HinhAnh}`} width={50} height={50} alt='Ảnh sản phẩm' />
+                {rowData?.HinhAnh && rowData.HinhAnh.length > 0 && (
+                    <Image
+                        src={`${process.env.NEXT_PUBLIC_API_URL}/${rowData.HinhAnh[0]}`} // Chỉ hiển thị hình ảnh đầu tiên
+                        width={50}
+                        height={50}
+                        alt='Ảnh sản phẩm'
+                    />
+                )}
             </>
         )
         // console.log('check: ', rowData.HinhAnh);
