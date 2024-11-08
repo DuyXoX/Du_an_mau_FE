@@ -142,7 +142,7 @@ console.log("Sản phẩm đã click:", detail);
             <Col md={5}>
               <div className="">
                 <img
-                  src={products.HinhAnh[0]}
+                  src={products.HinhAnh[0]} 
                   alt={product.TenSanPham}
                   className="imgsanphamid"
                 />

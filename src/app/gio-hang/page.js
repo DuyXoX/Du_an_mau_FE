@@ -80,7 +80,7 @@ const handleDecrease = (sanPhamId, chiTietSanPhamId) => {
         }
 
         // Gọi API để lấy toàn bộ thông tin người dùng
-        const userResponse = await apiClient.get(`/users/${nguoiDungId}`);
+        const userResponse = await apiClient.get(`/user/${nguoiDungId}`);
         const userData = userResponse.data; // Dữ liệu người dùng
 
         console.log("Thông tin người dùng:", userData);
@@ -89,7 +89,7 @@ const handleDecrease = (sanPhamId, chiTietSanPhamId) => {
         const updatedData = { ...userData, DiaChi: address }; // Giữ nguyên thông tin cũ, chỉ cập nhật địa chỉ
 
         // Gọi API PUT để cập nhật toàn bộ thông tin người dùng (bao gồm địa chỉ)
-        const response = await apiClient.put(`/users/${nguoiDungId}`, updatedData);
+        const response = await apiClient.put(`/user/${nguoiDungId}`, updatedData);
 
         // Xử lý thành công sau khi cập nhật
         console.log("Cập nhật thông tin người dùng thành công:", response.data);
@@ -132,7 +132,7 @@ const handleDecrease = (sanPhamId, chiTietSanPhamId) => {
         }
 
         // Gọi API để lấy toàn bộ thông tin người dùng
-        const userResponse = await apiClient.get(`/users/${nguoiDungId}`);
+        const userResponse = await apiClient.get(`/user/${nguoiDungId}`);
         const userData = userResponse.data; // Dữ liệu người dùng
 
         // console.log("Thông tin người dùng:", userData);
@@ -141,7 +141,7 @@ const handleDecrease = (sanPhamId, chiTietSanPhamId) => {
         const updatedData = { ...userData, SoDienThoai: addressSDT }; // Giữ nguyên thông tin cũ, chỉ cập nhật địa chỉ
 
         // Gọi API PUT để cập nhật toàn bộ thông tin người dùng (bao gồm địa chỉ)
-        const response = await apiClient.put(`/users/${nguoiDungId}`, updatedData);
+        const response = await apiClient.put(`/user/${nguoiDungId}`, updatedData);
 
         // Xử lý thành công sau khi cập nhật
         // console.log("Cập nhật thông tin người dùng thành công:", response.data);
@@ -227,7 +227,7 @@ const handleDecrease = (sanPhamId, chiTietSanPhamId) => {
 
   const fetchUserData = async (userId) => {
     try {
-      const response = await apiClient.get(`/users/${userId}`); // Gọi API lấy thông tin người dùng
+      const response = await apiClient.get(`/user/${userId}`); // Gọi API lấy thông tin người dùng
       console.log(response.data); // In ra dữ liệu người dùng
       if (response.data) {
         setAddress(response.data.DiaChi); // Lưu địa chỉ vào state
@@ -430,7 +430,7 @@ fetchCart();
                                 </td>
                                 <td>
                                     <img
-                                        src={`http://localhost:8000/${item.DuongDanHinh[0]}`}
+                                        src={`http://localhost:8000/api/${item.DuongDanHinh[0]}`}
                                         alt={item.TenSanPham}
                                         className={styles.productImage}
                                     />
