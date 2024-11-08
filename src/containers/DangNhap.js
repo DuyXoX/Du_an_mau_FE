@@ -107,7 +107,7 @@ const DangNhap = () => {
             if (response && message) {
                 setCookie('ss_account', ss_account);
                 showToast('success', message, loading);
-                router.push('/thong-tin/nguoi-dung');
+                router.push('/');
                 return;
             }
             if (response && warning) {

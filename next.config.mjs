@@ -44,7 +44,11 @@ const nextConfig = {
                 source: '/auth/facebook/callback',
                 destination: 'http://localhost:8000/auth/facebook/callback',
             },
+            
         ];
+    },
+    images: {
+        domains: ['localhost'], // Thêm dòng này để cho phép ảnh từ localhost
     },
 };
 

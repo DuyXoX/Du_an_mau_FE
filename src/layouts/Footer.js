@@ -12,6 +12,7 @@ const Footer = () => {
     };
 
     return (
+        <div className='backgroundfooter'>
         <footer className="mt-5 bg-custom">
             <Container fluid='xxl'>
                 <Row>
@@ -74,6 +75,7 @@ const Footer = () => {
                 </Row>
             </Container>
         </footer>
+        </div>
     );
 };
 

@@ -5,7 +5,8 @@ import Cookies from 'js-cookie';
 import { toast } from 'react-toastify';
 import useSWR from 'swr';
 
-const URL = process.env.NEXT_PUBLIC_API_URL || 'https://doman.com/api';
+
+const URL = process.env.NEXT_PUBLIC_API_URL || ' http://localhost:8000/api';
 // console.log('check api: ', URL);
 
 const apiClient = axios.create({ // Tạo một instance của axios với cấu hình cơ bản
@@ -58,17 +59,15 @@ const handleAuthError = async (error) => {
 const checkLogin = async () => {
     const token = Cookies.get('ss_account');
     if (!token && window.location.pathname !== '/dang-nhap') {
-        toast.warning('Bạn chưa đăng nhập!', {
-            onClose: () => {
-                window.location.replace('/dang-nhap');
-            }
+        toast.warning('Vui Lòng đăng nhập!', {
+            // onClose: () => {
+            //     window.location.replace('/dang-nhap');
+            // }
         });
         return false; // Trả về false nếu không có token    
     }
     return true; // Trả về true nếu đã đăng nhập
 }
-
-// Interceptor để thêm access token vào mỗi request
 apiClient.interceptors.request.use(addAuthHeader, (error) => Promise.reject(error));
 
 // Interceptor để xử lý các lỗi từ server
@@ -147,5 +146,43 @@ const deleteData = async (endpoint) => {
         throw error;
     }
 };
+// Hàm xóa sản phẩm trong giỏ hàng
+// Hàm xóa sản phẩm trong giỏ hàng
+const deleteCartProduct = async (sanPhamId, chiTietSanPhamId) => {
+    try {
+      const response = await axios.delete('http://localhost:8000/api/cart', {
+        data: {
+          SanPhamId: sanPhamId,
+          ChiTietSanPhamId: chiTietSanPhamId
+        },
+        withCredentials: true, // Đảm bảo gửi cookie
+      });
+  
+      console.log('Response từ API:', response);  // Log phản hồi từ API
+  
+      return response; // Trả về toàn bộ response từ API
+    } catch (error) {
+      console.error('Lỗi khi xóa sản phẩm:', error);
+      throw error; // Ném lỗi để được bắt ở phần handleDeleteProduct
+    }
+  };
+  
 
-export { apiClient, useGetData, postData, putData, deleteData };
+// Hàm lấy thông tin người dùng từ token
+const checkLogintoken = async () => {
+    try {
+        const response = await axios.get(`http://localhost:8000/api/check-login`, {
+            withCredentials: true, // Cho phép gửi cookie cùng với yêu cầu
+        });
+        return response.data; // Trả về dữ liệu từ phản hồi
+    } catch (error) {
+        console.error('Lỗi khi kiểm tra trạng thái đăng nhập:', error);
+        throw error; // Ném lại lỗi để có thể xử lý ở nơi gọi
+    }
+};
+
+
+
+
+
+export { apiClient, useGetData, postData, putData, deleteData ,checkLogin, checkLogintoken  , deleteCartProduct };
