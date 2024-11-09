@@ -41,8 +41,8 @@ const Navigation = () => {
                     <Navbar.Collapse id="basic-navbar-nav">
                         <Nav className="mx-auto">{/* ms-auto chuyển về End me-auto chuyển về Đầu */}
                             <Link href='/' className='nav-link'>Trang chủ</Link>
-                            <Link href='/' className='nav-link'>Giới thiệu</Link>
-                            <Link href='/' className='nav-link'>Sản phẩm</Link>
+                            <Link href='/gioi-thieu' className='nav-link'>Giới thiệu</Link>
+                            <Link href='/san-pham' className='nav-link'>Sản phẩm</Link>
                             <Link href='/' className='nav-link'>Tin tức</Link>
                             <Link href='/' className='nav-link'>Hoạt động</Link>
                             <div className="d-flex flex-wrap gap-2 align-items-center justify-content-between">

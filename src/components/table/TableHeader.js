@@ -50,7 +50,7 @@ const TableHeader = () => {
                         className='me-1 d-flex justify-content-center align-items-center'>
                         <IoReload className='pe-1 fs-5' /> Tải lại
                     </Button>
-                    <Button style={{
+                    {/* <Button style={{
                         width: '100px',
                         '--bs-btn-bg': '#be44ff',
                         '--bs-btn-border-color': '#be44ff',
@@ -63,7 +63,7 @@ const TableHeader = () => {
                         className='d-flex justify-content-center align-items-center'>
                         <FaFileUpload />
                         Upfile
-                    </Button>
+                    </Button> */}
                 </div>
             </div>
             <AddModal

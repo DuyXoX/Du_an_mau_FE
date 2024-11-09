@@ -23,7 +23,7 @@ const LoadTable = () => {
                                         <FaRegTrashAlt className='pe-1' /> Xóa
                                     </Button>
                                 </div>
-                                <div className='d-none d-sm-block'>
+                                {/* <div className='d-none d-sm-block'>
                                     <Button style={{
                                         width: '100px',
                                         '--bs-btn-bg': '#be44ff',
@@ -37,7 +37,7 @@ const LoadTable = () => {
                                         <FaFileUpload />
                                         Upfile
                                     </Button>
-                                </div>
+                                </div> */}
                             </div>
                             <div className='p-3 border rounded'>
                                 <Placeholder animation="glow" className='d-block d-sm-flex justify-content-sm-between'>

@@ -20,9 +20,9 @@ const ValidateSanPham = (name, value) => {
         case 'LoaiSanPhamId':
             error = !value ? 'Vui lòng nhập loại sản phẩm của bạn' : '';
             break;
-        case 'HinhAnh':
-            error = !value ? 'Vui lòng thêm hình ảnh sản phẩm' : '';
-            break;
+        // case 'HinhAnh':
+        //     error = !value ? 'Vui lòng thêm hình ảnh sản phẩm' : '';
+        //     break;
         default:
             break;
     }

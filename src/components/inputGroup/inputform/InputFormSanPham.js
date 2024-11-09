@@ -6,9 +6,11 @@ import '../InputGroup.scss';
 import { Form } from 'react-bootstrap';
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
+import Image from 'next/image';
 
 const InputFormSanPham = ({ formData, errors, handleChange }) => {
     const quillRef = useRef(null);
+    const [imagePreviewUrls, setImagePreviewUrls] = useState([]);
 
     const insertImage = (url) => {
         const quill = quillRef.current.getEditor();
@@ -17,16 +19,25 @@ const InputFormSanPham = ({ formData, errors, handleChange }) => {
     };
 
     const handleImageUpload = (event) => {
-        const file = event.target.files[0];
-        const reader = new FileReader();
+        const files = event.target.files;
+        const newImageUrls = [];
 
-        reader.onloadend = () => {
-            insertImage(reader.result);
-        };
+        for (let i = 0; i < files.length; i++) {
+            const file = files[i];
+            const reader = new FileReader();
 
-        if (file) {
-            reader.readAsDataURL(file);
+            reader.onloadend = () => {
+                newImageUrls.push(reader.result);
+                setImagePreviewUrls(prevUrls => [...prevUrls, reader.result]); // Cập nhật danh sách URL tạm thời
+            };
+
+            if (file) {
+                reader.readAsDataURL(file);
+            }
         }
+
+        // Cập nhật formData với tất cả file ảnh
+        handleChange({ target: { name: 'HinhAnh', files } });
     };
 
     const insertVideo = (url) => {
@@ -102,11 +113,7 @@ const InputFormSanPham = ({ formData, errors, handleChange }) => {
                 }
             </div>
             <div className="inputGroup">
-                {/* <textarea type="text" name='MoTa' required
-                    value={formData.MoTa}
-                    onChange={handleChange}
-                /> */}
-                <label>Mô Tả</label>
+                {/* <label>Mô Tả</label> */}
                 <ReactQuill
                     ref={quillRef}
                     value={formData.MoTa}
@@ -131,7 +138,7 @@ const InputFormSanPham = ({ formData, errors, handleChange }) => {
                     </span>
                 }
             </div>
-            <div className="inputGroup">
+            {/* <div className="inputGroup">
                 <input
                     type="file"
                     name='HinhAnh'
@@ -140,7 +147,31 @@ const InputFormSanPham = ({ formData, errors, handleChange }) => {
                     multiple // Thêm thuộc tính này để cho phép chọn nhiều file
                     onChange={handleChange}
                 />
-                {/* <label>Hình Ảnh</label> */}
+                {errors.HinhAnh &&
+                    <span
+                        style={{ fontSize: '.75rem' }}
+                        className='text-orange'>
+                        {errors.HinhAnh}
+                    </span>
+                }
+            </div> */}
+            <div className="inputGroup">
+                <input
+                    type="file"
+                    name='HinhAnh'
+                    required
+                    accept="image/*"
+                    multiple
+                    onChange={handleImageUpload}
+                />
+                {/* Hiển thị hình ảnh tạm thời */}
+                {imagePreviewUrls.length > 0 && (
+                    <div className="image-preview">
+                        {imagePreviewUrls.map((url, index) => (
+                            <img key={index} src={url} alt={`Preview ${index}`} style={{ width: '100px', height: '100px', margin: '5px' }} />
+                        ))}
+                    </div>
+                )}
                 {errors.HinhAnh &&
                     <span
                         style={{ fontSize: '.75rem' }}
@@ -149,7 +180,6 @@ const InputFormSanPham = ({ formData, errors, handleChange }) => {
                     </span>
                 }
             </div>
-
             {/* <div className='inputGroup'>
                 <Form.Select
                     required

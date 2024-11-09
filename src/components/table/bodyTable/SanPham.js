@@ -22,6 +22,18 @@ const SanPham = () => {
         }, 300);
     }, []);
 
+    const MoTaProduct = (rowData) => {
+        // console.log('check: ', rowData.MoTa);
+        return (
+            <>
+                <div>
+                    {rowData?.MoTa}
+                </div>
+                {/* <div dangerouslySetInnerHTML={{ __html: rowData?.MoTa }} /> */}
+            </>
+        )
+    }
+
     const ImageProduct = (rowData) => {
         return (
             <>
@@ -76,7 +88,7 @@ const SanPham = () => {
             <Column selectionMode="multiple" exportable={false}></Column>
             <Column field="SanPhamId" header="ID" sortable style={{ maxWidth: '3rem' }} className="text-truncate"></Column>
             <Column field="TenSanPham" header="Tên Sản Phẩm" sortable style={{ minWidth: '12rem' }}></Column>
-            <Column field="MoTa" header="Mô Tả" sortable style={{ maxWidth: '3rem' }} className='text-truncate'></Column>
+            <Column field="MoTa" header="Mô Tả" sortable style={{ maxWidth: '3rem' }} className='text-truncate' body={MoTaProduct}></Column>
             <Column field="Gia" header="Giá" sortable style={{ maxWidth: '8rem' }} className='text-truncate'></Column>
             <Column field="SoLuongKho" header="Số Lượng Kho" sortable style={{ maxWidth: '8rem' }} className='text-truncate'></Column>
             <Column field="LoaiSanPhamId" header="Loại" sortable style={{ maxWidth: '8rem' }} className='text-truncate'></Column>

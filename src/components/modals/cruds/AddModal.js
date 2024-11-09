@@ -146,11 +146,13 @@ const AddModal = ({ formTable, endpoint, updateData, showAddModal, toggleShowAdd
             return;
         }
     };
+    console.log('check:', formData);
     // console.log('check re render');
 
     return (
         <Modal
             show={showAddModal}
+            size='fullscreen'
             onHide={() => { handleClose() }}
             backdrop="static" //Ngăn chặn việc bấm ra ngoài
         >
