@@ -13,7 +13,7 @@ import ValidateLoaiSanPham from '../validations/ValidateLoaiSanPham';
 
 const LoaiSanPham = () => {
     const { toggleHeadTitle } = useContext(HeadeTitleContext);
-    const { data, error, isLoading, mutate } = useGetData('/loaisanpham');
+    const { data, error, isLoading, mutate } = useGetData('/loaisp');
 
     const ss_account = Cookies.get('ss_account');
     const typeData = {
@@ -44,7 +44,7 @@ const LoaiSanPham = () => {
                 formTable='loaisanpham'
                 typeData={typeData}
                 validate={validate}
-                endpoint={'/loaisanpham'}
+                endpoint={'/loaisp'}
             >
                 <TableMain />
             </TableInfo>

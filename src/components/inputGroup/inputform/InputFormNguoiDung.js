@@ -11,6 +11,7 @@ const InputFormNguoiDung = ({ formData, errors, handleChange }) => {
     const toggleShowPassword = () => {
         setShowPassword(!showPassword);
     };
+    // console.log('check: ', formData);
 
     return (
         <InputGroup>

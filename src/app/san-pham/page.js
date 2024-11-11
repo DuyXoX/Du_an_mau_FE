@@ -1,10 +1,10 @@
-import React from 'react';
+import SanPham from "@/containers/sanpham/SanPham";
 
 const page = () => {
     return (
-        <div>
-            SanPham
-        </div>
+        <>
+            <SanPham />
+        </>
     );
 };
 

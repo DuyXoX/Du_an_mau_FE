@@ -1,4 +1,6 @@
 import DangKy from '@/containers/DangKy';
+import Footer from '@/layouts/Footer';
+import Navigation from '@/layouts/Navigation';
 import React from 'react';
 
 export async function generateMetadata() {
@@ -9,7 +11,11 @@ export async function generateMetadata() {
 
 const page = () => {
     return (
-        <DangKy />
+        <>
+            <Navigation />
+            <DangKy />
+            <Footer />
+        </>
     );
 };
 

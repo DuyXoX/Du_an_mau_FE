@@ -35,11 +35,12 @@ const SanPham = () => {
     }
 
     const ImageProduct = (rowData) => {
+        // console.log('check: ', rowData.HinhAnh[0].DuongDanHinh);
         return (
             <>
                 {rowData?.HinhAnh && rowData.HinhAnh.length > 0 && (
                     <Image
-                        src={`${process.env.NEXT_PUBLIC_API_URL}/${rowData.HinhAnh[0]}`} // Chỉ hiển thị hình ảnh đầu tiên
+                        src={`${process.env.NEXT_PUBLIC_API_URL}/${rowData.HinhAnh[0].DuongDanHinh}`} // Chỉ hiển thị hình ảnh đầu tiên
                         width={50}
                         height={50}
                         alt='Ảnh sản phẩm'
@@ -47,9 +48,8 @@ const SanPham = () => {
                 )}
             </>
         )
-        // console.log('check: ', rowData.HinhAnh);
-
     }
+
     // Thực hiện lấy data của hàng và thực hiện trức năng (logic lấy data đc thư viện PrimeReact thực hiện từ DataTable)
     const OptionEditDelete = useCallback((rowData) => {
         return (<>
@@ -89,7 +89,7 @@ const SanPham = () => {
             <Column field="SanPhamId" header="ID" sortable style={{ maxWidth: '3rem' }} className="text-truncate"></Column>
             <Column field="TenSanPham" header="Tên Sản Phẩm" sortable style={{ minWidth: '12rem' }}></Column>
             <Column field="MoTa" header="Mô Tả" sortable style={{ maxWidth: '3rem' }} className='text-truncate' body={MoTaProduct}></Column>
-            <Column field="Gia" header="Giá" sortable style={{ maxWidth: '8rem' }} className='text-truncate'></Column>
+            {/* <Column field="Gia" header="Giá" sortable style={{ maxWidth: '8rem' }} className='text-truncate'></Column> */}
             <Column field="SoLuongKho" header="Số Lượng Kho" sortable style={{ maxWidth: '8rem' }} className='text-truncate'></Column>
             <Column field="LoaiSanPhamId" header="Loại" sortable style={{ maxWidth: '8rem' }} className='text-truncate'></Column>
             <Column field="HinhAnh" header="Hình" sortable body={ImageProduct}></Column>

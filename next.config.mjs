@@ -44,6 +44,7 @@ const nextConfig = {
                 source: '/auth/facebook/callback',
                 destination: 'http://localhost:8000/auth/facebook/callback',
             },
+            
         ];
     },
     images: {

@@ -5,7 +5,8 @@ import Cookies from 'js-cookie';
 import { toast } from 'react-toastify';
 import useSWR from 'swr';
 
-const URL = process.env.NEXT_PUBLIC_API_URL || 'https://doman.com/api';
+
+const URL = process.env.NEXT_PUBLIC_API_URL || ' http://localhost:8000/api';
 // console.log('check api: ', URL);
 
 const apiClient = axios.create({ // Tạo một instance của axios với cấu hình cơ bản
@@ -27,25 +28,25 @@ const handleAuthError = async (error) => {
     const token = Cookies.get('ss_account');
 
     if (error.response?.status === 401 && !originalRequest._retry) {
-        originalRequest._retry = true;
+        // originalRequest._retry = true;
 
-        // Nếu không có token hoặc request là để refresh token thì không cố gắng refresh
-        if (!token || originalRequest.url.includes('/refreshtoken')) {
-            clearCookiesAndRedirect();
-            return Promise.reject(error);
-        }
+        // // Nếu không có token hoặc request là để refresh token thì không cố gắng refresh
+        // if (!token || originalRequest.url.includes('/refreshtoken')) {
+        clearCookiesAndRedirect();
+        //     return Promise.reject(error);
+        // }
 
-        try {
-            const response = await apiClient.post('/refreshtoken');
-            const newToken = response.data.ss_account;
-            Cookies.set('ss_account', newToken, { secure: true, httpOnly: false, expires: 30 });
-            apiClient.defaults.headers.common['Authorization'] = `Bearer ${newToken}`;
-            originalRequest.headers['Authorization'] = `Bearer ${newToken}`;
-            return apiClient(originalRequest);
-        } catch (refreshError) {
-            clearCookiesAndRedirect();
-            return Promise.reject(refreshError);
-        }
+        // try {
+        //     const response = await apiClient.post('/refreshtoken');
+        //     const newToken = response.data.ss_account;
+        //     Cookies.set('ss_account', newToken, { secure: true, httpOnly: false, expires: 30 });
+        //     apiClient.defaults.headers.common['Authorization'] = `Bearer ${newToken}`;
+        //     originalRequest.headers['Authorization'] = `Bearer ${newToken}`;
+        //     return apiClient(originalRequest);
+        // } catch (refreshError) {
+        //     clearCookiesAndRedirect();
+        //     return Promise.reject(refreshError);
+        // }
     } else {
         clearCookiesAndRedirect();
         return Promise.reject(error);
@@ -55,7 +56,7 @@ const handleAuthError = async (error) => {
 const checkLogin = async () => {
     const token = Cookies.get('ss_account');
     if (!token && window.location.pathname !== '/dang-nhap') {
-        toast.warning('Bạn chưa đăng nhập!', {
+        toast.warning('Vui Lòng đăng nhập!', {
             onClose: () => {
                 window.location.replace('/dang-nhap');
             }
@@ -64,8 +65,6 @@ const checkLogin = async () => {
     }
     return true; // Trả về true nếu đã đăng nhập
 }
-
-// Interceptor để thêm access token vào mỗi request
 apiClient.interceptors.request.use(addAuthHeader, (error) => Promise.reject(error));
 
 // Interceptor để xử lý các lỗi từ server
@@ -144,5 +143,43 @@ const deleteData = async (endpoint) => {
         throw error;
     }
 };
+// Hàm xóa sản phẩm trong giỏ hàng
+// Hàm xóa sản phẩm trong giỏ hàng
+const deleteCartProduct = async (sanPhamId, chiTietSanPhamId) => {
+    try {
+        const response = await axios.delete('http://localhost:8000/api/cart', {
+            data: {
+                SanPhamId: sanPhamId,
+                ChiTietSanPhamId: chiTietSanPhamId
+            },
+            withCredentials: true, // Đảm bảo gửi cookie
+        });
 
-export { apiClient, useGetData, postData, putData, deleteData };
+        console.log('Response từ API:', response);  // Log phản hồi từ API
+
+        return response; // Trả về toàn bộ response từ API
+    } catch (error) {
+        console.error('Lỗi khi xóa sản phẩm:', error);
+        throw error; // Ném lỗi để được bắt ở phần handleDeleteProduct
+    }
+};
+
+
+// Hàm lấy thông tin người dùng từ token
+const checkLogintoken = async () => {
+    try {
+        const response = await axios.get(`http://localhost:8000/api/user/uesrs/check-login`, {
+            withCredentials: true, // Cho phép gửi cookie cùng với yêu cầu
+        });
+        return response.data; // Trả về dữ liệu từ phản hồi
+    } catch (error) {
+        console.error('Lỗi khi kiểm tra trạng thái đăng nhập:', error);
+        throw error; // Ném lại lỗi để có thể xử lý ở nơi gọi
+    }
+};
+
+
+
+
+
+export { apiClient, useGetData, postData, putData, deleteData, checkLogin, checkLogintoken, deleteCartProduct };

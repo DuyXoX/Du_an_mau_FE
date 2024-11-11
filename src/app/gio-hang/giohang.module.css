@@ -1,0 +1,135 @@
+/* src/styles/giohang.module.css */
+.gioHang {
+    display: flex;
+    justify-content: space-between;
+    padding: 20px;
+    background-color: #ffffff;
+  max-width: 100%;
+}
+
+.productTable {
+  width: 50%; /* Phần sản phẩm chiếm 3 phần */
+   margin-left: 100px;
+}
+
+.cartTable {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: #fff;
+}
+
+.cartTable th,
+.cartTable td {
+    border: 1px solid #ddd;
+    padding: 10px;
+    text-align: left;
+}
+
+.cartTable th {
+    background-color: #f2f2f2;
+}
+.productImage{
+    width: 100px;
+    height: 100px;
+}
+.removeButton {
+    background-color: #ff4d4d;
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.removeButton:hover {
+    background-color: #ff1a1a;
+}
+
+.summaryTable {
+   width: 30%; /* Phần tổng cộng chiếm 1 phần */
+   margin-top: 50px;
+   border-collapse: collapse;
+  margin-right: 100px;
+    background-color: #fff;
+    border-radius: 5px;
+}
+
+.summaryTable td {
+    padding: 10px; /* Khoảng cách bên trong mỗi ô */
+    border-bottom: 1px solid #ccc; /* Chỉ giữ đường viền ngang */
+}
+
+.summaryTable h2 {
+  width: 200px;
+}
+
+
+.checkoutButton {
+    width: 100%;
+    background-color: #28a745;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.checkoutButton:hover {
+    background-color: #218838;
+}
+
+.quantityControl {
+    display: flex;
+    align-items: center;
+}
+
+.controlButton {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    margin: 0 5px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.controlButton:hover {
+    background-color: #0056b3;
+}
+/*  nhập địa chỉ css */
+.addressInputContainer {
+    display: flex;
+    align-items: center;
+    margin-top: 10px;
+}
+
+.addressInput {
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    padding: 10px;
+    width: 80%;
+    font-size: 16px;
+    transition: border-color 0.3s;
+}
+
+.addressInput:focus {
+    border-color: #0070f3; /* Màu xanh khi có focus */
+    outline: none; /* Ẩn outline mặc định */
+}
+
+.confirmButton {
+    background-color: #0070f3; /* Màu nền xanh */
+    color: white; /* Màu chữ trắng */
+    border: none;
+    height: 50px;
+    border-radius: 4px;
+    padding: 10px 15px;
+    font-size: 11px;
+    margin-left: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.confirmButton:hover {
+    background-color: #005bb5; /* Màu nền khi hover */
+}

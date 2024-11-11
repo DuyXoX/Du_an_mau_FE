@@ -58,30 +58,6 @@ const AddModal = ({ formTable, endpoint, updateData, showAddModal, toggleShowAdd
             setCheckError(true);
         }
     }, [errors, validate, setFormData]);
-    // const handleChange = useCallback((e) => {
-    //     const { name, value, files } = e.target;
-    //     setFormData((prevData) => {
-    //         if (name === 'HinhAnh' && files) {
-    //             // Cập nhật formData với file ảnh duy nhất
-    //             return { ...prevData, [name]: files[0] };
-    //         }
-    //         return { ...prevData, [name]: value };
-    //     });
-
-    //     const newErrors = {
-    //         ...errors,
-    //         [name]: validate(name, value),
-    //     };
-
-    //     setErrors(newErrors);
-
-    //     // Kiểm tra nếu không có lỗi nào thì cập nhật checkError thành false
-    //     if (Object.values(newErrors).every((error) => error === '')) {
-    //         setCheckError(false);
-    //     } else {
-    //         setCheckError(true);
-    //     }
-    // }, [errors, validate, setFormData]);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -146,13 +122,13 @@ const AddModal = ({ formTable, endpoint, updateData, showAddModal, toggleShowAdd
             return;
         }
     };
-    console.log('check:', formData);
+    // console.log('check:', formData);
     // console.log('check re render');
 
     return (
         <Modal
             show={showAddModal}
-            size='fullscreen'
+            size='xl'
             onHide={() => { handleClose() }}
             backdrop="static" //Ngăn chặn việc bấm ra ngoài
         >

@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import InputGroup from '../InputGroup';
 import { FaEye, FaEyeSlash } from 'react-icons/fa';
 import './InputForm.scss';
@@ -7,52 +7,42 @@ import { Form } from 'react-bootstrap';
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
 import Image from 'next/image';
+import { useGetData } from '@/service/apiServive';
 
 const InputFormSanPham = ({ formData, errors, handleChange }) => {
     const quillRef = useRef(null);
     const [imagePreviewUrls, setImagePreviewUrls] = useState([]);
 
-    const insertImage = (url) => {
-        const quill = quillRef.current.getEditor();
-        const range = quill.getSelection();
-        quill.insertEmbed(range.index, 'image', url);
-    };
+    const { data: DonViTinh, error: errDVT } = useGetData('/dvt');
+    const { data: LoaiSanPham, error: errLSP } = useGetData('/loaisp');
 
-    const handleImageUpload = (event) => {
-        const files = event.target.files;
-        const newImageUrls = [];
-
-        for (let i = 0; i < files.length; i++) {
-            const file = files[i];
-            const reader = new FileReader();
-
-            reader.onloadend = () => {
-                newImageUrls.push(reader.result);
-                setImagePreviewUrls(prevUrls => [...prevUrls, reader.result]); // Cập nhật danh sách URL tạm thời
-            };
-
-            if (file) {
-                reader.readAsDataURL(file);
-            }
+    useEffect(() => {
+        return () => {
+            imagePreviewUrls && URL.revokeObjectURL(imagePreviewUrls.preview);
         }
+    }, [imagePreviewUrls])
 
-        // Cập nhật formData với tất cả file ảnh
-        handleChange({ target: { name: 'HinhAnh', files } });
+    const handleImageUpload = (e) => {
+        const files = Array.from(e.target.files); // Chuyển đổi FileList thành mảng
+        const newImagePreviewUrls = files.map(file => {
+            file.preview = URL.createObjectURL(file);
+            return file;
+        });
+        // console.log('check: ', files);
+
+        setImagePreviewUrls(newImagePreviewUrls)
+        handleChange({ target: { name: 'HinhAnh', value: files } });
     };
 
-    const insertVideo = (url) => {
-        const quill = quillRef.current.getEditor();
-        const range = quill.getSelection();
-        const videoEmbed = `<iframe width="560" height="315" src="${url}" frameborder="0" allowfullscreen></iframe>`;
-        quill.clipboard.dangerouslyPasteHTML(range.index, videoEmbed);
-    };
+    if (errDVT) {
+        return console.log('Error: ', errDVT);
+    }
+    if (errLSP) {
+        return console.log('Error: ', errLSP);
+    }
 
-    const handleVideoInsert = () => {
-        const videoUrl = prompt("Nhập URL video:");
-        if (videoUrl) {
-            insertVideo(videoUrl);
-        }
-    };
+    console.log('check: ', formData.LoaiChiTiet);
+    // console.log('check Error: ', errors);
 
     return (
         <InputGroup>
@@ -70,10 +60,72 @@ const InputFormSanPham = ({ formData, errors, handleChange }) => {
                     </span>
                 }
             </div>
-            <div className="inputGroup">
-                <input type="text" name='Gia' required
-                    value={formData.Gia}
+
+            <div className='inputGroup'>
+                <Form.Select
+                    required
+                    name="DonViTinhID"
+                    value={formData.DonViTinhID}
                     onChange={handleChange}
+                    aria-label="Chọn đơn vị tính"
+                >
+                    <option value="">Đơn Vị Tính</option>
+                    {DonViTinh?.map((donVi, idx) => (
+                        <option key={idx} value={donVi.DonViTinhID}>
+                            {donVi.TenDonVi}
+                        </option>
+                    ))}
+                </Form.Select>
+                {errors.DonViTinhID &&
+                    <span
+                        style={{ fontSize: '.75rem' }}
+                        className='text-orange'>
+                        {errors.DonViTinhID}
+                    </span>
+                }
+            </div>
+            <div className='inputGroup'>
+                <Form.Select
+                    required
+                    name="LoaiSanPhamId"
+                    value={formData.LoaiSanPhamId}
+                    onChange={handleChange}
+                    aria-label="Chọn đơn vị tính"
+                >
+                    <option value="">Loại Sản Phẩm</option>
+                    {LoaiSanPham?.map((loaiSP, idx) => (
+                        <option key={idx} value={loaiSP.LoaiSanPhamId}>
+                            {loaiSP.TenLoai}
+                        </option>
+                    ))}
+                </Form.Select>
+                {errors.LoaiSanPhamId &&
+                    <span
+                        style={{ fontSize: '.75rem' }}
+                        className='text-orange'>
+                        {errors.LoaiSanPhamId}
+                    </span>
+                }
+            </div>
+            <div className="inputGroup">
+                <input type="text" name='LoaiChiTiet' required
+                    value={formData.LoaiChiTiet || formData.PhanLoai[0]?.LoaiChiTiet}
+                    onChange={(e) => handleChange({ target: { name: 'LoaiChiTiet', value: e.target.value, PhanLoai: [{ ...formData.PhanLoai[0], LoaiChiTiet: e.target.value }] } })}
+                />
+                <label>Loại Chi Tiết</label>
+                {errors.LoaiChiTiet &&
+                    <span
+                        style={{ fontSize: '.75rem' }}
+                        className='text-orange'>
+                        {errors.LoaiChiTiet}
+                    </span>
+                }
+            </div>
+
+            <div className="inputGroup">
+                <input type="number" name='Gia' required
+                    value={formData.Gia || formData.PhanLoai[0]?.Gia}
+                    onChange={(e) => handleChange({ target: { name: 'Gia', value: e.target.value, PhanLoai: [{ ...formData.PhanLoai, Gia: e.target.value }] } })}
                 />
                 <label>Giá</label>
                 {errors.Gia &&
@@ -85,35 +137,21 @@ const InputFormSanPham = ({ formData, errors, handleChange }) => {
                 }
             </div>
             <div className="inputGroup">
-                <input type="number" name='SoLuongKho' required
-                    value={formData.SoLuongKho}
-                    onChange={handleChange}
+                <input type="number" name='SoLuong' required
+                    value={formData.SoLuong || formData.PhanLoai[0]?.SoLuong}
+                    onChange={(e) => handleChange({ target: { name: 'SoLuong', value: e.target.value, PhanLoai: [{ ...formData.PhanLoai[0], SoLuong: e.target.value }] } })}
                 />
-                <label>Số Lượng Kho</label>
-                {errors.SoLuongKho &&
+                <label>Số Lượng</label>
+                {errors.SoLuong &&
                     <span
                         style={{ fontSize: '.75rem' }}
                         className='text-orange'>
-                        {errors.SoLuongKho}
+                        {errors.SoLuong}
                     </span>
                 }
             </div>
+
             <div className="inputGroup">
-                <input type="number" name='LoaiSanPhamId' required
-                    value={formData.LoaiSanPhamId}
-                    onChange={handleChange}
-                />
-                <label>Loại Sản Phẩm</label>
-                {errors.LoaiSanPhamId &&
-                    <span
-                        style={{ fontSize: '.75rem' }}
-                        className='text-orange'>
-                        {errors.LoaiSanPhamId}
-                    </span>
-                }
-            </div>
-            <div className="inputGroup">
-                {/* <label>Mô Tả</label> */}
                 <ReactQuill
                     ref={quillRef}
                     value={formData.MoTa}
@@ -126,7 +164,7 @@ const InputFormSanPham = ({ formData, errors, handleChange }) => {
                             [{ 'list': 'ordered' }, { 'list': 'bullet' }],
                             [{ 'align': [] }],
                             ['clean'],
-                            ['image', 'video', 'code-block'], // Thêm nút video
+                            // ['image', 'video', 'code-block'], // Thêm nút video
                         ],
                     }}
                 />
@@ -138,23 +176,6 @@ const InputFormSanPham = ({ formData, errors, handleChange }) => {
                     </span>
                 }
             </div>
-            {/* <div className="inputGroup">
-                <input
-                    type="file"
-                    name='HinhAnh'
-                    required
-                    accept="image/*"
-                    multiple // Thêm thuộc tính này để cho phép chọn nhiều file
-                    onChange={handleChange}
-                />
-                {errors.HinhAnh &&
-                    <span
-                        style={{ fontSize: '.75rem' }}
-                        className='text-orange'>
-                        {errors.HinhAnh}
-                    </span>
-                }
-            </div> */}
             <div className="inputGroup">
                 <input
                     type="file"
@@ -164,44 +185,21 @@ const InputFormSanPham = ({ formData, errors, handleChange }) => {
                     multiple
                     onChange={handleImageUpload}
                 />
-                {/* Hiển thị hình ảnh tạm thời */}
-                {imagePreviewUrls.length > 0 && (
-                    <div className="image-preview">
-                        {imagePreviewUrls.map((url, index) => (
-                            <img key={index} src={url} alt={`Preview ${index}`} style={{ width: '100px', height: '100px', margin: '5px' }} />
-                        ))}
-                    </div>
-                )}
-                {errors.HinhAnh &&
-                    <span
-                        style={{ fontSize: '.75rem' }}
-                        className='text-orange'>
-                        {errors.HinhAnh}
-                    </span>
-                }
+                <div className='mt-3 d-flex flex-wrap'>
+                    {imagePreviewUrls?.map((file, idx) => (
+                        <div key={idx}>
+                            <Image src={file?.preview} alt='Ảnh sản phẩm' className='me-2' width={80} height={80} />
+                        </div>
+                    ))}
+                    {errors.HinhAnh &&
+                        <span
+                            style={{ fontSize: '.75rem' }}
+                            className='text-orange'>
+                            {errors.HinhAnh}
+                        </span>
+                    }
+                </div>
             </div>
-            {/* <div className='inputGroup'>
-                <Form.Select
-                    required
-                    name="role"
-                    value={formData.role}
-                    onChange={handleChange}
-                    aria-label="Chọn vai trò"
-                >
-                    <option value="">Chọn vai trò</option>
-                    <option value="user">Người dùng</option>
-                    <option value="quanly">Quản lý</option>
-                    <option value="admin">Admin</option>
-                </Form.Select>
-                {errors.role &&
-                    <span
-                        style={{ fontSize: '.75rem' }}
-                        className='text-orange'>
-                        {errors.role}
-                    </span>
-                }
-            </div> */}
-
         </InputGroup>
     );
 };

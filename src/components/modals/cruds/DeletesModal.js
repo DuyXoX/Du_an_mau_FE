@@ -91,7 +91,7 @@ const DeletesModal = ({ formTable, endpoint, updateData, selectedDatas, toggleSe
                 <Button variant="secondary" onClick={() => toggleShowDeleteModal(false)}>
                     Hủy
                 </Button>
-                <Button variant="orange" onClick={() => { handleSubmitDelete() }}>
+                <Button variant="green" onClick={() => { handleSubmitDelete() }}>
                     Xác nhận
                 </Button>
             </Modal.Footer>

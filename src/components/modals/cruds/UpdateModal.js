@@ -149,7 +149,7 @@ const UpdateModal = ({ formTable, endpoint, rowData, updateData }) => {
 
     const editData = (data) => {
         // console.log('check data: ', data);
-        const keysToNormalize = ['VaiTro', 'expertise']; // Danh sách các thuộc tính cần xử lý
+        const keysToNormalize = ['DonViTinhID', 'LoaiSanPhamId']; // Danh sách các thuộc tính cần xử lý
         const normalizedData = normalizeData(data, keysToNormalize);
         setFormData(normalizedData);
         toggleShowUpdateModal(true)
@@ -171,6 +171,7 @@ const UpdateModal = ({ formTable, endpoint, rowData, updateData }) => {
             </Button>{' '}
 
             <Modal
+                size='xl'
                 show={showUpdateModal}
                 onHide={() => { handleClose() }}
                 backdrop="static" //Ngăn chặn việc bấm ra ngoài

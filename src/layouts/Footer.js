@@ -1,4 +1,5 @@
 'use client'
+
 import React from 'react';
 import { Col, Container, Row } from 'react-bootstrap';
 import { FaMapMarkerAlt, FaPhoneAlt, FaFacebookF } from "react-icons/fa";
@@ -12,7 +13,7 @@ const Footer = () => {
     };
 
     return (
-        <footer className="mt-5 bg-custom">
+        <footer className="mt-5 bg-green">
             <Container fluid='xxl'>
                 <Row>
                     <Col>
@@ -24,7 +25,7 @@ const Footer = () => {
                                         <span style={{ cursor: 'pointer' }} className='ps-2'
                                             onClick={() => { handleNewTab('https://maps.app.goo.gl/PQk15Ui9QmnVAff38') }}
                                         >
-                                            107-95 Chu Văn An, Phường 26, Bình Thạnh, Hồ Chí Minh
+                                            300,6 Hà Huy Tập, Buôn Ma Thuột, Đăk Lăk
                                         </span>
                                     </h6>
                                 </li>
@@ -32,7 +33,7 @@ const Footer = () => {
                                     <h6 className="text-white">
                                         <MdEmail className='fs-4' />
                                         <span style={{ textDecoration: 'underline' }} className='ps-2'>
-                                            mimimusiccenter@gmail.com
+                                            banhangnongsan@gmail.com
                                         </span>
                                     </h6>
                                 </li>
@@ -40,7 +41,7 @@ const Footer = () => {
                                     <h6 className="text-white">
                                         <FaPhoneAlt className='fs-4' />
                                         <span className='ps-2'>
-                                            090 147 86 50
+                                            080 155 66 50
                                         </span>
                                     </h6>
                                 </li>
@@ -50,7 +51,7 @@ const Footer = () => {
                                         <span style={{ textDecoration: 'underline', cursor: 'pointer' }} className='ps-2'
                                             onClick={() => { handleNewTab('https://www.facebook.com/phongtapnhacmimimusic') }}
                                         >
-                                            Phongtapnhacmimimusic
+                                            Banhangnongsan
                                         </span>
                                     </h6>
                                 </li>
@@ -69,7 +70,7 @@ const Footer = () => {
                         </div>
                     </Col>
                     <div className='py-4'>
-                        <h5 className='text-center text-white fw-bold'>&copy;2024 Mimimusic | All Rights Reserved</h5>
+                        <h5 className='text-center text-white fw-bold'>&copy;2024 Bán hàng nông sản | All Rights Reserved</h5>
                     </div>
                 </Row>
             </Container>
