@@ -148,11 +148,34 @@ const UpdateModal = ({ formTable, endpoint, rowData, updateData }) => {
     };
 
     const editData = (data) => {
-        // console.log('check data: ', data);
         const keysToNormalize = ['DonViTinhID', 'LoaiSanPhamId']; // Danh sách các thuộc tính cần xử lý
         const normalizedData = normalizeData(data, keysToNormalize);
-        setFormData(normalizedData);
-        toggleShowUpdateModal(true)
+
+        // Tạo một đối tượng chứa các thuộc tính cần thiết dựa trên loại dữ liệu
+        const additionalData = {};
+
+        switch (formTable) {
+            case 'sanpham':
+                additionalData.LoaiChiTiet = data.PhanLoai[0]?.LoaiChiTiet || '';
+                additionalData.Gia = data.PhanLoai[0]?.Gia || '';
+                additionalData.SoLuong = data.PhanLoai[0]?.SoLuong || '';
+                break;
+            case 'nguoidung':
+                // Thêm các thuộc tính cần thiết cho người dùng nếu có
+                break;
+            case 'loaisanpham':
+                // Thêm các thuộc tính cần thiết cho loại sản phẩm nếu có
+                break;
+            default:
+                break;
+        }
+
+        // Cập nhật formData chỉ với các thuộc tính cần thiết
+        setFormData({
+            ...normalizedData,
+            ...additionalData
+        });
+        toggleShowUpdateModal(true);
     };
 
     // console.log('check: ', rowData);

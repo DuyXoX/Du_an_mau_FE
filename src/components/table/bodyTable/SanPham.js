@@ -7,12 +7,14 @@ import DeleteModal from '@/components/modals/cruds/DeleteModal';
 import { TableInfoContext } from '@/containers/context/getdata/TableInfo';
 import { TableContext } from '@/containers/context/getdata/TableData';
 import Image from 'next/image';
+import { useGetData } from '@/service/apiServive';
 
 const SanPham = () => {
     const { datas, updateData, selectedDatas, toggleSelectedDatas } = useContext(TableContext);//Lấy data đã có trong context
     const { formTable, endpoint } = useContext(TableInfoContext);
     const [globalFilter, setGlobalFilter] = useState(null); // Bộ lọc tìm kiếm toàn cục
     const timeoutRef = useRef(null);
+    const { data: LoaiSanPham, error: errLSP } = useGetData('/loaisp');
 
     // Bộ lọc tìm kiếm với độ trễ 300ms khi người dùng nhập
     const handleSearch = useCallback((searchTerm) => {
@@ -33,7 +35,45 @@ const SanPham = () => {
             </>
         )
     }
+    const PhanLoai = (rowData) => {
+        // console.log('check: ', rowData.PhanLoai);
+        return (
+            <div className='d-flex flex-wrap'>
+                {rowData?.PhanLoai?.map((value, idx) => {
+                    return (
+                        <div key={idx} style={{ fontSize: 'xx-small' }} className='p-1 m-1 rounded bg-success text-white'>
+                            <span className=''>
+                                {value.LoaiChiTiet}
+                            </span>
+                            <br />
+                            <span className=''>
+                                Giá: {value.Gia}
+                            </span>
+                            <br />
+                            <span className=''>
+                                Kho: {value?.SoLuong}
+                            </span>
+                        </div>
+                    )
+                })}
+            </div>
+        )
+    }
+    const TenLoai = (rowData) => {
+        // console.log('check: ', rowData.LoaiSanPhamId);
+        // console.log('check LoaiSanPham: ', LoaiSanPham && LoaiSanPham);
 
+        // Tìm loại sản phẩm dựa trên LoaiSanPhamId
+        const loaiSP = LoaiSanPham?.find(item => item.LoaiSanPhamId === rowData.LoaiSanPhamId);
+        // Nếu tìm thấy, lấy TenLoai, nếu không thì trả về một giá trị mặc định
+        const tenLoai = loaiSP ? loaiSP.TenLoai : 'Không xác định';
+
+        return (
+            <div>
+                {tenLoai}
+            </div>
+        )
+    }
     const ImageProduct = (rowData) => {
         // console.log('check: ', rowData.HinhAnh[0].DuongDanHinh);
         return (
@@ -87,11 +127,10 @@ const SanPham = () => {
         >
             <Column selectionMode="multiple" exportable={false}></Column>
             <Column field="SanPhamId" header="ID" sortable style={{ maxWidth: '3rem' }} className="text-truncate"></Column>
-            <Column field="TenSanPham" header="Tên Sản Phẩm" sortable style={{ minWidth: '12rem' }}></Column>
+            <Column field="TenSanPham" header="Tên Sản Phẩm" sortable style={{ maxWidth: '8rem' }}></Column>
             <Column field="MoTa" header="Mô Tả" sortable style={{ maxWidth: '3rem' }} className='text-truncate' body={MoTaProduct}></Column>
-            {/* <Column field="Gia" header="Giá" sortable style={{ maxWidth: '8rem' }} className='text-truncate'></Column> */}
-            <Column field="SoLuongKho" header="Số Lượng Kho" sortable style={{ maxWidth: '8rem' }} className='text-truncate'></Column>
-            <Column field="LoaiSanPhamId" header="Loại" sortable style={{ maxWidth: '8rem' }} className='text-truncate'></Column>
+            <Column field="PhanLoai" header="Phân Loại" sortable style={{ maxWidth: '8rem' }} className='text-truncate' body={PhanLoai}></Column>
+            <Column field="LoaiSanPhamId" header="Loại" sortable style={{ maxWidth: '8rem' }} className='text-truncate' body={TenLoai}></Column>
             <Column field="HinhAnh" header="Hình" sortable body={ImageProduct}></Column>
             <Column header="Tùy chọn" body={OptionEditDelete}></Column>
         </DataTable>

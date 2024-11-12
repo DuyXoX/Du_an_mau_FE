@@ -41,7 +41,7 @@ const InputFormSanPham = ({ formData, errors, handleChange }) => {
         return console.log('Error: ', errLSP);
     }
 
-    console.log('check: ', formData.LoaiChiTiet);
+    // console.log('check: ', formData.LoaiSanPhamId);
     // console.log('check Error: ', errors);
 
     return (
@@ -60,7 +60,6 @@ const InputFormSanPham = ({ formData, errors, handleChange }) => {
                     </span>
                 }
             </div>
-
             <div className='inputGroup'>
                 <Form.Select
                     required
@@ -88,9 +87,9 @@ const InputFormSanPham = ({ formData, errors, handleChange }) => {
                 <Form.Select
                     required
                     name="LoaiSanPhamId"
-                    value={formData.LoaiSanPhamId}
+                    value={formData.LoaiSanPhamId || ''}
                     onChange={handleChange}
-                    aria-label="Chọn đơn vị tính"
+                    aria-label="Chọn loại sản phẩm"
                 >
                     <option value="">Loại Sản Phẩm</option>
                     {LoaiSanPham?.map((loaiSP, idx) => (
@@ -109,7 +108,7 @@ const InputFormSanPham = ({ formData, errors, handleChange }) => {
             </div>
             <div className="inputGroup">
                 <input type="text" name='LoaiChiTiet' required
-                    value={formData.LoaiChiTiet || formData.PhanLoai[0]?.LoaiChiTiet}
+                    value={formData.LoaiChiTiet || (formData.PhanLoai && formData.PhanLoai[0]?.LoaiChiTiet) || ''}
                     onChange={(e) => handleChange({ target: { name: 'LoaiChiTiet', value: e.target.value, PhanLoai: [{ ...formData.PhanLoai[0], LoaiChiTiet: e.target.value }] } })}
                 />
                 <label>Loại Chi Tiết</label>
@@ -121,10 +120,9 @@ const InputFormSanPham = ({ formData, errors, handleChange }) => {
                     </span>
                 }
             </div>
-
             <div className="inputGroup">
                 <input type="number" name='Gia' required
-                    value={formData.Gia || formData.PhanLoai[0]?.Gia}
+                    value={formData.Gia || (formData.PhanLoai && formData.PhanLoai[0]?.Gia) || ''}
                     onChange={(e) => handleChange({ target: { name: 'Gia', value: e.target.value, PhanLoai: [{ ...formData.PhanLoai, Gia: e.target.value }] } })}
                 />
                 <label>Giá</label>
@@ -141,7 +139,7 @@ const InputFormSanPham = ({ formData, errors, handleChange }) => {
                     value={formData.SoLuong || formData.PhanLoai[0]?.SoLuong}
                     onChange={(e) => handleChange({ target: { name: 'SoLuong', value: e.target.value, PhanLoai: [{ ...formData.PhanLoai[0], SoLuong: e.target.value }] } })}
                 />
-                <label>Số Lượng</label>
+                <label>Số Lượng Kho</label>
                 {errors.SoLuong &&
                     <span
                         style={{ fontSize: '.75rem' }}
@@ -150,7 +148,6 @@ const InputFormSanPham = ({ formData, errors, handleChange }) => {
                     </span>
                 }
             </div>
-
             <div className="inputGroup">
                 <ReactQuill
                     ref={quillRef}

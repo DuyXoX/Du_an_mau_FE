@@ -58,8 +58,8 @@ const LoaiSanPham = () => {
             header={<TableTitle handleSearch={handleSearch} />}
         >
             <Column selectionMode="multiple" exportable={false}></Column>
-            <Column field="LoaiSanPhamId" header="ID" sortable style={{ minWidth: '12rem' }}></Column>
-            <Column field="TenLoai" header="Loại Sản Phẩm" sortable style={{ maxWidth: '3rem' }} className="text-truncate"></Column>
+            <Column field="LoaiSanPhamId" header="ID" sortable style={{ maxWidth: '3rem' }}></Column>
+            <Column field="TenLoai" header="Loại Sản Phẩm" sortable style={{ minWidth: '12rem' }} className="text-truncate"></Column>
             <Column header="Tùy chọn" body={OptionEditDelete}></Column>
         </DataTable>
     );
