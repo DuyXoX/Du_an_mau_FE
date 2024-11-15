@@ -8,6 +8,8 @@ import { TableInfoContext } from '@/containers/context/getdata/TableInfo';
 import { TableContext } from '@/containers/context/getdata/TableData';
 import Image from 'next/image';
 import { useGetData } from '@/service/apiServive';
+import ChiTietSanPham from '@/containers/quanly/ChiTietSanPham';
+import RemoveDiacritics from '@/components/reuses/RemoveDiacritics';
 
 const SanPham = () => {
     const { datas, updateData, selectedDatas, toggleSelectedDatas } = useContext(TableContext);//Lấy data đã có trong context
@@ -16,6 +18,9 @@ const SanPham = () => {
     const timeoutRef = useRef(null);
     const { data: LoaiSanPham, error: errLSP } = useGetData('/loaisp');
 
+    // const { data: ChiTietSamPham, error: errCTSP } = useGetData('/chitietsp');
+    // console.log('check: ', ChiTietSamPham && ChiTietSamPham);
+
     // Bộ lọc tìm kiếm với độ trễ 300ms khi người dùng nhập
     const handleSearch = useCallback((searchTerm) => {
         clearTimeout(timeoutRef.current);
@@ -23,7 +28,6 @@ const SanPham = () => {
             setGlobalFilter(searchTerm);
         }, 300);
     }, []);
-
     const MoTaProduct = (rowData) => {
         // console.log('check: ', rowData.MoTa);
         return (
@@ -36,27 +40,14 @@ const SanPham = () => {
         )
     }
     const PhanLoai = (rowData) => {
-        // console.log('check: ', rowData.PhanLoai);
+        // console.log('check: ', rowData.PhanLoai[0]?.ChiTietSanPhamId);
         return (
-            <div className='d-flex flex-wrap'>
-                {rowData?.PhanLoai?.map((value, idx) => {
-                    return (
-                        <div key={idx} style={{ fontSize: 'xx-small' }} className='p-1 m-1 rounded bg-success text-white'>
-                            <span className=''>
-                                {value.LoaiChiTiet}
-                            </span>
-                            <br />
-                            <span className=''>
-                                Giá: {value.Gia}
-                            </span>
-                            <br />
-                            <span className=''>
-                                Kho: {value?.SoLuong}
-                            </span>
-                        </div>
-                    )
-                })}
-            </div>
+            <>
+                <ChiTietSanPham
+                    rowData={rowData}
+                    updateData={updateData}
+                />
+            </>
         )
     }
     const TenLoai = (rowData) => {
@@ -109,31 +100,32 @@ const SanPham = () => {
     }, [formTable, endpoint, updateData]);
     // console.log('check: ', datas);
 
-
     return (
-        <DataTable
-            resizableColumns
-            value={datas}
-            selection={selectedDatas}
-            onSelectionChange={(e) => toggleSelectedDatas(e.value)} // Cập nhật giá trị khi chọn dòng
-            dataKey="SanPhamId" //Key dử liệu
-            paginator //Phân trang
-            rows={10} //Số hàng mặc định
-            rowsPerPageOptions={[5, 10, 25]}
-            globalFilter={globalFilter} //Lọc tìm
-            paginatorTemplate="FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink CurrentPageReport RowsPerPageDropdown"
-            currentPageReportTemplate="Hiển thị {first} đến {last} của {totalRecords} dữ liệu"
-            header={<TableTitle handleSearch={handleSearch} />}
-        >
-            <Column selectionMode="multiple" exportable={false}></Column>
-            <Column field="SanPhamId" header="ID" sortable style={{ maxWidth: '3rem' }} className="text-truncate"></Column>
-            <Column field="TenSanPham" header="Tên Sản Phẩm" sortable style={{ maxWidth: '8rem' }}></Column>
-            <Column field="MoTa" header="Mô Tả" sortable style={{ maxWidth: '3rem' }} className='text-truncate' body={MoTaProduct}></Column>
-            <Column field="PhanLoai" header="Phân Loại" sortable style={{ maxWidth: '8rem' }} className='text-truncate' body={PhanLoai}></Column>
-            <Column field="LoaiSanPhamId" header="Loại" sortable style={{ maxWidth: '8rem' }} className='text-truncate' body={TenLoai}></Column>
-            <Column field="HinhAnh" header="Hình" sortable body={ImageProduct}></Column>
-            <Column header="Tùy chọn" body={OptionEditDelete}></Column>
-        </DataTable>
+        <>
+            <DataTable
+                resizableColumns
+                value={datas}
+                selection={selectedDatas}
+                onSelectionChange={(e) => toggleSelectedDatas(e.value)} // Cập nhật giá trị khi chọn dòng
+                dataKey="SanPhamId" //Key dử liệu
+                paginator //Phân trang
+                rows={10} //Số hàng mặc định
+                rowsPerPageOptions={[5, 10, 25]}
+                globalFilter={globalFilter} //Lọc tìm
+                paginatorTemplate="FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink CurrentPageReport RowsPerPageDropdown"
+                currentPageReportTemplate="Hiển thị {first} đến {last} của {totalRecords} dữ liệu"
+                header={<TableTitle handleSearch={handleSearch} />}
+            >
+                <Column selectionMode="multiple" exportable={false}></Column>
+                <Column field="SanPhamId" header="ID" sortable style={{ maxWidth: '3rem' }} className="text-truncate"></Column>
+                <Column field="TenSanPham" header="Tên Sản Phẩm" sortable style={{ maxWidth: '8rem' }}></Column>
+                <Column field="MoTa" header="Mô Tả" sortable style={{ maxWidth: '3rem' }} className='text-truncate' body={MoTaProduct}></Column>
+                <Column field="PhanLoai" header="Phân Loại" sortable style={{ maxWidth: '8rem' }} className='text-truncate' body={PhanLoai}></Column>
+                <Column field="LoaiSanPhamId" header="Loại" sortable style={{ maxWidth: '8rem' }} className='text-truncate' body={TenLoai}></Column>
+                <Column field="HinhAnh" header="Hình" sortable body={ImageProduct}></Column>
+                <Column header="Tùy chọn" body={OptionEditDelete}></Column>
+            </DataTable>
+        </>
     );
 };
 

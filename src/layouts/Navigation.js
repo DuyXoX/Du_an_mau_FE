@@ -9,47 +9,28 @@ import { IoMdSearch } from 'react-icons/io';
 import { FaShoppingCart } from "react-icons/fa";
 import Cookies from 'js-cookie';
 import { apiClient } from '@/service/apiServive';
+import { clearCookiesAndRedirect } from '@/components/reuses/Cookie';
 
 const Navigation = () => {
     const [totalQuantity, setTotalQuantity] = useState(0);
     const [isAuthenticated, setIsAuthenticated] = useState(null);
-
     const ss_account = Cookies.get('ss_account');
+    const account_user = Cookies.get('account_user');
 
     useEffect(() => {
-        if (ss_account) {
+        if (ss_account && account_user) {
             setIsAuthenticated(true);
-            fetchCart();
-
         } else {
             setIsAuthenticated(false);
         }
-    }, [ss_account]);
+    }, [ss_account, account_user]);
 
     // console.log('check isAuthenticated', isAuthenticated);
 
-    const fetchCart = async () => {
-
-        try {
-            const response = await apiClient.get('/cart'); // Đường dẫn đến API
-            const { data } = response;
-
-            if (data.status === 'success') {
-                setTotalQuantity(data.totalQuantity); // Cập nhật số lượng giỏ hàng
-            }
-        } catch (error) {
-            console.error('Lỗi khi lấy giỏ hàng:', error);
-        }
-    };
-
-
-
     const handleLogout = () => {
-        // Xóa cookie liên quan đến phiên đăng nhập
-        Cookies.remove('ss_account'); // Xóa cookie chứa token
-        window.location.replace('/dang-nhap');
-
+        clearCookiesAndRedirect()
     };
+
     return (
         <>
             <Navbar sticky='top' expand="lg" className="bg-green">
@@ -66,7 +47,7 @@ const Navigation = () => {
                     </Navbar.Brand>
                     <Navbar.Toggle aria-controls="basic-navbar-nav" />
                     <Navbar.Collapse id="basic-navbar-nav">
-                        <Nav className="mx-auto">{/* ms-auto chuyển về End me-auto chuyển về Đầu */}
+                        <Nav className="ms-auto">{/* ms-auto chuyển về End me-auto chuyển về Đầu */}
                             <Link href='/' className='nav-link'>Trang chủ</Link>
                             <Link href='/gioi-thieu' className='nav-link'>Giới thiệu</Link>
                             <Link href='/san-pham' className='nav-link'>Sản phẩm</Link>
@@ -98,9 +79,8 @@ const Navigation = () => {
                                 </div>
                                 :
                                 <div className='py-3 d-lg-flex flex-wrap gap-2 align-items-center justify-content-end'>
-                                    {/* <Link href="/thong-tin/nguoi-dung" className='nav-link'>Thông tin cá nhân</Link> */}
-                                    <button onClick={handleLogout}>Logout</button>
-                                    <Link href='/gio-hang' className='nav-link'>Giỏ Hàng
+                                    <Link href="/thong-tin/nguoi-dung" className='nav-link'>Thông tin cá nhân</Link>
+                                    <Link href='/thong-tin/gio-hang' className='nav-link'>
                                         <Button variant='green' className="position-relative">
                                             <FaShoppingCart />
                                             <span className="position-absolute top-0 start-100 translate-middle badge rounded-pill text-bg-light">

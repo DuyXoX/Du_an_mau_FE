@@ -8,8 +8,8 @@ import 'react-toastify/dist/ReactToastify.css';
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata = {
-  title: "Fresco",
-  description: "Fresco - Thức phẩm sạch",
+  title: "Nông Sản",
+  description: "Nông Sản - Thức phẩm sạch",
   link: '',
 };
 

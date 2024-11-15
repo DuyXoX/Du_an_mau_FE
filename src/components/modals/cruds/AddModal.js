@@ -7,6 +7,7 @@ import { postData } from '@/service/apiServive';
 import InputFormNguoiDung from '@/components/inputGroup/inputform/InputFormNguoiDung';
 import InputFormSanPham from '@/components/inputGroup/inputform/InputFormSanPham';
 import InputFormLoaiSanPham from '@/components/inputGroup/inputform/InputFormLoaiSanPham';
+import InputFormChiTietSanPham from '@/components/inputGroup/inputform/InputFormChiTietSanPham';
 
 const AddModal = ({ formTable, endpoint, updateData, showAddModal, toggleShowAddModal }) => {
     const { typeData, validate } = useContext(TableInfoContext);
@@ -18,11 +19,13 @@ const AddModal = ({ formTable, endpoint, updateData, showAddModal, toggleShowAdd
         ['nguoidung', ' người dùng '],
         ['sanpham', ' sản phẩm '],
         ['loaisanpham', ' loại sản phẩm '],
+        ['chitietsanpham', ' chi tiết sản phẩm '],
     ]);
     const tableComponents = useMemo(() => ({//Sử lý data để trả về định dạng
         nguoidung: InputFormNguoiDung,
         sanpham: InputFormSanPham,
         loaisanpham: InputFormLoaiSanPham,
+        chitietsanpham: InputFormChiTietSanPham,
     }), []);
 
     const label = tableLabels.get(formTable) || '';

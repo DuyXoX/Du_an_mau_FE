@@ -41,7 +41,7 @@ const InputFormSanPham = ({ formData, errors, handleChange }) => {
         return console.log('Error: ', errLSP);
     }
 
-    // console.log('check: ', formData.LoaiSanPhamId);
+    // console.log('check: ', formData?.ChiTietSanPhamId);
     // console.log('check Error: ', errors);
 
     return (
@@ -105,6 +105,12 @@ const InputFormSanPham = ({ formData, errors, handleChange }) => {
                         {errors.LoaiSanPhamId}
                     </span>
                 }
+            </div>
+            <div className="inputGroup d-none">
+                <input type="text" name='ChiTietSanPhamId' required
+                    value={formData.ChiTietSanPhamId || (formData.PhanLoai && formData.PhanLoai[0]?.ChiTietSanPhamId) || ' '}
+                    onChange={(e) => handleChange({ target: { name: 'ChiTietSanPhamId', value: e.target.value, PhanLoai: [{ ...formData.PhanLoai[0], ChiTietSanPhamId: e.target.value }] } })}
+                />
             </div>
             <div className="inputGroup">
                 <input type="text" name='LoaiChiTiet' required

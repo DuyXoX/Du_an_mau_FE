@@ -32,7 +32,6 @@ const GioHang = () => {
     );
   };
 
-
   const handleDecrease = (sanPhamId, chiTietSanPhamId) => {
     setCartItems((prevItems) =>
       prevItems.map((item) =>
@@ -42,7 +41,6 @@ const GioHang = () => {
       )
     );
   };
-
 
   // Nhập địa chỉ
   const handleSelectAddress = () => {
@@ -95,9 +93,6 @@ const GioHang = () => {
       alert("Đã có lỗi xảy ra khi cập nhật địa chỉ.");
     }
   };
-
-
-
 
   const handleSelectAddressSDT = () => {
     setAddressInputSDT(true); // Hiện input nhập địa chỉ

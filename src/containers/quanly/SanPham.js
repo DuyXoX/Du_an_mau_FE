@@ -21,6 +21,7 @@ const SanPham = () => {
         DonViTinhID: '',
         LoaiSanPhamId: '',
         PhanLoai: '',
+        ChiTietSanPhamId: '',
         Gia: '',
         LoaiChiTiet: '',
         SoLuong: '',

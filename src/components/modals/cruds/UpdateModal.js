@@ -156,6 +156,7 @@ const UpdateModal = ({ formTable, endpoint, rowData, updateData }) => {
 
         switch (formTable) {
             case 'sanpham':
+                additionalData.ChiTietSanPhamId = data.PhanLoai[0]?.ChiTietSanPhamId || '';
                 additionalData.LoaiChiTiet = data.PhanLoai[0]?.LoaiChiTiet || '';
                 additionalData.Gia = data.PhanLoai[0]?.Gia || '';
                 additionalData.SoLuong = data.PhanLoai[0]?.SoLuong || '';
