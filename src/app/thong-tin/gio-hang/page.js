@@ -1,5 +1,5 @@
-import GioHang from '@/containers/thongtin/GioHang';
 import React from 'react';
+import GioHang from '@/containers/thongtin/GioHang';
 
 const page = () => {
     return (

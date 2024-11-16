@@ -6,13 +6,11 @@ import { Button, Container, Nav, Navbar } from 'react-bootstrap';
 // import Logo from '../assets/imgs/logo-mimimusic.png';
 import '../styles/Navigation.scss';
 import { IoMdSearch } from 'react-icons/io';
-import { FaShoppingCart } from "react-icons/fa";
 import Cookies from 'js-cookie';
-import { apiClient } from '@/service/apiServive';
 import { clearCookiesAndRedirect } from '@/components/reuses/Cookie';
+import GioHangNavigation from '@/components/giohang/GioHangNavigation';
 
 const Navigation = () => {
-    const [totalQuantity, setTotalQuantity] = useState(0);
     const [isAuthenticated, setIsAuthenticated] = useState(null);
     const ss_account = Cookies.get('ss_account');
     const account_user = Cookies.get('account_user');
@@ -81,12 +79,7 @@ const Navigation = () => {
                                 <div className='py-3 d-lg-flex flex-wrap gap-2 align-items-center justify-content-end'>
                                     <Link href="/thong-tin/nguoi-dung" className='nav-link'>Thông tin cá nhân</Link>
                                     <Link href='/thong-tin/gio-hang' className='nav-link'>
-                                        <Button variant='green' className="position-relative">
-                                            <FaShoppingCart />
-                                            <span className="position-absolute top-0 start-100 translate-middle badge rounded-pill text-bg-light">
-                                                {totalQuantity} {/* Hiển thị số lượng giỏ hàng */}
-                                            </span>
-                                        </Button>
+                                        <GioHangNavigation />
                                     </Link>
 
 

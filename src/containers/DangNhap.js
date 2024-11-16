@@ -109,7 +109,7 @@ const DangNhap = () => {
                 setCookie('account_user', account_user);
 
                 showToast('success', message, loading);
-                router.push('/quan-ly/nguoi-dung');
+                router.push('/');
                 return;
             }
             if (response && warning) {

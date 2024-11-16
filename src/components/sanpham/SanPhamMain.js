@@ -1,6 +1,6 @@
 "use client"
 
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import "./SanPhamMain.scss";
 import { Button, Col, Container, ProgressBar, Row } from "react-bootstrap";
 import Image from "next/image";
@@ -18,8 +18,10 @@ import {
 } from "react-icons/fa";
 import { postData, checkLogin, useGetData } from "@/service/apiServive";
 import showToast from "../reuses/Toast";
+import { InfoCartContext } from "@/containers/context/InFoCart";
 
 const SanPhamMain = ({ id }) => {
+  const { updateData } = useContext(InfoCartContext);
   const { data, isLoading, error, mutate } = useGetData(`/sanpham/${id}`)
   const [products, setProducts] = useState();
   const [selectedDetail, setSelectedDetail] = useState(null);
@@ -83,6 +85,7 @@ const SanPhamMain = ({ id }) => {
       // console.log("Sản phẩm đã được thêm vào giỏ hàng:", cartResponse);
       if (cartResponse.message) {
         toast.success(cartResponse.message);  // Hiển thị thông báo thành công
+        await updateData();
       }
 
     } catch (error) {

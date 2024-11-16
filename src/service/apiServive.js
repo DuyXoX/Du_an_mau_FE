@@ -55,8 +55,9 @@ const handleAuthError = async (error) => {
 
 const checkLogin = async () => {
     const token = Cookies.get('ss_account');
+
     if (!token && window.location.pathname !== '/dang-nhap') {
-        toast.warning('Vui Lòng đăng nhập!', {
+        toast.warning('Vui lòng đăng nhập!', {
             onClose: () => {
                 window.location.replace('/dang-nhap');
             }
