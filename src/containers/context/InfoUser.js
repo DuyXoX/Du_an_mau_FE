@@ -18,12 +18,13 @@ const InfoUser = ({ children }) => {
 
             if (ss_account) {
                 try {
-                    // console.log('check: ', ss_account);
-                    const decoded = await jwtVerify(ss_account);
+                    const decoded = jwtVerify(ss_account);
+                    const infoUser = jwtVerify(account_user);
+                    // console.log('check: ', infoUser);
                     setIsAuthenticated(true);
                     setInfo({
                         decoded,
-                        account_user
+                        infoUser
                     });
                     // console.log('check authen: ', infoUserAuthen.role);
                 } catch (error) {

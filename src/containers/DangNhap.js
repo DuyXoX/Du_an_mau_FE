@@ -100,7 +100,7 @@ const DangNhap = () => {
 
         try {
             const response = await postData('/login', formData);
-            const { message, warning, error, ss_account, account_user } = response;
+            const { message, warning, error, ss_account, account_user, address_user } = response;
 
             // console.log('check response: ', ss_account);
 
@@ -109,7 +109,7 @@ const DangNhap = () => {
                 setCookie('account_user', account_user);
 
                 showToast('success', message, loading);
-                router.push('/');
+                window.location.replace('/')
                 return;
             }
             if (response && warning) {

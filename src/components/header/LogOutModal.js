@@ -4,6 +4,7 @@ import { toast } from 'react-toastify';
 import { clearCookiesAndRedirect } from '../reuses/Cookie';
 import showToast from '../reuses/Toast';
 import { postData } from '@/service/apiServive';
+import { TbLogout } from "react-icons/tb";
 
 const LogOutModal = () => {
     const [showLogoutModal, setShowLogoutModal] = useState(false);
@@ -16,7 +17,7 @@ const LogOutModal = () => {
         setShowLogoutModal(false);
         const loading = toast.loading('Đang xử lý yêu cầu.');
         try {
-            const response = await postData('/user/logout', formData);
+            const response = await postData('/logout', formData);
             const { message, error } = response;
             // console.log('check response: ', error);
 
@@ -43,10 +44,9 @@ const LogOutModal = () => {
         // console.log('check ss_account: ', ss_account);            
     }
 
-
     return (
         <>
-            <p className='cursor cursor-hover' onClick={() => { setShowLogoutModal(true) }}>Đăng xuất</p>
+            <TbLogout className='fs-1 ms-1 text-white cursor' onClick={() => { setShowLogoutModal(true) }} />
             <Modal
                 show={showLogoutModal}
                 onHide={() => setShowLogoutModal(false)}

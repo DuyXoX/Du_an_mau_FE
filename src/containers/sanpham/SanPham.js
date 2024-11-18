@@ -25,20 +25,6 @@ const SanPham = () => {
     };
     const [searchResults, setSearchResults] = useState([]);
 
-    const handleAddToCart = (sanphamID) => {
-        console.log("ID sản phẩm được nhấn:", sanphamID); // Log ID sản phẩm được nhấn
-        const selectedProduct = products.find((product) => product.SanPhamId === sanphamID); // Sử dụng SanPhamId
-
-        if (selectedProduct) {
-            console.log("Thông tin sản phẩm:", selectedProduct);
-
-        } else {
-            console.log("Không tìm thấy sản phẩm với ID này.");
-        }
-    };
-
-
-    // Sử dụng hook tùy chỉnh để lấy dữ liệu
     //   const { data: productData, error } = useGetData(`/search?name=${searchTerm}`);
 
     useEffect(() => {
@@ -179,13 +165,10 @@ const SanPham = () => {
                                     </div>
                                 )}
                                 <p className={styles.productDescription} dangerouslySetInnerHTML={{ __html: product.MoTa }} />
-                                <Link href={`/san-pham/${product.SanPhamId}`}>
-                                    <Button
-                                        variant='green'
-                                        onClick={() => handleAddToCart(product.SanPhamId)}
-                                    >
-                                        Xem Sản Phẩm
-                                    </Button>
+                                <Link href={`/san-pham/${product?.SanPhamId}`}
+                                    className='btn btn-green'
+                                >
+                                    Xem Sản Phẩm
                                 </Link>
                             </div>
 

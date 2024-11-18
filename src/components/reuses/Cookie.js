@@ -7,7 +7,7 @@ const setCookie = (name, value) => {
         secure: false, //Chỉ cho phép truy cập từ (https).
         sameSite: 'strict',
         httpOnly: false,
-        expires: 30,//Thời gian 30 ngày
+        expires: 1 / 48,//Thời gian 30 ngày
     });
 };
 

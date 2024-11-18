@@ -25,7 +25,7 @@ const LogOut = ({ info }) => {
     // console.log('check: ', info);
 
     useEffect(() => {
-        const userName = info.account_user;
+        const userName = info.infoUser?.TenDangNhap;
         setUsername(userName);
         // return console.log('check contextInfo: ', userName);
 

@@ -9,7 +9,6 @@ import { TableContext } from '@/containers/context/getdata/TableData';
 import Image from 'next/image';
 import { useGetData } from '@/service/apiServive';
 import ChiTietSanPham from '@/containers/quanly/ChiTietSanPham';
-import RemoveDiacritics from '@/components/reuses/RemoveDiacritics';
 
 const SanPham = () => {
     const { datas, updateData, selectedDatas, toggleSelectedDatas } = useContext(TableContext);//Lấy data đã có trong context

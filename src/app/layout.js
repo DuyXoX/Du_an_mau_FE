@@ -5,6 +5,7 @@ import "react-icons";
 import 'react-toastify/dist/ReactToastify.css';
 import { ToastContainer } from 'react-toastify';
 import { InFoCart } from "@/containers/context/InFoCart";
+import { InfoUser } from "@/containers/context/InfoUser";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -18,9 +19,11 @@ export default function RootLayout({ children }) {
   return (
     <html lang="vi">
       <body className={inter.className}>
-        <InFoCart>
-          {children}
-        </InFoCart>
+        <InfoUser>
+          <InFoCart>
+            {children}
+          </InFoCart>
+        </InfoUser>
         <ToastContainer
           position="top-center"
           stacked />

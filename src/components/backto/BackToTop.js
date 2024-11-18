@@ -51,7 +51,7 @@ const BackToTop = () => {
                     cursor: 'pointer', //thay đổi con trỏ chuột thành hình dạng pointer (ngón tay trỏ) khi di chuột qua
                 }}
                 className='p-2 rounded-pill border'
-                onClick={() => { router.push('https://www.facebook.com/messages/t/249591255604520?locale=vi_VN') }}
+            // onClick={() => { router.push('') }}
             >
                 <FaFacebookMessenger className='fs-1 text-white' />
             </button>
