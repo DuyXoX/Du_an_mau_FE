@@ -156,48 +156,40 @@ const SanPham = () => {
 
 
                 <div className={styles.productList}>
-                    {searchResults.length > 0 ? (
-                        searchResults.map((product, index) => (
-                            <div key={product.id || index} className={styles.card}>
-                                <Image src={`${process.env.NEXT_PUBLIC_API_URL}/${product.HinhAnh[0]?.DuongDanHinh}`}
-                                    // style={{ maxWidth: '200px', height: '200px' }}
-                                    // className='w-100 h-auto'
-                                    width={180}
-                                    height={180}
-                                    alt={product?.TenSanPham}
-                                />
-                                <h3 className={styles.productName}>{product.TenSanPham}</h3>
-                                {/* Hiển thị chi tiết sản phẩm đầu tiên */}
-                                {product.Gia && product.Gia.length > 0 && (
-                                    <div className={styles.productDetails}>
-
-                                        <div className={styles.detail}>
-                                            {/* <p>Loại Chi Tiết: {product.Gia[0].LoaiChiTiet}</p> */}
-                                            <p>Giá: {product.Gia[0].Gia} VNĐ</p>
-                                            {/* <p>Số Lượng: {product.Gia[0].SoLuong}</p> */}
-                                        </div>
-                                    </div>
-                                )}
-                                <p className={styles.productDescription} dangerouslySetInnerHTML={{ __html: product.MoTa }} />
-                                <Link href={`/san-pham/${product.SanPhamId}`}>
-                                    <Button
-                                        variant='green'
-                                        onClick={() => handleAddToCart(product.SanPhamId)}
-                                    >
-                                        Xem Sản Phẩm
-                                    </Button>
-                                </Link>
-                            </div>
-
-
-                        ))
-
-                    ) : (
-                        <div className={styles.kothaysanpham} >
-
+    {searchResults.length > 0 ? (
+        searchResults.map((product, index) => (
+            <div key={product.SanPhamId || index} className={styles.card}>
+                {/* Xử lý và chỉnh sửa đường dẫn ảnh */}
+                <Image 
+                    src={`http://localhost:8000/api/${product.HinhAnh[0]?.replace(/\\/g, '/')}`} 
+                    width={180} 
+                    height={180} 
+                    alt={product?.TenSanPham} 
+                />
+                <h3 className={styles.productName}>{product.TenSanPham}</h3>
+                {product.PhanLoai && product.PhanLoai.length > 0 && (
+                    <div className={styles.productDetails}>
+                        <div className={styles.detail}>
+                            <p>Giá: {product.PhanLoai[0].Gia} VNĐ</p>
                         </div>
-                    )}
-                </div>
+                    </div>
+                )}
+                <p className={styles.productDescription} dangerouslySetInnerHTML={{ __html: product.MoTa }} />
+                <Link href={`/san-pham/${product.SanPhamId}`}>
+                    <Button
+                        variant='green'
+                        onClick={() => handleAddToCart(product.SanPhamId)}
+                    >
+                        Xem Sản Phẩm
+                    </Button>
+                </Link>
+            </div>
+        ))
+    ) : (
+        <div className={styles.kothaysanpham}></div>
+    )}
+</div>
+
             </div>
         </div>
     );

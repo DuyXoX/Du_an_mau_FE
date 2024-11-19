@@ -148,22 +148,22 @@ const deleteData = async (endpoint) => {
 // Hàm xóa sản phẩm trong giỏ hàng
 const deleteCartProduct = async (sanPhamId, chiTietSanPhamId) => {
     try {
-        const response = await axios.delete('http://localhost:8000/api/cart', {
-            data: {
-                SanPhamId: sanPhamId,
-                ChiTietSanPhamId: chiTietSanPhamId
-            },
-            withCredentials: true, // Đảm bảo gửi cookie
-        });
-
-        console.log('Response từ API:', response);  // Log phản hồi từ API
-
-        return response; // Trả về toàn bộ response từ API
+      const response = await axios.delete('http://localhost:8000/api/cart', {
+        data: {
+          SanPhamId: sanPhamId,
+          ChiTietSanPhamId: chiTietSanPhamId
+        },
+        withCredentials: true, // Đảm bảo gửi cookie
+      });
+  
+      console.log('Response từ API:', response);  // Log phản hồi từ API
+  
+      return response; // Trả về toàn bộ response từ API
     } catch (error) {
-        console.error('Lỗi khi xóa sản phẩm:', error);
-        throw error; // Ném lỗi để được bắt ở phần handleDeleteProduct
+      console.error('Lỗi khi xóa sản phẩm:', error);
+      throw error; // Ném lỗi để được bắt ở phần handleDeleteProduct
     }
-};
+  };
 
 
 // Hàm lấy thông tin người dùng từ token

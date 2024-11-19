@@ -3,19 +3,22 @@
     display: flex;
     justify-content: space-between;
     padding: 20px;
-    background-color: #ffffff;
+    background-color: #136754;
   max-width: 100%;
 }
 
 .productTable {
-  width: 50%; /* Phần sản phẩm chiếm 3 phần */
-   margin-left: 100px;
+  width: 64%; /* Phần sản phẩm chiếm 3 phần */
+border-radius: 5px;
+
+
 }
 
 .cartTable {
     width: 100%;
-    border-collapse: collapse;
+
     background-color: #fff;
+    border-radius: 5px;
 }
 
 .cartTable th,
@@ -46,10 +49,10 @@
 }
 
 .summaryTable {
-   width: 30%; /* Phần tổng cộng chiếm 1 phần */
+   width: 35%; /* Phần tổng cộng chiếm 1 phần */
    margin-top: 50px;
    border-collapse: collapse;
-  margin-right: 100px;
+
     background-color: #fff;
     border-radius: 5px;
 }
@@ -132,4 +135,100 @@
 
 .confirmButton:hover {
     background-color: #005bb5; /* Màu nền khi hover */
+}
+.modal {
+    width: 400px;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+    max-height: 80vh;
+    overflow-y: auto;
+}
+
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.modalContent {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.modalHeader {
+    font-size: 1.5em;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.infoSection {
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+.infoSection p {
+    font-size: 1em;
+    margin: 8px 0;
+}
+
+.paymentMethods {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+.paymentButton {
+    flex: 1;
+    padding: 10px;
+    margin: 0 5px;
+    font-size: 1em;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.paymentButtonActive {
+    background-color: #4CAF50;
+    color: white;
+}
+
+.modalActions {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+
+}
+
+.confirmButton, .cancelButton {
+    padding: 10px 20px;
+    font-size: 1em;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.confirmButton {
+    background-color: #4CAF50;
+    color: white;
+}
+
+.cancelButton {
+    background-color: #ccc;
+    color: black;
+}
+.tongtienmodal{
+  width: 150px;
+  margin-top: 15px;
+ 
 }

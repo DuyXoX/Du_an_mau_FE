@@ -9,6 +9,7 @@ import { IoMdSearch } from 'react-icons/io';
 import Cookies from 'js-cookie';
 import { clearCookiesAndRedirect } from '@/components/reuses/Cookie';
 import GioHangNavigation from '@/components/giohang/GioHangNavigation';
+import DOnHangNavigation from '@/components/donhang/donhangNavigation';
 
 const Navigation = () => {
     const [isAuthenticated, setIsAuthenticated] = useState(null);
@@ -77,7 +78,7 @@ const Navigation = () => {
                                 </div>
                                 :
                                 <div className='py-3 d-lg-flex flex-wrap gap-2 align-items-center justify-content-end'>
-                                    <Link href="/thong-tin/nguoi-dung" className='nav-link'>Thông tin cá nhân</Link>
+                                    <Link href="/don-hang" className='nav-link'>  <DOnHangNavigation/></Link>
                                     <Link href='/thong-tin/gio-hang' className='nav-link'>
                                         <GioHangNavigation />
                                     </Link>

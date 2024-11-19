@@ -1,30 +1,27 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useState ,useEffect } from 'react';
 import { FaMinus, FaPen, FaPlus, FaRegTrashAlt } from 'react-icons/fa';
 import Image from 'next/image';
 import { Button, Placeholder, Table } from 'react-bootstrap';
 import { InfoCartContext } from '@/containers/context/InFoCart';
-import { deleteData, putData } from '@/service/apiServive';
+import { deleteData, putData , checkLogintoken, apiClient} from '@/service/apiServive';
 import showToast from '../reuses/Toast';
 import { toast } from 'react-toastify';
-
+import Modal from 'react-modal';
 const TableGioHang = () => {
     const { cart, updateData } = useContext(InfoCartContext);
     const [quantities, setQuantities] = useState({});
-
     const handlePlus = (item) => {
         setQuantities((prevQuantities) => ({
             ...prevQuantities,
             [item.SanPhamId]: Math.min((prevQuantities[item.SanPhamId] || item.SoLuong) + 1, 99),
         }));
     };
-
     const handleMinus = (item) => {
         setQuantities((prevQuantities) => ({
             ...prevQuantities,
             [item.SanPhamId]: Math.max((prevQuantities[item.SanPhamId] || item.SoLuong) - 1, 1),
         }));
     };
-
     const handleSubmitEdit = async (item) => {
         const loading = toast.loading('Đang xử lý yêu cầu.');
         const updatedQuantity = quantities[item.SanPhamId] || item.SoLuong; // Lấy số lượng mới từ state
@@ -58,7 +55,6 @@ const TableGioHang = () => {
             return;
         }
     }
-
     const handleDelete = async (item) => {
         const sanphamToUpdate = {
             SanPhamId: item.SanPhamId,
@@ -72,8 +68,35 @@ const TableGioHang = () => {
             return;
         }
     }
-    // console.log('check: ', quantities);
 
+    const loadCartAndSaveToLocalStorage = async () => {
+        try {
+            // Kiểm tra token và lấy thông tin người dùng
+            const loginResponse = await checkLogintoken();
+    
+            if (loginResponse && loginResponse.NguoiDungId) {
+                const userId = loginResponse.NguoiDungId; // Lấy userId từ token
+    console.log("ID người dùng là" (userId))
+                // Gọi API để lấy giỏ hàng của người dùng
+                const response = await apiClient.get(`/cart?userId=${userId}`);
+                if (response && response.data) {
+                    // Lưu giỏ hàng vào localStorage
+                    localStorage.setItem('cart', JSON.stringify(response.data));
+                    console.log('Giỏ hàng đã được lưu vào localStorage');
+                } else {
+                    console.log('Không có dữ liệu giỏ hàng');
+                }
+            } else {
+                console.log('Token không hợp lệ hoặc không tìm thấy userId');
+            }
+        } catch (error) {
+            console.error('Lỗi khi tải giỏ hàng:', error.message);
+        }
+    };
+    useEffect(() => {
+        loadCartAndSaveToLocalStorage(); // Gọi hàm khi component được render
+    }, []);
+    
     return (
         <>
             <div className=''>
@@ -99,7 +122,7 @@ const TableGioHang = () => {
                                     </td>
                                     <td>
                                         <Image
-                                            src={`${process.env.NEXT_PUBLIC_API_URL}/${item?.DuongDanHinh[0]}`}
+                                             src={`http://localhost:8000/api/${item.DuongDanHinh[0]}`}
                                             alt={cart[0]?.TenSanPham}
                                             width={80}
                                             height={80}
@@ -189,6 +212,10 @@ const TableGioHang = () => {
                     </tbody>
                 </Table>
             </div>
+            <table className="summaryTable">
+  
+</table>
+
         </>
     );
 };

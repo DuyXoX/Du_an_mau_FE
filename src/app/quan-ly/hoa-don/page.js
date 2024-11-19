@@ -10,7 +10,7 @@ const page = () => {
                 <Row>
                     <Col>
                         <div className=''>
-                            Hoa don
+                        
                         </div>
                     </Col>
                 </Row>

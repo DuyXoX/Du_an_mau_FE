@@ -124,7 +124,7 @@ const ThanhToanGioHang = () => {
                 </tr>
                 <tr>
                     <td>Tạm tính:</td>
-                    {/* <td>{totalAmount.toLocaleString("vi-VN")} VNĐ</td> */}
+                    <td>{totalAmount.toLocaleString("vi-VN")} VNĐ</td>
                 </tr>
                 <tr>
                     <td>Địa Chỉ Giao hàng:</td>
@@ -196,9 +196,7 @@ const ThanhToanGioHang = () => {
                 </tr>
                 <tr>
                     <td colSpan={2}>
-                        {/* <button className={styles.checkoutButton} onClick={handleCheckout} disabled={loading}>
-{loading ? "Đang xử lý..." : "Thanh toán"}
-</button> */}
+                      
                     </td>
                 </tr>
             </tbody>

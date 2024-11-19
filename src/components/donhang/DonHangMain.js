@@ -1,14 +1,14 @@
 import React from 'react';
 import './GioHangMain.scss';
-import TableGioHang from '@/app/gio-hang/page';
+import DonHang from '@/app/don-hang/page';
 import ThanhToanGioHang from './ThanhToanGioHang';
 import { Col, Container, Row } from 'react-bootstrap';
 
-const GioHangMain = () => {
+const DonHangMain = () => {
     return (
-      <section>
-        <Container>
-          {/* <Row style={{ minHeight: '100vh' }}>
+        <section>
+            <Container>
+                {/* <Row style={{ minHeight: '100vh' }}>
                     <Col lg={0}>
                        
                     </Col>
@@ -18,12 +18,12 @@ const GioHangMain = () => {
                         </div>
                     </Col>
                 </Row> */}
-          <div className="">
-            <TableGioHang />
-          </div>
-        </Container>
-      </section>
+                 <div className=''>
+                            <DonHang/>
+                        </div>
+            </Container>
+        </section>
     );
 };
 
-export default GioHangMain;
+export default DonHangMain;

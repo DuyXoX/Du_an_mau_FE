@@ -8,7 +8,21 @@
     margin-top: 10px;
 
 }
+.sanphammotachitiet {
+    width: 700px;
 
+    border: 1px solid #ccc; /* Đường viền màu xám nhạt */
+    padding: 15px; /* Khoảng cách bên trong khung */
+    border-radius: 5px; /* Bo tròn các góc */
+    background-color: #f9f9f9; /* Màu nền nhạt */
+    margin: 10px 0; /* Khoảng cách phía trên và dưới */
+    font-size: 12px; /* Cỡ chữ */
+    color: #333; /* Màu chữ */
+    max-height: 220px; /* Chiều rộng tối đa */
+    word-wrap: break-word; /* Tự động xuống dòng khi quá dài */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Đổ bóng nhẹ */
+    overflow-y: auto;
+}
 .separator::before {
     content: '';
     position: absolute;

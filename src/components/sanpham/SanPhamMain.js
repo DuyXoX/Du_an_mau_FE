@@ -37,7 +37,6 @@ const SanPhamMain = ({ id }) => {
     setQuantity((prevQuantity) => Math.max(prevQuantity - 1, 1)); //Ko cho bé hơn 1
   };
 
-
   useEffect(() => {
     setProducts(data);
   }, [data]);
@@ -113,10 +112,10 @@ const SanPhamMain = ({ id }) => {
               <Col md={5}>
                 <div className="">
                   <Image
-                    src={`${process.env.NEXT_PUBLIC_API_URL}/${products.HinhAnh[0].DuongDanHinh}`}
-                    alt={product.TenSanPham}
-                    width={280}
-                    height={280}
+                    src={`http://localhost:8000/api/${products.HinhAnh[0]?.replace(/\\/g, '/')}`} 
+                    alt={products.TenSanPham}
+                    width={500}
+                    height={500}
                   // className="img-fluid"
                   />
                 </div>
@@ -185,7 +184,7 @@ const SanPhamMain = ({ id }) => {
                                 <div className="radio-content">
                                   <div className="image-container">
                                     <Image
-                                      src={`${process.env.NEXT_PUBLIC_API_URL}/${products?.HinhAnh[0]?.DuongDanHinh}`}
+                                      src={`http://localhost:8000/api/${products.HinhAnh[0]?.replace(/\\/g, '/')}`} 
                                       alt={`Loại Chi Tiết: ${detail.LoaiChiTiet}`}
                                       className="radio-image"
                                       width={180}
@@ -207,7 +206,17 @@ const SanPhamMain = ({ id }) => {
                       </div>
                     )}
                   </div>
-
+                  {selectedDetail ? (
+    <p className="sanphammotachitiet">
+       {selectedDetail.LoaiChiTiet} : {selectedDetail.MoTaChiTiet}
+    </p>
+) : (
+    products.Gia && products.Gia.length > 0 && (
+        <p className="sanphammotachitiet">
+         Mô Tả Chi Tiết
+        </p>
+    )
+)}
 
 
                   <div className="phanloaitxt">
