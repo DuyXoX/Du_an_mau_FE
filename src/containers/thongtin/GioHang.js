@@ -3,6 +3,8 @@
 import GioHangMain from '@/components/giohang/GioHangMain';
 import { checkLogin } from '@/service/apiServive';
 import React, { useEffect } from 'react';
+import { InFoCart } from '../context/InFoCart';
+import { InfoUser } from '../context/InfoUser';
 
 const GioHang = () => {
 
@@ -14,7 +16,11 @@ const GioHang = () => {
     // }, []);
 
     return (
-        <GioHangMain />
+        <InfoUser>
+            <InFoCart>
+                <GioHangMain />
+            </InFoCart>
+        </InfoUser>
     );
 };
 

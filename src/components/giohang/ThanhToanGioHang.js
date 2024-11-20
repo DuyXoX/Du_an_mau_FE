@@ -1,7 +1,7 @@
 import { InfoCartContext } from '@/containers/context/InFoCart';
 import { postData } from '@/service/apiServive';
-import React, { useContext, useState } from 'react';
-import { Button, Table } from 'react-bootstrap';
+import React, { useContext, useEffect, useState } from 'react';
+import { Button, Col, Modal, Row, Table } from 'react-bootstrap';
 import showToast from '../reuses/Toast';
 import { toast } from 'react-toastify';
 
@@ -9,36 +9,110 @@ const ThanhToanGioHang = ({ info }) => {
     const { cart, updateData } = useContext(InfoCartContext);
     const [isAddressInputVisible, setAddressInputVisible] = useState(false);
     const [isAddressInputSDT, setAddressInputSDT] = useState(false);
+    const [formData, setFormData] = useState({});
+    const [typePay, setTypePay] = useState('');
     const [addressSDT, setAddressSDT] = useState("");
-    const [cartItems, setCartItems] = useState([]);
     const [address, setAddress] = useState("");
     const [checkError, setCheckError] = useState(true);
+    const [showAddModal, setShowAddModal] = useState(false);
+
+    useEffect(() => {
+        if (cart && cart.length > 0) {
+            setCheckError(false);
+        } else {
+            setCheckError(true)
+        }
+
+    }, [cart])
 
     const totalAmount = cart?.reduce((total, item) => {
         return total + (parseInt(item.Gia.Gia) * item.SoLuong);
     }, 0);
 
-    const handlePay = async (e) => {
-        // const formData = {
-        //     NguoiDungId: info.decoded?.id,
-        //     TongTien: totalAmount,
-        //     chiTietSanPhamList: chiTietSanPhamList
-        // };
+    const handleClose = (() => {
+        setFormData({});
+        setShowAddModal(false);
+        setCheckError(false);
+    });
 
-        // const loading = toast.loading('Đang xử lý yêu cầu.');
-        setCheckError(true)
+    const toogleTypePay = (e) => {
+        setTypePay(e);
+        setCheckError(false);
+    }
 
-        return console.log('check formData: ', info);
+    const toggleShowAddModal = (e) => {
+        const chiTietSanPhamList = cart.map(item => ({
+            ChiTietSanPhamId: item.Gia.ChiTietSanPhamId, // Lấy ChiTietSanPhamId từ Gia
+            Gia: item.Gia.Gia, // Lấy Gia từ Gia
+            SanPhamId: item.SanPhamId, // Lấy SanPhamId
+            SoLuong: item.SoLuong // Lấy SoLuong
+        }));
+
+        setFormData(preData => ({
+            ...preData,
+            NguoiDungId: info.decoded?.id,
+            TongTien: totalAmount,
+            PhuongThucThanhToan: typePay,
+            chiTietSanPhamList: chiTietSanPhamList
+        }))
+        setShowAddModal(true);
+    };
+
+    const handlePay = async () => {
+        let res;
+        const loading = toast.loading('Đang xử lý yêu cầu.');
+        if (!typePay) {
+            showToast('warning', 'Vui lòng chọn phương thức thanh toán.', loading);
+            return setCheckError(true);
+        }
+        setCheckError(true);
+
+        // return console.log('check formData: ', formData);
 
         try {
             const response = await postData('/donhang', formData);
             const { message, warning, error } = response;
-            // console.log('check response: ', response);
 
+            // return console.log('check response: ', response);
+            const paymentData = {
+                DonHangId: response.donHang?.DonHangId,
+                PhuongThuc: typePay,
+            };
             if (response) {
                 if (message) {
-                    showToast('success', `Thêm chi tiết sản phẩm mới thành công`, loading);
-                    return await updateData();// Gọi mutate để làm mới dữ liệu từ API
+                    if (typePay === 'cod') {
+                        res = await postData('/thanh-toan', paymentData);
+                    }
+                    if (typePay === 'zalopay') {
+                        const items = cart.map(item => ({
+                            SanPhamId: item.SanPhamId,
+                            TenSanPham: item.TenSanPham,
+                            Gia: item.Gia.Gia,
+                            SoLuong: item.SoLuong,
+                        }));
+
+                        res = await postData('/paymentzalo', {
+                            amount: totalAmount,
+                            orderId: `temp-${Date.now()}`,
+                            items: items,
+                        });
+
+                        if (res.order_url) {
+                            // Lưu `app_trans_id` vào localStorage để sử dụng khi kiểm tra trạng thái thanh toán
+                            localStorage.setItem('app_trans_id', res.app_trans_id);
+
+                            // Chuyển hướng người dùng đến trang thanh toán ZaloPay
+                            return window.location.assign(res.order_url);
+                        } else {
+                            return showToast('warning', "Không thể thanh toán qua ZaloPay.", loading);
+                        }
+                    }
+                    if (res && res.message) {
+                        handleClose();
+                        showToast('success', message, loading);
+                        return await updateData();// Gọi mutate để làm mới dữ liệu từ API
+                    }
+                    return showToast('warning', 'Thanh toán thất bại.', loading);
                 }
                 if (warning) {
                     return showToast('warning', warning, loading);
@@ -53,7 +127,7 @@ const ThanhToanGioHang = ({ info }) => {
             return;
         }
     }
-    // console.log('check: ', info);
+    // console.log('check: ', cart);
 
     const handleSelectAddressSDT = () => {
         setAddressInputSDT(true); // Hiện input nhập địa chỉ
@@ -103,7 +177,6 @@ const ThanhToanGioHang = ({ info }) => {
             alert("Đã có lỗi xảy ra khi cập nhật địa chỉ.");
         }
     };
-
 
     // Nhập địa chỉ
     const handleSelectAddress = () => {
@@ -241,8 +314,8 @@ const ThanhToanGioHang = ({ info }) => {
                         <td colSpan={2} >
                             <div className='d-flex justify-content-center'>
                                 <Button variant='green'
-                                    onClick={() => handlePay(cart)}
-                                // disabled={checkError}
+                                    onClick={() => toggleShowAddModal()}
+                                    disabled={checkError}
                                 >
                                     Thanh toán
                                 </Button>
@@ -251,6 +324,84 @@ const ThanhToanGioHang = ({ info }) => {
                     </tr>
                 </tbody>
             </Table>
+            <Modal
+                size='lg'
+                show={showAddModal}
+                onHide={() => { handleClose() }}
+                backdrop="static" //Ngăn chặn việc bấm ra ngoài
+            >
+                <Modal.Header closeButton>
+                    <Modal.Title className='text-orange'>Thông tin chi tiết đơn hàng</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
+                    <Row>
+                        <Col xs={6} className=''>
+                            <div className=''>
+                                <h5>
+                                    Tên người nhận:
+                                </h5>
+                                <p>
+                                    Số điện thoại:
+                                </p>
+                                <p>
+                                    Địa chỉ:
+                                </p>
+                                <p className='bold'>
+                                    Tổng Tiền:
+                                </p>
+                                <p>
+                                    Phương thức thanh toán:
+                                </p>
+                            </div>
+                        </Col>
+                        <Col xs={6} className=''>
+                            <div className=''>
+                                <h5>
+                                    {info.infoUser?.TenDangNhap}
+                                </h5>
+                                <p>
+                                    {info.infoUser?.SoDienThoai}
+                                </p>
+                                <p>
+                                    {info.infoUser?.DiaChi}
+                                </p>
+                                <strong>
+                                    {totalAmount?.toLocaleString("vi-VN")} VNĐ
+                                </strong>
+                                <div className='mt-2 d-flex'>
+                                    <div style={{ backgroundColor: '' }}
+                                        className={`p-2 me-1 cursor border rounded ${typePay === 'zalopay' ? 'border-success' : ''}`}
+                                        onClick={() => { toogleTypePay('zalopay') }}
+                                    >
+                                        ZaloPay
+                                    </div>
+                                    <div style={{ backgroundColor: '' }}
+                                        className={`p-2 me-1 cursor border rounded ${typePay === 'cod' ? 'border-success' : ''}`}
+                                        onClick={() => { toogleTypePay('cod') }}
+                                    >
+                                        Thanh toán khi nhận hàng
+                                    </div>
+                                </div>
+                            </div>
+                        </Col>
+                    </Row>
+                </Modal.Body>
+                <Modal.Footer>
+                    <Button
+                        variant="secondary"
+                        onClick={() => { handleClose() }}>
+                        Hủy
+                    </Button>
+                    <Button
+                        type='submit'
+                        disabled={checkError}
+                        variant="green"
+                        onClick={() => handlePay()}
+                    >
+                        Xác nhận
+                    </Button>
+                </Modal.Footer>
+            </Modal>
         </>
     );
 };

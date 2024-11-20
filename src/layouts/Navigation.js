@@ -10,6 +10,8 @@ import Cookies from 'js-cookie';
 import { clearCookiesAndRedirect } from '@/components/reuses/Cookie';
 import GioHangNavigation from '@/components/giohang/GioHangNavigation';
 import LogOutModal from '@/components/header/LogOutModal';
+import { InfoUser } from '@/containers/context/InfoUser';
+import { InFoCart } from '@/containers/context/InFoCart';
 
 const Navigation = () => {
     const [isAuthenticated, setIsAuthenticated] = useState(null);
@@ -77,14 +79,17 @@ const Navigation = () => {
                                     <Link href="/dang-ky" className='nav-link'>Đăng ký</Link>
                                 </div>
                                 :
-                                <div className='py-3 d-lg-flex flex-wrap gap-2 align-items-center justify-content-end'>
-                                    <LogOutModal />
-                                    <Link href='/thong-tin/gio-hang' className='nav-link'>
-                                        <GioHangNavigation />
-                                    </Link>
+                                <InfoUser>
+                                    <InFoCart>
+                                        <div className='py-3 d-lg-flex flex-wrap gap-2 align-items-center justify-content-end'>
+                                            <LogOutModal />
+                                            <Link href='/thong-tin/gio-hang' className='nav-link'>
+                                                <GioHangNavigation />
+                                            </Link>
+                                        </div>
+                                    </InFoCart>
+                                </InfoUser>
 
-
-                                </div>
                         }
                     </Navbar.Collapse>
                 </Container>

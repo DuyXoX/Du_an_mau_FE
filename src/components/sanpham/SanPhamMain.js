@@ -70,7 +70,7 @@ const SanPhamMain = ({ id }) => {
 
     // Kiểm tra ChiTietSanPhamId đã được lưu trong state
     if (!chiTietSanPhamId) {
-      showToast('warning', "Bạn chưa chọn chi tiết sản phẩm. Vui lòng chọn chi tiết sản phẩm trước khi thêm vào giỏ hàng.");
+      showToast('warning', "Vui lòng chọn chi tiết sản phẩm.");
       return;
     }
 

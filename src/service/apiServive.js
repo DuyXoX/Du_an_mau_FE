@@ -169,7 +169,7 @@ const deleteCartProduct = async (sanPhamId, chiTietSanPhamId) => {
 // Hàm lấy thông tin người dùng từ token
 const checkLogintoken = async () => {
     try {
-        const response = await axios.get(`http://localhost:8000/api/user/uesrs/check-login`, {
+        const response = await axios.get(`http://localhost:8000/api/user/check-login`, {
             withCredentials: true, // Cho phép gửi cookie cùng với yêu cầu
         });
         return response.data; // Trả về dữ liệu từ phản hồi

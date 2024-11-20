@@ -1,0 +1,297 @@
+.containerOrderManagement {
+    padding: 20px;
+    max-width: 1200px;
+    margin: auto;
+    background-color: #ffffff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+}
+
+.headingOrderManagement {
+    text-align: center;
+    color: #333;
+    margin-bottom: 20px;
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.tableOrderList {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: #f9f9f9;
+}
+
+.tableHeaderCell {
+    padding: 12px 15px;
+    border: 1px solid #ddd;
+    text-align: center;
+    background-color: #4CAF50;
+    color: white;
+    font-weight: bold;
+    font-size: 16px;
+}
+
+.tableDataCell {
+    padding: 12px 15px;
+    border: 1px solid #ddd;
+    text-align: center;
+    font-size: 15px;
+    color: #333;
+}
+
+.tableRowEven {
+    background-color: #f2f2f2;
+}
+
+.buttonOrderView,
+.buttonOrderDelete {
+    padding: 8px 12px;
+    margin: 0 5px;
+    border: none;
+    color: white;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: background-color 0.3s;
+    font-size: 14px;
+}
+
+.buttonOrderView {
+    background-color: #4CAF50;
+}
+
+.buttonOrderDelete {
+    background-color: #d9534f;
+}
+
+.buttonOrderView:hover {
+    background-color: #45a049;
+}
+
+.buttonOrderDelete:hover {
+    background-color: #c9302c;
+}
+
+/* Định dạng overlay modal */
+.modalOverlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    /* Màu nền tối mờ */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    /* Đảm bảo overlay nằm trên các thành phần khác */
+}
+
+/* Định dạng nội dung modal */
+.modalContent {
+    background-color: #fff;
+    padding: 20px;
+    width: 1000px;
+    max-width: 100%;
+    border-radius: 8px;
+    margin-left: 300px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+    z-index: 1001;
+    position: relative;
+    outline: none;
+    /* Bỏ viền mặc định khi modal active */
+}
+
+/* Định dạng tiêu đề modal */
+.modalContent h2 {
+    margin-top: 0;
+    font-size: 1.5em;
+    font-weight: bold;
+    color: #333;
+}
+
+/* Định dạng bảng chi tiết đơn hàng */
+.orderTable {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 15px;
+}
+
+.orderTable th,
+.orderTable td {
+    border: 1px solid #ddd;
+    padding: 10px;
+    text-align: left;
+}
+
+.orderTable th {
+    background-color: #f8f8f8;
+    font-weight: 600;
+    color: #555;
+}
+
+.orderTable td {
+    color: #333;
+}
+
+/* Định dạng nút đóng modal */
+/* Lớp phủ nền tối bên ngoài modal */
+.modalOverlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+/* Nội dung modal */
+.modalContent {
+    width: 90%;
+    height: 100%;
+    max-width: 800px;
+    background-color: #fff;
+    border-radius: 8px;
+    padding: 20px;
+    position: relative;
+    box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.2);
+    animation: fadeIn 0.3s ease-in-out;
+    max-height: 80vh;
+    overflow-y: auto;
+}
+
+.pay {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 16px;
+    color: #333;
+    margin: 10px 0;
+}
+
+.pay h5 {
+    margin: 0;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.pay p {
+    margin: 0;
+    font-size: 16px;
+    color: #c9302c;
+}
+
+/* Modal Body Style */
+.modalBody {
+    display: flex;
+    flex-direction: column;
+    height: 500px;
+    /* Điều chỉnh chiều cao của modal */
+    padding: 20px;
+
+}
+
+/* Table Wrapper (thêm thanh cuộn dọc nếu quá nhiều sản phẩm) */
+.tableWrapper {
+    flex: 1;
+    overflow-y: auto;
+    margin-bottom: 20px;
+    /* Khoảng cách giữa bảng và nút hành động */
+}
+
+/* Table Styling */
+.orderTable {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.orderTable th,
+.orderTable td {
+    padding: 10px;
+    border: 1px solid #ccc;
+    text-align: center;
+}
+
+.orderTable th {
+    background-color: #f4f4f4;
+}
+
+.orderTable td {
+    word-wrap: break-word;
+}
+
+/* Modal Action buttons */
+.modalActions {
+    display: flex;
+    justify-content: space-between;
+    padding-top: 10px;
+}
+
+.closeModal,
+.confirmButton {
+    padding: 10px 20px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.closeModal {
+    background-color: #f44336;
+}
+
+.confirmButton {
+    background-color: #4CAF50;
+}
+
+/* Sticky footer for buttons */
+.modalActions {
+    margin-top: auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* Optional: Scrollbar Style */
+.tableWrapper::-webkit-scrollbar {
+    width: 8px;
+}
+
+.tableWrapper::-webkit-scrollbar-thumb {
+    background-color: #888;
+    border-radius: 4px;
+}
+
+.tableWrapper::-webkit-scrollbar-thumb:hover {
+    background-color: #555;
+}
+
+.statusContainer {
+    margin: 20px;
+    font-family: Arial, sans-serif;
+}
+
+.statusContainer h5 {
+    font-size: 16px;
+    margin-bottom: 8px;
+}
+
+.statusSelect {
+    padding: 8px 12px;
+    font-size: 14px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+    cursor: pointer;
+    width: 100%;
+    max-width: 200px;
+}
+
+.statusSelect:focus {
+    outline: none;
+    border-color: #007bff;
+}
