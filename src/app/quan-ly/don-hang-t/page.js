@@ -1,9 +1,9 @@
-import DonHang from '@/containers/quanly/DonHang';
+import DonHangT from '@/containers/quanly/DonHangT';
 import React from 'react';
 
 const page = () => {
     return (
-        <DonHang />
+        <DonHangT />
     );
 };
 

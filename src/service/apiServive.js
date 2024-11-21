@@ -26,6 +26,9 @@ const addAuthHeader = (config) => {
 const handleAuthError = async (error) => {
     const originalRequest = error.config;
     const token = Cookies.get('ss_account');
+    // if (error.response?.status === 403) {
+    //     toast.warning('Bạn không có quyền truy cập!')
+    // }
 
     if (error.response?.status === 401 && !originalRequest._retry) {
         // originalRequest._retry = true;

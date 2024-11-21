@@ -1,17 +1,18 @@
 import { InfoCartContext } from '@/containers/context/InFoCart';
-import { postData } from '@/service/apiServive';
+import { postData, putData, useGetData } from '@/service/apiServive';
 import React, { useContext, useEffect, useState } from 'react';
 import { Button, Col, Modal, Row, Table } from 'react-bootstrap';
 import showToast from '../reuses/Toast';
 import { toast } from 'react-toastify';
 
 const ThanhToanGioHang = ({ info }) => {
+    const { data, isLoading, error, mutate } = useGetData(`/user/${info.decoded?.id}`);
     const { cart, updateData } = useContext(InfoCartContext);
     const [isAddressInputVisible, setAddressInputVisible] = useState(false);
     const [isAddressInputSDT, setAddressInputSDT] = useState(false);
     const [formData, setFormData] = useState({});
     const [typePay, setTypePay] = useState('');
-    const [addressSDT, setAddressSDT] = useState("");
+    const [SDT, setSDT] = useState("");
     const [address, setAddress] = useState("");
     const [checkError, setCheckError] = useState(true);
     const [showAddModal, setShowAddModal] = useState(false);
@@ -127,54 +128,40 @@ const ThanhToanGioHang = ({ info }) => {
             return;
         }
     }
-    // console.log('check: ', cart);
 
     const handleSelectAddressSDT = () => {
         setAddressInputSDT(true); // Hiện input nhập địa chỉ
     };
-    const handleAddressChangeSDT = (e) => {
-        setAddressSDT(e.target.value);
+
+    const toogleSDT = (e) => {
+        setSDT(e.target.value);
     };
-    const handleAddressConfirmSDT = async () => {
+
+    const handleUpdateSDT = async () => {
+        const loading = toast.loading('Đang xử lý yêu cầu.');
+        setAddressInputSDT(false);
+
         try {
-            // Kiểm tra trạng thái đăng nhập và lấy NguoiDungId
-            const loginResponse = await checkLogintoken(); // Gọi checkLogintoken để lấy thông tin người dùng
-            if (!loginResponse.loggedIn) {
-                alert("Bạn chưa đăng nhập.");
-                return;
+            const response = await putData('/user/update/sdt', { SoDienThoai: SDT });
+            const { message, warning, error } = response;
+
+            if (response) {
+                if (message) {
+                    showToast('success', `Điều chỉnh thông tin thành công.`, loading);
+                    return await mutate();// Gọi mutate để làm mới dữ liệu từ API
+                }
+                if (warning) {
+                    return showToast('warning', warning, loading);
+                }
+                if (error) {
+                    return showToast('error', error, loading);
+                }
             }
-
-            const nguoiDungId = loginResponse.user.NguoiDungId; // Lấy NguoiDungId từ phản hồi
-            if (!nguoiDungId) {
-                alert("Không tìm thấy thông tin người dùng.");
-                return;
-            }
-
-            // Kiểm tra địa chỉ người dùng nhập vào
-            if (addressSDT.trim() === "") {
-                alert("Vui lòng nhập địa chỉ.");
-                return;
-            }
-
-            // Gọi API để lấy toàn bộ thông tin người dùng
-            const userResponse = await apiClient.get(`/user/${nguoiDungId}`);
-            const userData = userResponse.data; // Dữ liệu người dùng
-
-            // console.log("Thông tin người dùng:", userData);
-
-            // Cập nhật địa chỉ vào thông tin người dùng
-            const updatedData = { ...userData, SoDienThoai: addressSDT }; // Giữ nguyên thông tin cũ, chỉ cập nhật địa chỉ
-
-            // Gọi API PUT để cập nhật toàn bộ thông tin người dùng (bao gồm địa chỉ)
-            const response = await apiClient.put(`/user/${nguoiDungId}`, updatedData);
-
-            // Xử lý thành công sau khi cập nhật
-            // console.log("Cập nhật thông tin người dùng thành công:", response.data);
-            setAddressInputSDT(false); // Ẩn input sau khi xác nhận
 
         } catch (error) {
-            // console.error("Cập nhật địa chỉ thất bại:", error.message || error.response?.data);
-            alert("Đã có lỗi xảy ra khi cập nhật địa chỉ.");
+            toast.update(loading, { render: 'Có lỗi xảy ra khi gửi yêu cầu.', type: 'error', isLoading: false, autoClose: 3000 });
+            console.error('check error: ', error);
+            return;
         }
     };
 
@@ -184,52 +171,37 @@ const ThanhToanGioHang = ({ info }) => {
     };
 
     const handleAddressChange = (e) => {
-        setAddress(event.target.value);
+        setAddress(e.target.value);
     };
 
     const handleAddressConfirm = async () => {
+        const loading = toast.loading('Đang xử lý yêu cầu.');
+        setAddressInputVisible(false);
+
         try {
-            // Kiểm tra trạng thái đăng nhập và lấy NguoiDungId
-            const loginResponse = await checkLogintoken(); // Gọi checkLogintoken để lấy thông tin người dùng
-            if (!loginResponse.loggedIn) {
-                alert("Bạn chưa đăng nhập.");
-                return;
+            const response = await putData('/user/update/diachi', { DiaChi: address });
+            const { message, warning, error } = response;
+
+            if (response) {
+                if (message) {
+                    showToast('success', `Điều chỉnh thông tin thành công.`, loading);
+                    return await mutate();// Gọi mutate để làm mới dữ liệu từ API
+                }
+                if (warning) {
+                    return showToast('warning', warning, loading);
+                }
+                if (error) {
+                    return showToast('error', error, loading);
+                }
             }
-
-            const nguoiDungId = loginResponse.user.NguoiDungId; // Lấy NguoiDungId từ phản hồi
-            if (!nguoiDungId) {
-                alert("Không tìm thấy thông tin người dùng.");
-                return;
-            }
-
-            // Kiểm tra địa chỉ người dùng nhập vào
-            if (address.trim() === "") {
-                alert("Vui lòng nhập địa chỉ.");
-                return;
-            }
-
-            // Gọi API để lấy toàn bộ thông tin người dùng
-            const userResponse = await apiClient.get(`/user/${nguoiDungId}`);
-            const userData = userResponse.data; // Dữ liệu người dùng
-
-            console.log("Thông tin người dùng:", userData);
-
-            // Cập nhật địa chỉ vào thông tin người dùng
-            const updatedData = { ...userData, DiaChi: address }; // Giữ nguyên thông tin cũ, chỉ cập nhật địa chỉ
-
-            // Gọi API PUT để cập nhật toàn bộ thông tin người dùng (bao gồm địa chỉ)
-            const response = await apiClient.put(`/user/${nguoiDungId}`, updatedData);
-
-            // Xử lý thành công sau khi cập nhật
-            console.log("Cập nhật thông tin người dùng thành công:", response.data);
-            setAddressInputVisible(false); // Ẩn input sau khi xác nhận
 
         } catch (error) {
-            console.error("Cập nhật địa chỉ thất bại:", error.message || error.response?.data);
-            alert("Đã có lỗi xảy ra khi cập nhật địa chỉ.");
+            toast.update(loading, { render: 'Có lỗi xảy ra khi gửi yêu cầu.', type: 'error', isLoading: false, autoClose: 3000 });
+            console.error('check error: ', error);
+            return;
         }
     };
-    // console.log('check: ', totalAmount);
+    // console.log('check: ', address);
 
     return (
         <>
@@ -243,7 +215,7 @@ const ThanhToanGioHang = ({ info }) => {
                     <tr>
                         <td>Địa Chỉ Giao hàng:</td>
                         <td>
-                            {info.infoUser?.DiaChi}
+                            {data?.DiaChi}
                             {isAddressInputVisible ? (
                                 <div>
                                     <input
@@ -264,10 +236,9 @@ const ThanhToanGioHang = ({ info }) => {
                             ) : (
                                 <span
                                     onClick={handleSelectAddress}
-                                    style={{ cursor: "pointer", color: "blue" }}
+                                    className='ps-1 text-primary cursor'
                                 >
-                                    {address || "Thay đổi"}{" "}
-                                    {/* Sử dụng thông tin địa chỉ từ userInfo */}
+                                    Thay đổi
                                 </span>
                             )}
                         </td>
@@ -275,19 +246,19 @@ const ThanhToanGioHang = ({ info }) => {
                     <tr>
                         <td>Số Điện Thoại</td>
                         <td>
-                            {info.infoUser?.SoDienThoai}
+                            {data?.SoDienThoai}
                             {isAddressInputSDT ? (
                                 <div className=''>
                                     <input
-                                        type="text"
-                                        value={addressSDT}
-                                        onChange={handleAddressChangeSDT}
+                                        type="number"
+                                        value={SDT}
+                                        onChange={toogleSDT}
                                         placeholder="Nhập Số Điện Thoại của bạn"
                                         className=''
                                     />
 
                                     <Button variant='green'
-                                        onClick={handleAddressConfirmSDT}
+                                        onClick={handleUpdateSDT}
                                         className=''
                                     >
                                         Xác nhận
@@ -296,10 +267,9 @@ const ThanhToanGioHang = ({ info }) => {
                             ) : (
                                 <span
                                     onClick={handleSelectAddressSDT}
-                                    style={{ cursor: "pointer", color: "blue" }}
+                                    className='ps-1 text-primary cursor'
                                 >
-                                    {addressSDT || "Thay đổi"}{" "}
-                                    {/* Sử dụng thông tin địa chỉ từ userInfo */}
+                                    Thay đổi
                                 </span>
                             )}
                         </td>
@@ -357,26 +327,26 @@ const ThanhToanGioHang = ({ info }) => {
                         <Col xs={6} className=''>
                             <div className=''>
                                 <h5>
-                                    {info.infoUser?.TenDangNhap}
+                                    {data?.TenDangNhap}
                                 </h5>
                                 <p>
-                                    {info.infoUser?.SoDienThoai}
+                                    {data?.SoDienThoai}
                                 </p>
                                 <p>
-                                    {info.infoUser?.DiaChi}
+                                    {data?.DiaChi}
                                 </p>
                                 <strong>
                                     {totalAmount?.toLocaleString("vi-VN")} VNĐ
                                 </strong>
                                 <div className='mt-2 d-flex'>
                                     <div style={{ backgroundColor: '' }}
-                                        className={`p-2 me-1 cursor border rounded ${typePay === 'zalopay' ? 'border-success' : ''}`}
+                                        className={`p-2 me-1 cursor border rounded ${typePay === 'zalopay' ? 'text-white bold bg-info' : ''}`}
                                         onClick={() => { toogleTypePay('zalopay') }}
                                     >
                                         ZaloPay
                                     </div>
                                     <div style={{ backgroundColor: '' }}
-                                        className={`p-2 me-1 cursor border rounded ${typePay === 'cod' ? 'border-success' : ''}`}
+                                        className={`p-2 me-1 cursor border rounded ${typePay === 'cod' ? 'bold border-success' : ''}`}
                                         onClick={() => { toogleTypePay('cod') }}
                                     >
                                         Thanh toán khi nhận hàng

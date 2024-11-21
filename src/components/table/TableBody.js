@@ -3,6 +3,7 @@ import { TableInfoContext } from '@/containers/context/getdata/TableInfo';
 import NguoiDung from './bodyTable/NguoiDung';
 import SanPham from './bodyTable/SanPham';
 import LoaiSanPham from './bodyTable/LoaiSanPham';
+import DonHang from './bodyTable/DonHang';
 
 
 const TableBody = () => {
@@ -11,6 +12,7 @@ const TableBody = () => {
         nguoidung: NguoiDung,
         sanpham: SanPham,
         loaisanpham: LoaiSanPham,
+        donhang: DonHang
     }), []);
 
     const ComponentToRender = tableComponents[formTable] || null;

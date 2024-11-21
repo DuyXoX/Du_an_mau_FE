@@ -47,7 +47,7 @@ const Navigation = () => {
                         Dự án
                     </Navbar.Brand>
                     <Navbar.Toggle aria-controls="basic-navbar-nav" />
-                    <Navbar.Collapse id="basic-navbar-nav">
+                    <Navbar.Collapse id="basic-navbar-nav" className='py-2'>
                         <Nav className="ms-auto">{/* ms-auto chuyển về End me-auto chuyển về Đầu */}
                             <Link href='/' className='nav-link'>Trang chủ</Link>
                             <Link href='/gioi-thieu' className='nav-link'>Giới thiệu</Link>
@@ -69,26 +69,23 @@ const Navigation = () => {
                             {/* <Link href='/gio-hang' className='nav-link'>Giỏ Hàng </Link> */}
 
                         </Nav>
-
-                        {isAuthenticated === null ?
-                            <></>
-                            : !isAuthenticated ?
-                                <div className='pt-2 d-flex'>
-                                    <Link href="/dang-nhap" className='nav-link'>Đăng nhập</Link>
-                                    <span className='mx-1 text-white'>/</span>
-                                    <Link href="/dang-ky" className='nav-link'>Đăng ký</Link>
-                                </div>
-                                :
-                                <InfoUser>
-                                    <InFoCart>
-                                        <div className='py-3 d-lg-flex flex-wrap gap-2 align-items-center justify-content-end'>
-                                            <LogOutModal />
-                                            <Link href='/thong-tin/gio-hang' className='nav-link'>
-                                                <GioHangNavigation />
-                                            </Link>
-                                        </div>
-                                    </InFoCart>
-                                </InfoUser>
+                        {!isAuthenticated ?
+                            <div className='d-flex'>
+                                <Link href="/dang-nhap" className='nav-link'>Đăng nhập</Link>
+                                <span className='mx-1 text-white'>/</span>
+                                <Link href="/dang-ky" className='nav-link'>Đăng ký</Link>
+                            </div>
+                            :
+                            <InfoUser>
+                                <InFoCart>
+                                    <div className='py- d-lg-flex flex-wrap gap-2 align-items-center justify-content-end'>
+                                        <LogOutModal />
+                                        <Link href='/thong-tin/gio-hang' className='nav-link'>
+                                            <GioHangNavigation />
+                                        </Link>
+                                    </div>
+                                </InFoCart>
+                            </InfoUser>
 
                         }
                     </Navbar.Collapse>
