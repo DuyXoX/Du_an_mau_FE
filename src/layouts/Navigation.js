@@ -12,6 +12,7 @@ import GioHangNavigation from '@/components/giohang/GioHangNavigation';
 import LogOutModal from '@/components/header/LogOutModal';
 import { InfoUser } from '@/containers/context/InfoUser';
 import { InFoCart } from '@/containers/context/InFoCart';
+import LogOutNavbar from '@/components/header/LogOutNavbar';
 
 const Navigation = () => {
     const [isAuthenticated, setIsAuthenticated] = useState(null);
@@ -79,7 +80,7 @@ const Navigation = () => {
                             <InfoUser>
                                 <InFoCart>
                                     <div className='py- d-lg-flex flex-wrap gap-2 align-items-center justify-content-end'>
-                                        <LogOutModal />
+                                        <LogOutNavbar />
                                         <Link href='/thong-tin/gio-hang' className='nav-link'>
                                             <GioHangNavigation />
                                         </Link>

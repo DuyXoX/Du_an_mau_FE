@@ -81,10 +81,10 @@ const ThanhToanGioHang = ({ info }) => {
             };
             if (response) {
                 if (message) {
-                    if (typePay === 'cod') {
+                    if (typePay === 'COD') {
                         res = await postData('/thanh-toan', paymentData);
                     }
-                    if (typePay === 'zalopay') {
+                    if (typePay === 'Zalo Pay') {
                         const items = cart.map(item => ({
                             SanPhamId: item.SanPhamId,
                             TenSanPham: item.TenSanPham,
@@ -103,11 +103,12 @@ const ThanhToanGioHang = ({ info }) => {
                             localStorage.setItem('app_trans_id', res.app_trans_id);
 
                             // Chuyển hướng người dùng đến trang thanh toán ZaloPay
-                            return window.location.assign(res.order_url);
+                            window.location.assign(res.order_url);
                         } else {
                             return showToast('warning', "Không thể thanh toán qua ZaloPay.", loading);
                         }
                     }
+                    // console.log('check res: ', res);
                     if (res && res.message) {
                         handleClose();
                         showToast('success', message, loading);
@@ -340,14 +341,14 @@ const ThanhToanGioHang = ({ info }) => {
                                 </strong>
                                 <div className='mt-2 d-flex'>
                                     <div style={{ backgroundColor: '' }}
-                                        className={`p-2 me-1 cursor border rounded ${typePay === 'zalopay' ? 'text-white bold bg-info' : ''}`}
-                                        onClick={() => { toogleTypePay('zalopay') }}
+                                        className={`p-2 me-1 cursor border rounded ${typePay === 'Zalo Pay' ? 'text-white bold bg-info' : ''}`}
+                                        onClick={() => { toogleTypePay('Zalo Pay') }}
                                     >
                                         ZaloPay
                                     </div>
                                     <div style={{ backgroundColor: '' }}
-                                        className={`p-2 me-1 cursor border rounded ${typePay === 'cod' ? 'bold border-success' : ''}`}
-                                        onClick={() => { toogleTypePay('cod') }}
+                                        className={`p-2 me-1 cursor border rounded ${typePay === 'COD' ? 'bold border-success' : ''}`}
+                                        onClick={() => { toogleTypePay('COD') }}
                                     >
                                         Thanh toán khi nhận hàng
                                     </div>
