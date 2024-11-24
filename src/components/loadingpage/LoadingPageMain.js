@@ -4,6 +4,7 @@ import React from 'react';
 import './LoadingPage.scss';
 import { Button, Col, Container, Row } from 'react-bootstrap';
 import Image from 'next/image';
+import Link from 'next/link';
 import loadingpage_01 from '../../assets/imgs/loadingpage/loadingpage_01.webp';
 import loadingpage_02 from '../../assets/imgs/loadingpage/loadingpage_02.webp';
 import loadingpage_03 from '../../assets/imgs/loadingpage/loadingpage_03.png';
@@ -12,19 +13,18 @@ import loadingpage_05 from '../../assets/imgs/loadingpage/loadingpage_05.png';
 import loadingpage_06 from '../../assets/imgs/loadingpage/loadingpage_06.png';
 import loadingpage_07 from '../../assets/imgs/loadingpage/loadingpage_07.jpg';
 import loadingpage_bg from '../../assets/imgs/loadingpage/loadingpage_bg.png';
-import product_xa_lat from '../../assets/imgs/product/product_xa_lat.webp';
-import product_oi from '../../assets/imgs/product/product_oi.webp';
-import product_man_cut from '../../assets/imgs/product/product_man_cut.webp';
-import product_thanh_long from '../../assets/imgs/product/product_thanh_long.webp';
-import product_kho_qua from '../../assets/imgs/product/product_kho_qua.webp';
-import product_ca_tim from '../../assets/imgs/product/product_ca_tim.webp';
-import product_ca_rot from '../../assets/imgs/product/product_ca_rot.webp';
-import product_bap_cai from '../../assets/imgs/product/product_bap_cai.webp';
-import Link from 'next/link';
 import ScrollAnimation from '../animation/ScrollAnimation';
+import { useRouter } from 'next/navigation';
+import { useGetData } from '@/service/apiServive';
 
 
 const LoadingPageMain = () => {
+    const { data } = useGetData('/sanpham')
+    const router = useRouter();
+
+    const limitedData = data ? data.slice(0, 8) : [];
+    // console.log('check: ', data && limitedData);
+
     return (
         <section style={{ paddingTop: '0px' }}>
             <Container fluid='xxl'>
@@ -43,7 +43,11 @@ const LoadingPageMain = () => {
                                     </p>
                                 </ScrollAnimation>
                                 <ScrollAnimation animationClass='animation-bottom'>
-                                    <Button variant='green' className=''>
+                                    <Button
+                                        variant='green'
+                                        className=''
+                                        onClick={() => router.push('/gioi-thieu')}
+                                    >
                                         Xem thêm
                                     </Button>
                                 </ScrollAnimation>
@@ -128,120 +132,36 @@ const LoadingPageMain = () => {
                         </Col>
                     </Row>
                     <Row>
-                        <Col sm={6} lg={3} className='py-2'>
-                            <ScrollAnimation animationClass='animation-bottom h-100 border border1 bg-white'>
-                                <Image src={product_xa_lat}
-                                    style={{ maxHeight: '250px', objectFit: 'cover' }}
-                                    className='w-100 d-block mx-auto'
-                                    alt='Xà lách'
-                                />
-                                <Link href='/product/' style={{ bottom: '1%' }}
-                                    className='py-3 nav-link fw-bold text-center'
-                                >
-                                    Xà lách
-                                </Link>
-                            </ScrollAnimation>
-                        </Col>
-                        <Col sm={6} lg={3} className='py-2'>
-                            <ScrollAnimation animationClass='animation-bottom h-100 border border1 bg-white'>
-                                <Image src={product_oi}
-                                    style={{ maxHeight: '250px', objectFit: 'cover' }}
-                                    className='w-100 d-block mx-auto'
-                                    alt='Ổi'
-                                />
-                                <Link href='/product/' style={{ bottom: '1%' }}
-                                    className='py-3 nav-link fw-bold text-center'
-                                >
-                                    Ổi
-                                </Link>
-                            </ScrollAnimation>
-                        </Col>
-                        <Col sm={6} lg={3} className='py-2'>
-                            <ScrollAnimation animationClass='animation-bottom h-100 border border1 bg-white'>
-                                <Image src={product_man_cut}
-                                    style={{ maxHeight: '250px', objectFit: 'cover' }}
-                                    className='w-100 d-block mx-auto'
-                                    alt='Măng cụt'
-                                />
-                                <Link href='/product/' style={{ bottom: '1%' }}
-                                    className='py-3 nav-link fw-bold text-center'
-                                >
-                                    Măng cụt
-                                </Link>
-                            </ScrollAnimation>
-                        </Col>
-                        <Col sm={6} lg={3} className='py-2'>
-                            <ScrollAnimation animationClass='animation-bottom h-100 border border1 bg-white'>
-                                <Image src={product_thanh_long}
-                                    style={{ maxHeight: '250px', objectFit: 'cover' }}
-                                    className='w-100 d-block mx-auto'
-                                    alt='Thanh long'
-                                />
-                                <Link href='/product/' style={{ bottom: '1%' }}
-                                    className='py-3 nav-link fw-bold text-center'
-                                >
-                                    Thanh long
-                                </Link>
-                            </ScrollAnimation>
-                        </Col>
-                        <Col sm={6} lg={3} className='py-2'>
-                            <ScrollAnimation animationClass='animation-bottom h-100 border border1 bg-white'>
-                                <Image src={product_kho_qua}
-                                    style={{ maxHeight: '250px', objectFit: 'cover' }}
-                                    className='w-100 d-block mx-auto'
-                                    alt='Khổ qua'
-                                />
-                                <Link href='/product/' style={{ bottom: '1%' }}
-                                    className='py-3 nav-link fw-bold text-center'
-                                >
-                                    Khổ qua
-                                </Link>
-                            </ScrollAnimation>
-                        </Col>
-                        <Col sm={6} lg={3} className='py-2'>
-                            <ScrollAnimation animationClass='animation-bottom h-100 border border1 bg-white'>
-                                <Image src={product_ca_tim}
-                                    style={{ maxHeight: '250px', objectFit: 'cover' }}
-                                    className='w-100 d-block mx-auto'
-                                    alt='Cà tím'
-                                />
-                                <Link href='/product/' style={{ bottom: '1%' }}
-                                    className='py-3 nav-link fw-bold text-center'
-                                >
-                                    Cà tím
-                                </Link>
-                            </ScrollAnimation>
-                        </Col>
-                        <Col sm={6} lg={3} className='py-2'>
-                            <ScrollAnimation animationClass='animation-bottom h-100 border border1 bg-white'>
-                                <Image src={product_ca_rot}
-                                    style={{ maxHeight: '250px', objectFit: 'cover' }}
-                                    className='w-100 d-block mx-auto'
-                                    alt='Cà rốt'
-                                />
-                                <Link href='/product/' style={{ bottom: '1%' }}
-                                    className='py-3 nav-link fw-bold text-center'
-                                >
-                                    Cà rốt
-                                </Link>
-                            </ScrollAnimation>
-                        </Col>
-                        <Col sm={6} lg={3} className='py-2'>
-                            <ScrollAnimation animationClass='animation-bottom h-100 border border1 bg-white'>
-                                <Image src={product_bap_cai}
-                                    style={{ maxHeight: '250px', objectFit: 'cover' }}
-                                    className='w-100 d-block mx-auto'
-                                    alt='Bắp cải'
-                                />
-                                <Link href='/product/' style={{ bottom: '1%' }}
-                                    className='py-3 nav-link fw-bold text-center'
-                                >
-                                    Bắp cải
-                                </Link>
-                            </ScrollAnimation>
-                        </Col>
+                        {limitedData ?
+                            limitedData.map((item, idx) => {
+                                return (
+                                    <Col sm={6} lg={3} className='py-2' key={idx}>
+                                        <ScrollAnimation animationClass='animation-bottom h-100 border border1 bg-white'>
+                                            <Image src={`${process.env.NEXT_PUBLIC_API_URL}/${item.HinhAnh[0]?.DuongDanHinh}`}
+                                                style={{ maxHeight: '250px', objectFit: 'cover' }}
+                                                className='w-100 d-block mx-auto'
+                                                width={250}
+                                                height={250}
+                                                alt={item.TenSanPham}
+                                            />
+                                            <Link href={`san-pham/${item.SanPhamId}`} style={{ bottom: '1%' }}
+                                                className='py-3 nav-link fw-bold text-center'
+                                            >
+                                                {item.TenSanPham}
+                                            </Link>
+                                        </ScrollAnimation>
+                                    </Col>
+                                )
+                            })
+                            :
+                            <>
+                            </>
+                        }
                     </Row>
-                    <Button variant='green' className='mt-3 d-block mx-auto'>
+                    <Button variant='green'
+                        className='mt-3 d-block mx-auto'
+                        onClick={() => router.push('/san-pham')}
+                    >
                         Xem tất cả sản phẩm
                     </Button>
                     <Image src={loadingpage_02} alt='ảnh lá deco' style={{ top: '25%' }} className='img-fluid position-absolute start-0' />

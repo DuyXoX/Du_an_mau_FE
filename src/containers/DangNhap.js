@@ -109,8 +109,9 @@ const DangNhap = () => {
                 setCookie('account_user', account_user);
 
                 showToast('success', message, loading);
-                window.location.replace('/')
-                return;
+                setTimeout(() => {
+                    return window.location.replace('/')
+                }, 2000);
             }
             if (response && warning) {
                 showToast('warning', warning, loading);

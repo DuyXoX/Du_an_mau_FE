@@ -1,4 +1,3 @@
-import { InFoCart } from "@/containers/context/InFoCart";
 import Footer from "@/layouts/Footer";
 import Header from "@/layouts/Header";
 import Navigation from "@/layouts/Navigation";
@@ -9,9 +8,7 @@ export default function NestedLayout({ children }) {
         <>
             <Header />
             <Navigation />
-            <InFoCart>
-                {children}
-            </InFoCart>
+            {children}
             <Footer />
         </>
     );

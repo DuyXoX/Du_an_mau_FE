@@ -1,10 +1,11 @@
 
 import SanPhamMain from '@/components/sanpham/SanPhamMain';
+import ThongTinSanPham from '@/containers/sanpham/ThongTinSanPham';
 import React from 'react';
 
 const page = ({ params }) => {
     return (
-        <SanPhamMain id={params?.id} />
+        <ThongTinSanPham id={params?.id} />
     );
 };
 
