@@ -8,10 +8,13 @@ import { TableInfoContext } from '@/containers/context/getdata/TableInfo';
 import { TableContext } from '@/containers/context/getdata/TableData';
 import Image from 'next/image';
 import ViewDonHangChiTiet from '@/components/modals/cruds/chitietdonhang/ViewDonHangChiTiet';
+<<<<<<< HEAD
 import { Button, Form } from 'react-bootstrap';
 import showToast from '@/components/reuses/Toast';
 import { toast } from 'react-toastify';
 import { putData } from '@/service/apiServive';
+=======
+>>>>>>> origin/main
 
 const DonHang = () => {
     const { datas, updateData, selectedDatas, toggleSelectedDatas } = useContext(TableContext);//Lấy data đã có trong context
@@ -19,6 +22,19 @@ const DonHang = () => {
     const [globalFilter, setGlobalFilter] = useState(null); // Bộ lọc tìm kiếm toàn cục
     const [statusMap, setStatusMap] = useState({}); // Thêm state để lưu trạng thái cho từng hàng
     const [showUpdateStatus, setShowUpdateStatus] = useState(null); // Thêm state để lưu ID của hàng đang được cập nhật
+
+    const statusColor = {
+        '': "transparent", // Không có trạng thái
+        "dangxu ly": "orange",
+        'hoantat': '#00b356',
+        'huy': '#ff5757'
+    };
+
+    const statusType = {
+        'dangxu ly': 'Đang sử lý',
+        'hoantat': 'Hoàn tất',
+        'huy': 'Đã hủy'
+    }
 
     const statusColor = {
         '': "transparent", // Không có trạng thái
@@ -41,6 +57,15 @@ const DonHang = () => {
         }, 300);
     }, []);
 
+    const status = (rowData) => {
+        const color = statusColor[rowData?.TrangThai] || "transparent"; // Mặc định là trong suốt nếu không có trạng thái
+        return (
+            <div style={{ backgroundColor: color }} className='text-center text-white rounded'>
+                {statusType[rowData?.TrangThai] || "Chưa xác định"}
+            </div>
+        );
+    }
+
     // Thực hiện lấy data của hàng và thực hiện trức năng (logic lấy data đc thư viện PrimeReact thực hiện từ DataTable)
     const viewChiTiet = useCallback((rowData) => {
         return (<>
@@ -49,6 +74,7 @@ const DonHang = () => {
             />
         </>)
     }, []);
+<<<<<<< HEAD
     // console.log('check: ', statusMap);
 
     const statusTemplate = (rowData) => {
@@ -132,6 +158,9 @@ const DonHang = () => {
     }
 
     // console.log('check: ', updateStatus);
+=======
+    // console.log('check: ', datas);
+>>>>>>> origin/main
 
 
     return (
@@ -152,8 +181,13 @@ const DonHang = () => {
             <Column field="DiaChi" header="Địa Chỉ" sortable style={{ maxWidth: '8rem' }} className="text-truncate"></Column>
             <Column field="SoDienThoai" header="Số Điện Thoại" sortable style={{ maxWidth: '8rem' }} className="text-truncate"></Column>
             <Column field="TongTien" header="Tổng Tiền" sortable style={{ maxWidth: '5rem' }} className="text-truncate"></Column>
+<<<<<<< HEAD
             <Column field="TrangThai" header="Trạng Thái" sortable style={{ maxWidth: '6rem' }} body={statusTemplate}></Column>
             <Column header="Tùy chọn" body={viewChiTiet}></Column>
+=======
+            <Column field="TrangThai" header="Trạng Thái" sortable style={{ maxWidth: '5rem' }} body={status}></Column>
+            <Column header="Tùy chọn" body={OptionEditDelete}></Column>
+>>>>>>> origin/main
         </DataTable>
     );
 };

@@ -109,9 +109,14 @@ const DangNhap = () => {
                 setCookie('account_user', account_user);
 
                 showToast('success', message, loading);
+<<<<<<< HEAD
                 setTimeout(() => {
                     return window.location.replace('/')
                 }, 2000);
+=======
+                window.location.replace('/quan-ly/don-hang')
+                return;
+>>>>>>> origin/main
             }
             if (response && warning) {
                 showToast('warning', warning, loading);
