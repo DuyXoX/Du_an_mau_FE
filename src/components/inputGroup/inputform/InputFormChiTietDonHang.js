@@ -1,17 +1,14 @@
-import React, { useEffect, useRef, useState } from 'react';
-import InputGroup from '../InputGroup';
-import { FaEye, FaEyeSlash } from 'react-icons/fa';
+import React from 'react';
 import './InputForm.scss';
 import '../InputGroup.scss';
-import { Button, Col, Form, Placeholder, Row, Table } from 'react-bootstrap';
-import ReactQuill from 'react-quill';
+import { Col, Placeholder, Row, Table } from 'react-bootstrap';
 import 'react-quill/dist/quill.snow.css';
 import Image from 'next/image';
 import { useGetData } from '@/service/apiServive';
 
 const InputFormChiTietDonHang = (formData) => {
     const DonHangId = formData.formData?.DonHangId || 0;
-    const { data, mutate } = useGetData(`/quanly/donhang/${DonHangId}`)
+    const { data } = useGetData(`/quanly/donhang/${DonHangId}`)
     const donHang = data?.donHang;
     const thongTin = formData?.formData;
     const tinhTrang = donHang && donHang[donHang.length - 1];
@@ -104,29 +101,6 @@ const InputFormChiTietDonHang = (formData) => {
                     </div>
                 </Col>
             </Row>
-            {/* <div className="inputGroup">
-                <input type="text" name='TenSanPham' required
-                    value={formData.TenSanPham}
-                    onChange={handleChange}
-                />
-                <label>Tên Sản Phẩm</label>
-            </div> */}
-            {/* <div className='inputGroup'>
-                <Form.Select
-                    required
-                    name="DonViTinhID"
-                    value={formData.DonViTinhID}
-                    onChange={handleChange}
-                    aria-label="Chọn đơn vị tính"
-                >
-                    <option value="">Đơn Vị Tính</option>
-                    {DonViTinh?.map((donVi, idx) => (
-                        <option key={idx} value={donVi.DonViTinhID}>
-                            {donVi.TenDonVi}
-                        </option>
-                    ))}
-                </Form.Select>
-            </div> */}
         </>
     );
 };

@@ -9,7 +9,6 @@ import { IoMdSearch } from 'react-icons/io';
 import Cookies from 'js-cookie';
 import { clearCookiesAndRedirect } from '@/components/reuses/Cookie';
 import GioHangNavigation from '@/components/giohang/GioHangNavigation';
-import LogOutModal from '@/components/header/LogOutModal';
 import { InfoUser } from '@/containers/context/InfoUser';
 import { InFoCart } from '@/containers/context/InFoCart';
 import LogOutNavbar from '@/components/header/LogOutNavbar';
@@ -53,9 +52,9 @@ const Navigation = () => {
                             <Link href='/' className='nav-link'>Trang chủ</Link>
                             <Link href='/gioi-thieu' className='nav-link'>Giới thiệu</Link>
                             <Link href='/san-pham' className='nav-link'>Sản phẩm</Link>
-                            <Link href='/' className='nav-link'>Tin tức</Link>
-                            <Link href='/' className='nav-link'>Hoạt động</Link>
-                            <div className="d-flex flex-wrap gap-2 align-items-center justify-content-between">
+                            <Link href='/tin-tuc' className='nav-link'>Tin tức</Link>
+                            <Link href='/hoat-dong' className='nav-link'>Hoạt động</Link>
+                            <div className="me-lg-1 d-flex flex-wrap gap-2 align-items-center justify-content-between">
                                 <div className='pe-1 w-100 border border-1 rounded-3 d-flex bg-white'>
                                     <Button variant='white' className=''>
                                         <IoMdSearch className='fs-5' />
@@ -79,7 +78,7 @@ const Navigation = () => {
                             :
                             <InfoUser>
                                 <InFoCart>
-                                    <div className='py- d-lg-flex flex-wrap gap-2 align-items-center justify-content-end'>
+                                    <div className='d-lg-flex flex-wrap gap-2 align-items-center justify-content-end'>
                                         <LogOutNavbar />
                                         <Link href='/thong-tin/gio-hang' className='nav-link'>
                                             <GioHangNavigation />
@@ -87,7 +86,6 @@ const Navigation = () => {
                                     </div>
                                 </InFoCart>
                             </InfoUser>
-
                         }
                     </Navbar.Collapse>
                 </Container>

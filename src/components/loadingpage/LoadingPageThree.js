@@ -28,12 +28,12 @@ const LoadingPageThree = () => {
                         <div className=''>
                             <ScrollAnimation animationClass='animation-left'>
                                 <h2 className='text-green'>
-                                    Nông trại Fresco
+                                    Bán hàng Nông Sản
                                 </h2>
                             </ScrollAnimation>
                             <ScrollAnimation animationClass='animation-right'>
                                 <p style={{ fontSize: '14px' }}>
-                                    Nông trại Fresco tọa lạc tại tỉnh Long An, với diện tích 58.000 m2. Áp dụng mô hình nông trại công nghệ cao được trang bị hệ thống tưới tiêu tự động tiên tiến. Đây cũng là nơi cung cấp độc quyền các loại rau, củ, quả tươi sạch và an toàn cho Công ty CP Thực Phẩm Fresco.
+                                    Bán hàng Nông Sản tọa lạc tại tỉnh Đắk Lắk, với diện tích 1000 m2. Áp dụng mô hình nông trại công nghệ cao được trang bị hệ thống tưới tiêu tự động tiên tiến. Đây cũng là nơi cung cấp độc quyền các loại rau, củ, quả tươi sạch và an toàn cho người tiêu dùng.
                                     <br />
                                     Sản phẩm trải qua quy trình nuôi trồng, bảo quản nghiêm ngặt. Được chú trọng trong quá trình lựa chọn, kiểm tra trước khi đưa đến tay người tiêu dùng. Chúng tôi tự hào về sự minh bạch trong việc xác định nguồn gốc sản phẩm.
                                 </p>

@@ -47,12 +47,12 @@ const SliderMain = () => {
     };
     return (
         <section style={{ paddingTop: '0px' }}>
-            <Container fluid='xxl' style={{ '--bs-gutter-x': 'none' }}>
+            <Container fluid='xxl'>
                 <div className='w-100 d-block mx-auto slider-teacher'>
                     <Slider {...settings}>
                         <div className=''>
                             <Image src={slider1}
-                                className="img-fluid"
+                                className="w-100 h-auto"
                                 alt="images-shrimp"
                             />
                         </div>

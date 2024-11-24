@@ -46,7 +46,7 @@ const LogOutModal = () => {
 
     return (
         <>
-            <p className='ms-1 cursor cursor-hover' onClick={() => { setShowLogoutModal(true) }}>Đăng xuất</p>
+            <p className='cursor cursor-hover' onClick={() => { setShowLogoutModal(true) }}>Đăng xuất</p>
             {/* <TbLogout className='fs-1 ms-1 text-white cursor' onClick={() => { setShowLogoutModal(true) }} /> */}
             <Modal
                 show={showLogoutModal}

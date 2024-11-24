@@ -12,46 +12,17 @@ const ViewDonHangChiTiet = (rowData) => {
         TongTien: '',
         PhuongThuc: ''
     };
-    const id = rowData.rowData?.DonHangId
     const [formData, setFormData] = useState(typeData);
-    const [errors, setErrors] = useState(typeData);
-    const [checkError, setCheckError] = useState(true);
     const [showUpdateModal, setShowUpdateModal] = useState(false);
-
 
     const handleClose = (() => {
         setFormData(typeData);
-        setErrors(typeData);
         toggleShowUpdateModal(false, null);
     });
 
     const toggleShowUpdateModal = (e) => {
         setShowUpdateModal(e);
     };
-
-    const handleSubmit = async (e) => {
-
-        try {
-            const response = putData(`/donhang/${id}`, formData);
-            const { message, warning, error } = response;
-            if (response) {
-                if (message) {
-                    showToast('success', `Điều chỉnh thông tin ${label} thành công.`, loading);
-                    return await updateData();// Gọi mutate để làm mới dữ liệu từ API
-                }
-                if (warning) {
-                    return showToast('warning', warning, loading);
-                }
-                if (error) {
-                    return showToast('error', error, loading);
-                }
-            }
-        } catch (error) {
-            toast.update(loading, { render: 'Có lỗi xảy ra khi gửi yêu cầu.', type: 'error', isLoading: false, autoClose: 3000 });
-            console.error('check error: ', error);
-            return;
-        }
-    }
 
     const editData = (data) => {
         // const SanPhamId = rowData?.SanPhamId
@@ -80,29 +51,21 @@ const ViewDonHangChiTiet = (rowData) => {
                 onHide={() => { handleClose() }}
                 backdrop="static" //Ngăn chặn việc bấm ra ngoài
             >
-                <form onSubmit={handleSubmit}>
-                    <Modal.Header closeButton>
-                        <Modal.Title className='text-orange'>Thông tin chi tiết đơn hàng</Modal.Title>
-                    </Modal.Header>
-                    <Modal.Body>
-                        <InputFormChiTietDonHang
-                            formData={formData}
-                        />
-                    </Modal.Body>
-                    <Modal.Footer>
-                        <Button
-                            variant="secondary"
-                            onClick={() => { handleClose() }}>
-                            Hủy
-                        </Button>
-                        <Button
-                            type='submit'
-                            disabled={checkError}
-                            variant="green">
-                            Xác nhận
-                        </Button>
-                    </Modal.Footer>
-                </form>
+                <Modal.Header closeButton>
+                    <Modal.Title className='text-orange'>Thông tin chi tiết đơn hàng</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
+                    <InputFormChiTietDonHang
+                        formData={formData}
+                    />
+                </Modal.Body>
+                <Modal.Footer>
+                    <Button
+                        variant="secondary"
+                        onClick={() => { handleClose() }}>
+                        Đóng
+                    </Button>
+                </Modal.Footer>
             </Modal>
         </>
     );
