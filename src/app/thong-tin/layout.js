@@ -1,5 +1,4 @@
 import Footer from "@/layouts/Footer";
-import Header from "@/layouts/Header";
 import Navigation from "@/layouts/Navigation";
 
 export const metadata = {
@@ -10,7 +9,6 @@ export const metadata = {
 export default function NestedLayout({ children }) {
     return (
         <>
-            <Header />
             <Navigation />
             {children}
             <Footer />

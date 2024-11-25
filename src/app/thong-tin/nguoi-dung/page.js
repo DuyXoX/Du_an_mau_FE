@@ -1,10 +1,9 @@
+import NguoiDung from '@/containers/thongtin/NguoiDung';
 import React from 'react';
 
 const page = () => {
     return (
-        <div>
-            Thong tin user
-        </div>
+        <NguoiDung />
     );
 };
 

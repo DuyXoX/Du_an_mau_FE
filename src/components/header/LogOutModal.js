@@ -46,11 +46,7 @@ const LogOutModal = () => {
 
     return (
         <>
-<<<<<<< HEAD
             <p className='cursor cursor-hover' onClick={() => { setShowLogoutModal(true) }}>Đăng xuất</p>
-=======
-            <p className='ms-1 cursor cursor-hover' onClick={() => { setShowLogoutModal(true) }}>Đăng xuất</p>
->>>>>>> origin/main
             {/* <TbLogout className='fs-1 ms-1 text-white cursor' onClick={() => { setShowLogoutModal(true) }} /> */}
             <Modal
                 show={showLogoutModal}
