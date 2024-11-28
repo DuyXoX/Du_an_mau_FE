@@ -6,7 +6,7 @@ const InfoCartContext = createContext();
 
 const InFoCart = ({ children }) => {
     const { data, loading, error, mutate } = useGetData('/cart');
-    const [cart, setCart] = useState(data);
+    const [cart, setCart] = useState([]);
 
     const updateData = useCallback(async () => {
         const newData = await mutate(); // Cập nhật lại dữ liệu từ SWR
