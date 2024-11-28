@@ -7,7 +7,7 @@ const GioiThieu = () => {
     return (
         <>
             <section>
-                <Container fluid='xxl'>
+                <Container fluid='xxl' style={{ minHeight: '55vh' }}>
                     <h1 className='text-green text-center'>
                         BÁN HÀNG NÔNG SẢN
                     </h1>

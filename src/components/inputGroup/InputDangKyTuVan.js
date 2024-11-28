@@ -11,7 +11,7 @@ const InputDangKyTuVan = ({ formData, errors, checkError, handleChange, handleSu
                         value={formData.username}
                         onChange={handleChange}
                     />
-                    <label>Họ và tên</label>
+                    <label className='bg-transparent'>Họ và tên</label>
                     {errors.username &&
                         <span
                             style={{ fontSize: '.75rem' }}
@@ -25,7 +25,7 @@ const InputDangKyTuVan = ({ formData, errors, checkError, handleChange, handleSu
                         value={formData.email}
                         onChange={handleChange}
                     />
-                    <label>Email</label>
+                    <label className='bg-transparent'>Email</label>
                     {errors.email &&
                         <span
                             style={{ fontSize: '.75rem' }}
@@ -39,7 +39,7 @@ const InputDangKyTuVan = ({ formData, errors, checkError, handleChange, handleSu
                         value={formData.facebook}
                         onChange={handleChange}
                     />
-                    <label>Facebook</label>
+                    <label className='bg-transparent'>Facebook</label>
                     {errors.facebook &&
                         <span
                             style={{ fontSize: '.75rem' }}
@@ -53,7 +53,7 @@ const InputDangKyTuVan = ({ formData, errors, checkError, handleChange, handleSu
                         value={formData.phonenumber}
                         onChange={handleChange}
                     />
-                    <label>Số điện thoại</label>
+                    <label className='bg-transparent'>Số điện thoại</label>
                     {errors.phonenumber &&
                         <span
                             style={{ fontSize: '.75rem' }}
@@ -67,7 +67,7 @@ const InputDangKyTuVan = ({ formData, errors, checkError, handleChange, handleSu
                         value={formData.content}
                         onChange={handleChange}
                     />
-                    <label>Nội dung</label>
+                    <label className='bg-transparent'>Nội dung</label>
                     {errors.content &&
                         <span
                             style={{ fontSize: '.75rem' }}

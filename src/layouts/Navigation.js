@@ -28,10 +28,6 @@ const Navigation = () => {
 
     // console.log('check isAuthenticated', isAuthenticated);
 
-    const handleLogout = () => {
-        clearCookiesAndRedirect()
-    };
-
     return (
         <>
             <Navbar sticky='top' expand="lg" className="bg-green">

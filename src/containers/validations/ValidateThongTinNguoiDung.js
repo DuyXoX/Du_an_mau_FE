@@ -1,4 +1,4 @@
-const ValidateNguoiDung = (name, value) => {
+const ValidateThongTinNguoiDung = (name, value) => {
     let error = '';
     switch (name) {
         case 'TenDangNhap':
@@ -19,15 +19,7 @@ const ValidateNguoiDung = (name, value) => {
         case 'SoDienThoai':
             error = !value ? 'Vui lòng nhập số điện thoại của bạn' :
                 value.length < 10 ? 'Số điện thoại phải có ít nhất 10 ký tự' :
-                    value.length > 12 ? 'Số điện thoại không thể dài hơn 12 ký tự' : '';
-            break;
-        case 'MatKhau':
-            error = !value ? 'Vui lòng nhập mật khẩu của bạn' :
-                value.length < 8 ? 'Mật khẩu phải có ít nhất 8 ký tự' :
-                    value.length > 20 ? 'Mật khẩu không thể dài hơn 20 ký tự' : '';
-            break;
-        case 'VaiTro':
-            error = !value ? 'Vui lòng nhập quyền hạn' : '';
+                    value.length > 10 ? 'Số điện thoại không thể dài hơn 10 ký tự' : '';
             break;
         default:
             break;
@@ -35,4 +27,4 @@ const ValidateNguoiDung = (name, value) => {
     return error;
 };
 
-export default ValidateNguoiDung;
+export default ValidateThongTinNguoiDung;
