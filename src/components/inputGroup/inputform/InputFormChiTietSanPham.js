@@ -23,6 +23,22 @@ const InputFormChiTietSanPham = ({ formData, errors, handleChange }) => {
                     </span>
                 }
             </div>
+
+            <div className="inputGroup">
+                <input type="text" name='moTaChiTiet' required
+                    value={formData.moTaChiTiet}
+                    onChange={handleChange}
+                />
+                <label>Mô Tả Chi Tiết</label>
+                {errors.moTaChiTiet &&
+                    <span
+                        style={{ fontSize: '.75rem' }}
+                        className='text-orange'>
+                        {errors.moTaChiTiet}
+                    </span>
+                }
+            </div>
+
             <div className="inputGroup">
                 <input type="number" name='gia' required
                     value={formData.gia}

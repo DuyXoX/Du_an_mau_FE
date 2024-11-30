@@ -10,6 +10,7 @@ const ChiTietSamPham = ({ rowData, updateData }) => {
         sanPhamId: '',
         chiTietSanPhamId: '',
         loaiChiTiet: '',
+        moTaChiTiet: '',
         gia: '',
         soLuong: ''
     };

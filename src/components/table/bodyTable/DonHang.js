@@ -23,12 +23,16 @@ const DonHang = () => {
     const statusColor = {
         '': "transparent", // Không có trạng thái
         "dangxu ly": "orange",
+        'chogiaohang': 'blue',
         'hoantat': '#00b356',
+        'danggiao': '#ff0000',
         'huy': '#ff5757'
     };
 
     const statusType = {
         'dangxu ly': 'Đang sử lý',
+        'chogiaohang': 'Chờ giao hàng',
+        'danggiao': 'Đang giao',
         'hoantat': 'Hoàn tất',
         'huy': 'Đã hủy'
     }
@@ -74,6 +78,8 @@ const DonHang = () => {
                         >
                             <option value="">Chọn trạng thái</option>
                             <option value="dangxu ly">Đang xử lý</option>
+                            <option value="chogiaohang">Chờ giao hàng</option>
+                            <option value="danggiao">Đang giao</option>
                             <option value="hoantat">Hoàn tất</option>
                             <option value="huy">Hủy</option>
                         </Form.Select>

@@ -7,72 +7,58 @@ const InputDangKyTuVan = ({ formData, errors, checkError, handleChange, handleSu
         <form onSubmit={handleSubmit}>
             <InputGroup>
                 <div className="inputGroup">
-                    <input type="text" name='username' required
-                        value={formData.username}
+                    <input type="text" name='TenDangNhap' required
+                        value={formData.TenDangNhap}
                         onChange={handleChange}
                     />
                     <label className='bg-transparent'>Họ và tên</label>
-                    {errors.username &&
+                    {errors.TenDangNhap &&
                         <span
                             style={{ fontSize: '.75rem' }}
                             className=''>
-                            {errors.username}
+                            {errors.TenDangNhap}
                         </span>
                     }
                 </div>
                 <div className="inputGroup">
-                    <input type="email" name='email' required
-                        value={formData.email}
+                    <input type="Account" name='Account' required
+                        value={formData.Account}
                         onChange={handleChange}
                     />
                     <label className='bg-transparent'>Email</label>
-                    {errors.email &&
+                    {errors.Account &&
                         <span
                             style={{ fontSize: '.75rem' }}
                             className=''>
-                            {errors.email}
+                            {errors.Account}
                         </span>
                     }
                 </div>
                 <div className="inputGroup">
-                    <input type="text" name='facebook' required autoComplete="off"
-                        value={formData.facebook}
-                        onChange={handleChange}
-                    />
-                    <label className='bg-transparent'>Facebook</label>
-                    {errors.facebook &&
-                        <span
-                            style={{ fontSize: '.75rem' }}
-                            className=''>
-                            {errors.facebook}
-                        </span>
-                    }
-                </div>
-                <div className="inputGroup">
-                    <input type="tel" name='phonenumber' required autoComplete="off"
-                        value={formData.phonenumber}
+                    <input type="tel" name='SoDienThoai' required autoComplete="off"
+                        value={formData.SoDienThoai}
                         onChange={handleChange}
                     />
                     <label className='bg-transparent'>Số điện thoại</label>
-                    {errors.phonenumber &&
+                    {errors.SoDienThoai &&
                         <span
                             style={{ fontSize: '.75rem' }}
                             className=''>
-                            {errors.phonenumber}
+                            {errors.SoDienThoai}
                         </span>
                     }
                 </div>
                 <div className="inputGroup">
-                    <textarea rows={3} type="text" name='content'
-                        value={formData.content}
+                    <textarea rows={3} type="text" name='NoiDung'
+                        value={formData.NoiDung}
                         onChange={handleChange}
                     />
                     <label className='bg-transparent'>Nội dung</label>
-                    {errors.content &&
+                    {errors.NoiDung &&
                         <span
                             style={{ fontSize: '.75rem' }}
                             className=''>
-                            {errors.content}
+                            {errors.NoiDung}
                         </span>
                     }
                 </div>

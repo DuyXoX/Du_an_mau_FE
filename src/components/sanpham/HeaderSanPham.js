@@ -36,6 +36,7 @@ const HeaderSanPham = ({ products }) => {
         setSelectedDetail(detail);
         setChiTietSanPhamId(detail.ChiTietSanPhamId); // Giả sử `detail` có trường ChiTietSanPhamId
     };
+    // console.log('check: ', products);
 
     return (
         <>
@@ -43,17 +44,16 @@ const HeaderSanPham = ({ products }) => {
                 <section>
                     <Container fluid="xxl">
                         <Row
-                            style={{ "--bs-gutter-x": "none" }}
-                            className="p-3 shadow-custom rounded bg-white"
+                            className="g-0 shadow-custom rounded bg-white"
                         >
                             <Col md={5}>
-                                <div className="">
+                                <div className="p-3">
                                     <Image
                                         src={`${process.env.NEXT_PUBLIC_API_URL}/${products.HinhAnh[0].DuongDanHinh}`}
                                         alt={products.TenSanPham}
-                                        width={280}
-                                        height={280}
-                                    // className="img-fluid"
+                                        width={400}
+                                        height={400}
+                                        className="w-100 object-fit-cover rounded"
                                     />
                                 </div>
                             </Col>
@@ -88,7 +88,7 @@ const HeaderSanPham = ({ products }) => {
                                                 {/* Hiển thị thông tin giá mặc định nếu chưa chọn radio nào */}
                                                 {selectedDetail ? (
                                                     <p className="sanphamcogia">
-                                                        Sản phẩm {selectedDetail.LoaiChiTiet} có giá: {new Intl.NumberFormat('vi-VN').format(selectedDetail.Gia)} VNĐ
+                                                        Sản phẩm {selectedDetail.LoaiChiTiet} có giá: {new Intl.NumberFormat('vi-VN').format(selectedDetail.Gia)} VNĐ / {products.TenDonVi}
                                                     </p>
                                                 ) : (
                                                     products.Gia && products.Gia.length > 0 && (
@@ -152,6 +152,19 @@ const HeaderSanPham = ({ products }) => {
                                             })}
                                         </div>
                                     </div>
+
+                                    <div>
+                                        {selectedDetail ? (
+                                            <p style={{ maxHeight: '100px' }}
+                                                className="p-2 me-3 fs-8 rounded bg-warning-subtle overflow-y-auto"
+                                            >
+                                                Mô tả chi tiết {selectedDetail.LoaiChiTiet} : {selectedDetail.MoTaChiTiet}
+                                            </p>
+                                        ) : (
+                                            null
+                                        )}
+                                    </div>
+
                                     <div className="mb-4 fw-light">
                                         <div className="d-flex">
                                             <Button

@@ -3,7 +3,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import React, { useEffect, useState } from 'react';
 import { Button, Container, Nav, Navbar } from 'react-bootstrap';
-// import Logo from '../assets/imgs/logo-mimimusic.png';
+import Logo from '../assets/imgs/Screenshot 2023-07-29 172851.png';
 import '../styles/Navigation.scss';
 import { IoMdSearch } from 'react-icons/io';
 import Cookies from 'js-cookie';
@@ -33,14 +33,14 @@ const Navigation = () => {
             <Navbar sticky='top' expand="lg" className="bg-green">
                 <Container fluid='xl'>
                     <Navbar.Brand href="/" className='nav-link'>
-                        {/* <Image
+                        <Image
                             src={Logo}
                             width={50}
                             height={50}
                             alt="Ảnh Logo"
                             priority // Ưu tiên tải hình ảnh này
-                        /> */}
-                        Dự án
+                        />{' '}
+                        Nông Sản
                     </Navbar.Brand>
                     <Navbar.Toggle aria-controls="basic-navbar-nav" />
                     <Navbar.Collapse id="basic-navbar-nav" className='py-2'>

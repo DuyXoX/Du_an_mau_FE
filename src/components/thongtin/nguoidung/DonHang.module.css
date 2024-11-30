@@ -1,0 +1,75 @@
+.buttonContainer {
+    background-color: rgb(230, 240, 249);
+    width: 80%;
+    height: 50px;
+    margin-top: 20px;
+    margin-left: 150px;
+    display: flex;
+    justify-content: space-between;
+    /* Tạo khoảng cách đều giữa các nút */
+    align-items: center;
+    /* Canh giữa theo chiều dọc */
+}
+
+.button {
+    width: 200px;
+    height: 40px;
+    background-color: #ffffff;
+    color: rgb(0, 0, 0);
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s;
+}
+
+.button:hover {
+    background-color: #0056b3;
+    color: #ffffff;
+}
+
+/* Container cho sản phẩm */
+.contentContainer {
+    width: 80%;
+    margin-top: 20px;
+    margin-left: 150px;
+}
+
+.productRow {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 15px;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 10px;
+}
+
+.orderDetails1 {
+    display: flex;
+    gap: 10px;
+}
+
+/* Hình ảnh sản phẩm */
+.productImage {
+    border-radius: 5px;
+    object-fit: cover;
+}
+
+/* Text nằm bên phải hình ảnh */
+.productText {
+    display: flex;
+
+}
+
+.productText2 {
+    margin-left: 50px;
+    margin-left: 750px;
+
+}
+
+.productName,
+.productDetail,
+.productPrice,
+.productQuantity {
+    margin: 5px 0;
+}

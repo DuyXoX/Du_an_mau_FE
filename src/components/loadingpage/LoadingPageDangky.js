@@ -12,27 +12,19 @@ import ScrollAnimation from '../animation/ScrollAnimation';
 
 
 const LoadingPageDangky = () => {
-    const [formData, setFormData] = useState({
-        username: '',
-        email: '',
-        facebook: '',
-        phonenumber: '',
-        content: '',
-    });
-
-    const [errors, setErrors] = useState({
-        username: '',
-        email: '',
-        facebook: '',
-        phonenumber: '',
-        content: ''
-    });
-
+    const typeData = {
+        TenDangNhap: '',
+        Account: '',
+        SoDienThoai: '',
+        NoiDung: '',
+    }
+    const [formData, setFormData] = useState(typeData);
+    const [errors, setErrors] = useState(typeData);
     const [checkError, setCheckError] = useState(true);
 
     const validate = (name, value) => {
         switch (name) {
-            case 'username':
+            case 'TenDangNhap':
                 if (!value) {
                     return 'Vui lòng nhập tên của bạn';
                 } else if (value.length < 8) {
@@ -40,7 +32,7 @@ const LoadingPageDangky = () => {
                 } else {
                     return '';
                 }
-            case 'email':
+            case 'Account':
                 if (!value) {
                     return 'Vui lòng nhập email của bạn';
                 } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(value)) {
@@ -48,13 +40,7 @@ const LoadingPageDangky = () => {
                 } else {
                     return '';
                 }
-            case 'facebook':
-                if (!value) {
-                    return 'Vui lòng thêm Facebook của bạn';
-                } else {
-                    return '';
-                }
-            case 'phonenumber':
+            case 'SoDienThoai':
                 if (!value) {
                     return 'Vui lòng nhập SĐT của bạn';
                 } else if (value.length < 10) {
@@ -62,7 +48,7 @@ const LoadingPageDangky = () => {
                 } else {
                     return '';
                 }
-            case 'content':
+            case 'NoiDung':
                 if (!value) {
                     return 'Vui lòng nhập nội dung của bạn';
                 } else {

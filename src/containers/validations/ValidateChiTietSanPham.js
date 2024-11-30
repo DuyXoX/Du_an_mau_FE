@@ -4,6 +4,9 @@ const ValidateChiTietSanPham = (name, value) => {
         case 'loaiChiTiet':
             error = !value ? 'Vui lòng nhập loại chi tiết sản phẩm của bạn' : '';
             break;
+        case 'moTaChiTiet':
+            error = !value ? 'Vui lòng nhập mô tả chi tiết sản phẩm của bạn' : '';
+            break;
         case 'gia':
             error = !value ? 'Vui lòng nhập giá của bạn' : '';
             break;

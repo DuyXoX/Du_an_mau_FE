@@ -104,6 +104,7 @@ const UpdateModal = ({ typeData, endpoint, rowData, value, updateData, children 
             sanPhamId: SanPhamId, // Cập nhật chỉ SanPhamId
             chiTietSanPhamId: data.ChiTietSanPhamId,
             loaiChiTiet: data.LoaiChiTiet,
+            moTaChiTiet: data.MoTaChiTiet,
             gia: data.Gia,
             soLuong: data.SoLuong,
         }));
