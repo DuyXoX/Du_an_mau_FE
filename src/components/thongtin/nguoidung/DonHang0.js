@@ -5,7 +5,7 @@ import { apiClient, checkLogintoken } from '@/service/apiServive';
 import Image from 'next/image';
 import DonHangStatus from './DonHangStatus';
 const DonHang = () => {
-    const [selectedStatus, setSelectedStatus] = useState('Tất Cả');
+    const [selectedStatus, setSelectedStatus] = useState('all');
     const [loading, setLoading] = useState(false);
     const [orders, setOrders] = useState([]); // State để lưu đơn hàng
     const [userInfo, setUserInfo] = useState(null);
@@ -25,7 +25,7 @@ const DonHang = () => {
         try {
             // Gọi checkLogintoken để lấy thông tin người dùng
             const loginResponse = await checkLogintoken();
-            console.log(loginResponse); // Log thông tin người dùng
+            // console.log(loginResponse); // Log thông tin người dùng
 
             // Lấy NguoiDungId từ phản hồi của checkLogin
             if (loginResponse) {
@@ -35,7 +35,7 @@ const DonHang = () => {
 
                 // Gọi API lấy đơn hàng với NguoiDungId
                 const orderResponse = await apiClient.get(`/donhang/${userId}`);
-                console.log("Thông tin đơn hàng:", orderResponse.data);
+                // console.log("Thông tin đơn hàng:", orderResponse.data);
                 setOrders(orderResponse.data); // Lưu đơn hàng vào state
             } else {
                 console.log("Người dùng chưa đăng nhập."); // Thông báo nếu chưa đăng nhập
@@ -74,7 +74,7 @@ const DonHang = () => {
     }
 
     const filterOrdersByStatus = (status) => {
-        console.log('check: ', status);
+        // console.log('check: ', status);
 
         // const color = statusColor[status?.TrangThai] || "transparent";
         return orders.filter((order) => order.TrangThai === status);
@@ -96,37 +96,37 @@ const DonHang = () => {
             <div className={styles.buttonContainer}>
                 <button
                     className={styles.button}
-                    onClick={() => handleButtonClick("Tất Cả")}
+                    onClick={() => handleButtonClick("all")}
                 >
                     Tất Cả
                 </button>
                 <button
                     className={styles.button}
-                    onClick={() => handleButtonClick("Chờ Xác Nhận")}
+                    onClick={() => handleButtonClick("dangxu ly")}
                 >
                     Chờ Xác Nhận
                 </button>
                 <button
                     className={styles.button}
-                    onClick={() => handleButtonClick("Chờ Giao")}
+                    onClick={() => handleButtonClick("chogiao")}
                 >
                     Chờ Giao
                 </button>
                 <button
                     className={styles.button}
-                    onClick={() => handleButtonClick("Đang Giao")}
+                    onClick={() => handleButtonClick("danggiao")}
                 >
                     Đang Giao
                 </button>
                 <button
                     className={styles.button}
-                    onClick={() => handleButtonClick("Hoàn Thành")}
+                    onClick={() => handleButtonClick("hoantat")}
                 >
                     Hoàn Thành
                 </button>
                 <button
                     className={styles.button}
-                    onClick={() => handleButtonClick("Hủy")}
+                    onClick={() => handleButtonClick("huy")}
                 >
                     Hủy
                 </button>
@@ -142,7 +142,7 @@ const DonHang = () => {
                 statusType={statusType}
             />
 
-            {selectedStatus === "Chờ Xác Nhận" && (
+            {selectedStatus === "dangxu ly" && (
                 <div className={styles.contentContainer}>
                     <div className={styles.ordersContainer}>
                         {loading && <p className={styles.loadingText}>Loading...</p>}
@@ -155,11 +155,11 @@ const DonHang = () => {
                             </div>
                         )}
 
-                        {filteredOrdersDangXuLy.length === 0 ? (
+                        {filterOrdersByStatus(selectedStatus).length === 0 ? (
                             <p className={styles.noOrders}>Không có đơn hàng nào chờ xác nhận.</p>
                         ) : (
                             <div className={styles.ordersList}>
-                                {filteredOrdersDangXuLy.map((order, index) => {
+                                {filterOrdersByStatus(selectedStatus).map((order, index) => {
                                     const {
                                         TrangThai,
                                         TongTien,
@@ -221,7 +221,7 @@ const DonHang = () => {
                 </div>
             )}
 
-            {selectedStatus === "Chờ Giao" && (
+            {selectedStatus === "chogiao" && (
                 <div className={styles.contentContainer}>
                     <div className={styles.ordersContainer}>
                         {loading && <p className={styles.loadingText}>Loading...</p>}
@@ -300,7 +300,7 @@ const DonHang = () => {
                 </div>
             )}
 
-            {selectedStatus === "Đang Giao" && (
+            {selectedStatus === "danggiao" && (
                 <div className={styles.contentContainer}>
                     <div className={styles.ordersContainer}>
                         {loading && <p className={styles.loadingText}>Loading...</p>}
@@ -379,7 +379,7 @@ const DonHang = () => {
                 </div>
             )}
 
-            {selectedStatus === "Hoàn Thành" && (
+            {selectedStatus === "hoantat" && (
                 <div className={styles.contentContainer}>
                     <div className={styles.ordersContainer}>
                         {loading && <p className={styles.loadingText}>Loading...</p>}
@@ -458,7 +458,7 @@ const DonHang = () => {
                 </div>
             )}
 
-            {selectedStatus === "Hủy" && (
+            {selectedStatus === "huy" && (
                 <div className={styles.contentContainer}>
                     <div className={styles.ordersContainer}>
                         {loading && <p className={styles.loadingText}>Loading...</p>}

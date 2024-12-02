@@ -85,6 +85,7 @@ const LogOutModal = () => {
                     style={{ padding: '1rem', borderRadius: '0.5rem', position: 'absolute', zIndex: '1', inset: '0px auto auto 0px', transform: 'translate(0px, 48px)', minWidth: '180px', backgroundColor: 'white' }}
                     className={dropdown ? 'dropdown-content' : 'dropdown-content d-none'}>
                     <h6 className='cursor cursor-hover' onClick={() => { router.push('/thong-tin/nguoi-dung') }}>Thông tin cá nhân</h6>
+                    <h6 className='cursor cursor-hover' onClick={() => { router.push('/thong-tin/don-hang') }}>Đơn hàng</h6>
                     <span className='cursor cursor-hover' onClick={() => { setShowLogoutModal(true) }}>Đăng xuất</span>
                 </div>
             </div>

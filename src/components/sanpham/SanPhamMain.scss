@@ -53,17 +53,15 @@
     transition: border-color 0.3s;
     background-color: #f9f9f9;
     /* Màu nền cho card */
-    height: 60px;
-    /* Chiều cao cố định cho card */
 }
 
 .radio-label:hover {
-    border-color: #007bff;
+    border-color: #2a534f;
     /* Màu viền khi hover */
 }
 
 .radio-input:checked+.radio-label {
-    border-color: #007bff;
+    border-color: #2a534f;
     /* Màu viền khi được chọn */
     background-color: #e6f0ff;
     /* Màu nền khi được chọn */

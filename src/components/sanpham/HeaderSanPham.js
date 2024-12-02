@@ -57,7 +57,7 @@ const HeaderSanPham = ({ products }) => {
                                     />
                                 </div>
                             </Col>
-                            <Col sm={7} className="d-flex align-items-center">
+                            <Col md={7} className="d-flex align-items-center">
                                 <div className="">
                                     <div>
                                         <h1>{products.TenSanPham || "Tên sản phẩm không có"}</h1>
@@ -79,11 +79,7 @@ const HeaderSanPham = ({ products }) => {
                                         </p>
                                     </div>
                                     <div className="mb-3 d-flex align-items-center">
-                                        {/* <div className='me-2 text-secondary text-decoration-line-through'>
-                                            Giá gốc
-                                        </div> */}
                                         <div className="me-2 fs-5 text-green">
-                                            {/* <h1>{products.Gia || "Tên sản phẩm không có"} VND / {products.TenDonVi || "Tên Đơn Vị không có"} </h1> */}
                                             <h1>
                                                 {/* Hiển thị thông tin giá mặc định nếu chưa chọn radio nào */}
                                                 {selectedDetail ? (
@@ -111,15 +107,12 @@ const HeaderSanPham = ({ products }) => {
                                         </h6>
                                     </div>
                                     <div className="phanloaitxt">
-                                        <div className="mb-3 fw-light d-flex flex-wrap align-items-center">
-                                            Phân loại
-
-                                            {/* {products.Gia && products.Gia.length > 0 && (
-                                                <div className=""> */}
+                                        <div className="fw-light d-flex flex-wrap align-items-center">
+                                            <h6 className='mb-0 me-2'>Phân loại</h6>
                                             {products.Gia?.map((detail, index) => {
                                                 const key = detail.ChiTietSanPhamId || index; // Sử dụng index nếu không có ChiTietSanPhamId
                                                 return (
-                                                    <div className="me-1 radio-card" key={key}>
+                                                    <div className="me-1 mb-2 radio-card" key={key}>
                                                         <input
                                                             type="radio"
                                                             id={`detail-${key}`} // Sử dụng key làm phần của ID
@@ -128,22 +121,22 @@ const HeaderSanPham = ({ products }) => {
                                                             onChange={() => handleDetailChange(detail)}
                                                         />
                                                         <label htmlFor={`detail-${key}`} className="radio-label">
-                                                            <div className="radio-content">
+                                                            <div className="d-flex align-items-center">
                                                                 <div className="image-container">
                                                                     <Image
                                                                         src={`${process.env.NEXT_PUBLIC_API_URL}/${products?.HinhAnh[0]?.DuongDanHinh}`}
                                                                         alt={`Loại Chi Tiết: ${detail.LoaiChiTiet}`}
-                                                                        className="radio-image"
-                                                                        width={180}
-                                                                        height={180}
+                                                                        className="rounded"
+                                                                        width={30}
+                                                                        height={30}
                                                                     />
                                                                 </div>
-                                                                <div className="info-container">
-                                                                    <h4 className="radio-title">{detail.LoaiChiTiet}</h4>
-                                                                    <p className="radio-price">
+                                                                <div className="">
+                                                                    <h6 className="mb-0 fs-8">{detail.LoaiChiTiet}</h6>
+                                                                    {/* <p className="radio-price">
                                                                         Giá: {new Intl.NumberFormat('vi-VN').format(detail.Gia)} VNĐ
                                                                     </p>
-                                                                    <p className="radio-quantity">Số Lượng: {detail.SoLuong}</p>
+                                                                    <p className="radio-quantity">Số Lượng: {detail.SoLuong}</p> */}
                                                                 </div>
                                                             </div>
                                                         </label>

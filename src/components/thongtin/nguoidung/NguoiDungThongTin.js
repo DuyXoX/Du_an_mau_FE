@@ -31,6 +31,8 @@ const NguoiDungThongTin = ({ Id, data, mutate }) => {
                 SoDienThoai: data.SoDienThoai,
             }))
         }
+        // console.log('check re render');
+
     }, [data])
 
     const handleChange = (e) => {
@@ -91,6 +93,7 @@ const NguoiDungThongTin = ({ Id, data, mutate }) => {
                         <input type="text" name='TenDangNhap' required
                             value={formData.TenDangNhap}
                             onChange={handleChange}
+                            className={formData.TenDangNhap ? 'has-value' : ''}
                         />
                         <label >Tên Đăng Nhập</label>
                         {errors.TenDangNhap &&
@@ -105,6 +108,7 @@ const NguoiDungThongTin = ({ Id, data, mutate }) => {
                         <input type="text" name='Account' required
                             value={formData.Account}
                             onChange={handleChange}
+                            className={formData.Account ? 'has-value' : ''}
                         />
                         <label>Tài khoản</label>
                         {errors.Account &&
@@ -119,6 +123,7 @@ const NguoiDungThongTin = ({ Id, data, mutate }) => {
                         <input type="text" name='DiaChi' required
                             value={formData.DiaChi}
                             onChange={handleChange}
+                            className={formData.DiaChi ? 'has-value' : ''}
                         />
                         <label>Địa chỉ</label>
                         {errors.DiaChi &&
@@ -133,6 +138,7 @@ const NguoiDungThongTin = ({ Id, data, mutate }) => {
                         <input type="numberphone" name='SoDienThoai' required
                             value={formData.SoDienThoai}
                             onChange={handleChange}
+                            className={formData.SoDienThoai ? 'has-value' : ''}
                         />
                         <label>SĐT</label>
                         {errors.SoDienThoai &&

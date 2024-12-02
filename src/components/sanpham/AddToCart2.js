@@ -13,7 +13,7 @@ const AddToCart2 = () => {
     }
 
     return (
-        <Button variant="green" onClick={() => handleAddToCart()}>
+        <Button variant="green" className='mb-2' onClick={() => handleAddToCart()}>
             <FaCartPlus size={15} /> <span>Thêm vào giỏ hàng</span>
         </Button>
     );

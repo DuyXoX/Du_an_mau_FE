@@ -46,7 +46,7 @@ const AddToCart = ({ sanPhamId, quantity, chiTietSanPhamId }) => {
     };
 
     return (
-        <div className="">
+        <div className="mb-2">
             <Button variant="green" onClick={() => handleAddToCart()}>
                 <FaCartPlus size={15} /> <span>Thêm vào giỏ hàng</span>
             </Button>

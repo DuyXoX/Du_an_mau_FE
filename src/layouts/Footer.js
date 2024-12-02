@@ -61,11 +61,11 @@ const Footer = () => {
                     <Col>
                         <div className='pt-5'>
                             <ul className="list-unstyled">
-                                <li className="menu__item"><Link className="menu__link" href="/#">Trang chủ</Link></li>
-                                <li className="menu__item"><Link className="menu__link" href="/dang-ky-khoa-hoc">Đăng ký ngay</Link></li>
-                                <li className="menu__item"><Link className="menu__link" href="/#tiem-hieu-ngay">Tìm hiểu ngay</Link></li>
-                                <li className="menu__item"><Link className="menu__link" href="#">Hội nhóm</Link></li>
-                                <li className="menu__item"><Link className="menu__link" href="#">Contact</Link></li>
+                                <li className=""><Link className="text-light text-decoration-none" href="/">Trang chủ</Link></li>
+                                <li className=""><Link className="text-light text-decoration-none" href="/gioi-thieu">Giới thiệu</Link></li>
+                                <li className=""><Link className="text-light text-decoration-none" href="/san-pham">Sản phẩm</Link></li>
+                                <li className=""><Link className="text-light text-decoration-none" href="/#dang-ky-tu-van">Đăng ký ngay</Link></li>
+                                <li className=""><Link className="text-light text-decoration-none" href="/tin-tuc">Tin tức</Link></li>
                             </ul>
                         </div>
                     </Col>

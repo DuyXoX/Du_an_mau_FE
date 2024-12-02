@@ -15,12 +15,12 @@ const GioHangMain = () => {
                 <Row style={{ minHeight: '55vh' }}>
                     {isAuthenticated ?
                         <>
-                            <Col lg={8}>
+                            <Col xs={12}>
                                 <div className=''>
                                     <TableGioHang />
                                 </div>
                             </Col>
-                            <Col lg={4}>
+                            <Col xs={12}>
                                 <div className=''>
                                     <ThanhToanGioHang info={info} />
                                 </div>

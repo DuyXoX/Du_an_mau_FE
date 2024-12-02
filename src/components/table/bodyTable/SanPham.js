@@ -71,8 +71,8 @@ const SanPham = () => {
                 {rowData?.HinhAnh && rowData.HinhAnh.length > 0 && (
                     <Image
                         src={`${process.env.NEXT_PUBLIC_API_URL}/${rowData.HinhAnh[0].DuongDanHinh}`} // Chỉ hiển thị hình ảnh đầu tiên
-                        width={50}
-                        height={50}
+                        width={80}
+                        height={80}
                         alt='Ảnh sản phẩm'
                     />
                 )}
@@ -117,11 +117,11 @@ const SanPham = () => {
             >
                 <Column selectionMode="multiple" exportable={false}></Column>
                 <Column field="SanPhamId" header="ID" sortable style={{ maxWidth: '3rem' }} className="text-truncate"></Column>
+                <Column field="HinhAnh" header="Hình" sortable body={ImageProduct}></Column>
                 <Column field="TenSanPham" header="Tên Sản Phẩm" sortable style={{ maxWidth: '8rem' }}></Column>
                 <Column field="MoTa" header="Mô Tả" sortable style={{ maxWidth: '3rem' }} className='text-truncate' body={MoTaProduct}></Column>
                 <Column field="PhanLoai" header="Phân Loại" sortable style={{ maxWidth: '8rem' }} className='text-truncate' body={PhanLoai}></Column>
                 <Column field="LoaiSanPhamId" header="Loại" sortable style={{ maxWidth: '8rem' }} className='text-truncate' body={TenLoai}></Column>
-                <Column field="HinhAnh" header="Hình" sortable body={ImageProduct}></Column>
                 <Column header="Tùy chọn" body={OptionEditDelete}></Column>
             </DataTable>
         </>

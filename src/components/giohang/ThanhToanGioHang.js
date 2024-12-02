@@ -287,12 +287,12 @@ const ThanhToanGioHang = ({ info }) => {
                             {data?.DiaChi}
                             {isAddressInputVisible ?
                                 <div>
-                                    <input
+                                    <textarea
                                         type="text"
                                         value={address}
                                         onChange={handleAddressChange}
                                         placeholder="Nhập địa chỉ của bạn"
-                                        className=''
+                                        className='w-100'
                                     />
 
                                     <Button variant='green'
@@ -305,7 +305,7 @@ const ThanhToanGioHang = ({ info }) => {
                                 : !data?.DiaChi ?
                                     <span
                                         onClick={handleSelectAddressSDT}
-                                        className='ps-1 text-primary cursor'
+                                        className='ps-1 w-100 text-primary cursor'
                                     >
                                         Thêm
                                     </span>
@@ -330,7 +330,7 @@ const ThanhToanGioHang = ({ info }) => {
                                         value={SDT}
                                         onChange={toogleSDT}
                                         placeholder="Nhập Số Điện Thoại của bạn"
-                                        className=''
+                                        className='w-100'
                                     />
 
                                     <Button variant='green'
@@ -365,7 +365,7 @@ const ThanhToanGioHang = ({ info }) => {
                     </tr>
                     <tr>
                         <td colSpan={2} >
-                            <div className='d-flex justify-content-center'>
+                            <div className='d-flex justify-content-betwen'>
                                 <Button variant='green'
                                     onClick={() => toggleShowAddModal()}
                                     disabled={checkError}

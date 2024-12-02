@@ -3,9 +3,12 @@ import React from 'react';
 import styles from './DonHang.module.css';
 
 const DonHangStatus = ({ selectedStatus, statusType, retryFetchOrders, orders, error, loading }) => {
+    // console.log('check: ', selectedStatus);
+
+
     return (
         <>
-            {selectedStatus === "Tất Cả" && (
+            {selectedStatus === "all" && (
                 <div className={styles.contentContainer}>
                     <div className={styles.ordersContainer}>
                         {loading && <p className={styles.loadingText}>Loading...</p>}
@@ -30,7 +33,7 @@ const DonHangStatus = ({ selectedStatus, statusType, retryFetchOrders, orders, e
                                                 <h4 className={styles.orderTitle}>Đơn Hàng #{index + 1}</h4>
                                                 <div className={styles.orderDetails1}>
                                                     <p className={styles.orderTotal}>
-                                                        <strong>Tổng Tiền:</strong> {order.TongTien}    VND
+                                                        <strong>Tổng Tiền:</strong> {order.TongTien}    VNĐ
                                                     </p>
                                                     <p className={styles.orderStatus}>
                                                         <strong>Trạng Thái:</strong> {statusType[order.TrangThai]}
@@ -57,7 +60,7 @@ const DonHangStatus = ({ selectedStatus, statusType, retryFetchOrders, orders, e
                                                                     <strong>Loại Chi Tiết:</strong> {sanPham.LoaiChiTiet}
                                                                 </p>
                                                                 <p className={styles.productPrice}>
-                                                                    <strong>Giá:</strong> {sanPham.Gia} VND
+                                                                    <strong>Giá:</strong> {sanPham.Gia} VNĐ
                                                                 </p>
                                                             </div>
                                                             <div className={styles.productText2}>

@@ -24,7 +24,7 @@ const ValidateSanPham = (name, value) => {
         case 'MoTa':
             error = !value ? 'Vui lòng nhập mô tả của bạn' :
                 value.length < 8 ? 'Mô tả phải có ít nhất 8 ký tự' :
-                    value.length > 500 ? 'Mô tả không thể dài hơn 500 ký tự' : '';
+                    value.length > 5000 ? 'Mô tả không thể dài hơn 5000 ký tự' : '';
             break;
         // case 'HinhAnh':
         //     error = !value ? 'Vui lòng thêm hình ảnh sản phẩm' : '';

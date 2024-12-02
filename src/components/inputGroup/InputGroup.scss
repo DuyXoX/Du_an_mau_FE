@@ -16,7 +16,7 @@ input:-webkit-autofill {
     input,
     textarea {
         color: #2a534f;
-        caret-color: #f3fffe;
+        caret-color: #008944; //Màu dấu nháy
         font-size: 100%;
         padding: 0.8em;
         outline: none;
@@ -35,7 +35,7 @@ input:-webkit-autofill {
                 margin-left: 1.3em;
                 padding: 0.3em;
                 background-color: transparent;
-                background: white;
+                background: #f3fffe;
             }
         }
 
@@ -49,7 +49,7 @@ input:-webkit-autofill {
                 margin-left: 1.3em;
                 padding: 0.3em;
                 background-color: transparent;
-                background: white;
+                background: #f3fffe;
             }
         }
     }
