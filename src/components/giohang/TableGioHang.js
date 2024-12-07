@@ -84,7 +84,7 @@ const TableGioHang = () => {
                                 </td>
                                 <td>
                                     <Image className='rounded'
-                                        src={`${process.env.NEXT_PUBLIC_API_URL}/${item?.DuongDanHinh[0]}`}
+                                        src={`http://localhost:8000/api/${item.DuongDanHinh[0]}`}
                                         alt={cart[0]?.TenSanPham}
                                         width={80}
                                         height={80}

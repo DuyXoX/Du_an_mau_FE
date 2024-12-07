@@ -137,7 +137,8 @@ const LoadingPageMain = () => {
                                 return (
                                     <Col sm={6} lg={3} className='py-2' key={idx}>
                                         <ScrollAnimation animationClass='animation-bottom h-100 border border1 bg-white'>
-                                            <Image src={`${process.env.NEXT_PUBLIC_API_URL}/${item.HinhAnh[0]?.DuongDanHinh}`}
+                                            <Image
+                                            src={`http://localhost:8000/api/${item.HinhAnh[0]?.replace(/\\/g, '/')}`} 
                                                 style={{ maxHeight: '250px', objectFit: 'cover' }}
                                                 className='w-100 d-block mx-auto'
                                                 width={250}

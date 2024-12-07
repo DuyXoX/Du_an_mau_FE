@@ -46,6 +46,7 @@ const SidebarNavbar = () => {
                     <MenuItem icon={<FaUserTie />} component={<Link href="san-pham" />}> Sản phẩm</MenuItem>
                     <MenuItem icon={<FaUserTie />} component={<Link href="loai-san-pham" />}> Loại Sản phẩm</MenuItem>
                     <MenuItem icon={<FaRegCalendarAlt />} component={<Link href="don-hang" />}>Đơn Hàng</MenuItem>
+                    <MenuItem icon={<FaRegCalendarAlt />} component={<Link href="kho" />}>QL Kho</MenuItem>
                     <MenuItem icon={<FaBell />} component={<Link href="thong-bao" />}> Thông Báo</MenuItem>
                 </Menu>
             </Sidebar>

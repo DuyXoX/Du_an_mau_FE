@@ -48,13 +48,13 @@ const HeaderSanPham = ({ products }) => {
                         >
                             <Col md={5}>
                                 <div className="">
-                                    <Image
-                                        src={`${process.env.NEXT_PUBLIC_API_URL}/${products.HinhAnh[0].DuongDanHinh}`}
+                                    {/* <Image
+                                       src={`http://localhost:8000/api/${products.HinhAnh[0]?.replace(/\\/g, '/')}`} 
                                         alt={products.TenSanPham}
                                         width={280}
                                         height={280}
                                     // className="img-fluid"
-                                    />
+                                    /> */}
                                 </div>
                             </Col>
                             <Col sm={7} className="d-flex align-items-center">
@@ -130,13 +130,13 @@ const HeaderSanPham = ({ products }) => {
                                                         <label htmlFor={`detail-${key}`} className="radio-label">
                                                             <div className="radio-content">
                                                                 <div className="image-container">
-                                                                    <Image
+                                                                    {/* <Image
                                                                         src={`${process.env.NEXT_PUBLIC_API_URL}/${products?.HinhAnh[0]?.DuongDanHinh}`}
                                                                         alt={`Loại Chi Tiết: ${detail.LoaiChiTiet}`}
                                                                         className="radio-image"
                                                                         width={180}
                                                                         height={180}
-                                                                    />
+                                                                    /> */}
                                                                 </div>
                                                                 <div className="info-container">
                                                                     <h4 className="radio-title">{detail.LoaiChiTiet}</h4>

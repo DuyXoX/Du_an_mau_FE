@@ -145,7 +145,8 @@ const SanPham = () => {
                     {searchResults.length > 0 ? (
                         searchResults.map((product, index) => (
                             <div key={product.id || index} className={styles.card}>
-                                <Image src={`${process.env.NEXT_PUBLIC_API_URL}/${product.HinhAnh[0]?.DuongDanHinh}`}
+                                <Image 
+                                  src={`http://localhost:8000/api/${product.HinhAnh[0]?.replace(/\\/g, '/')}`} 
                                     // style={{ maxWidth: '200px', height: '200px' }}
                                     // className='w-100 h-auto'
                                     width={180}
