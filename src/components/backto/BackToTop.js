@@ -41,7 +41,7 @@ const BackToTop = () => {
                     <FaAngleUp className='fs-2 text-white' />
                 </button>
             )}
-            <button
+            {/* <button
                 style={{
                     position: 'fixed',
                     backgroundColor: '#00b0ff',
@@ -54,7 +54,7 @@ const BackToTop = () => {
             // onClick={() => { router.push('') }}
             >
                 <FaFacebookMessenger className='fs-1 text-white' />
-            </button>
+            </button> */}
         </div>
     );
 };

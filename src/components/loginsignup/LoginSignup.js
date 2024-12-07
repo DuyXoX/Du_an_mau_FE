@@ -13,7 +13,7 @@ const LoginSignup = ({ login, formData, errors, checkError, handleChange, handle
                 <Row style={{ '--bs-gutter-x': 'none', border: '3px solid #c4efca' }} className='rounded-5'>
                     <LoginSignupOne />
                     <Col className='d-flex justify-content-center'>
-                        <div style={{ maxWidth: '500px' }} className='px-3 my-5 w-100'>
+                        <div style={{ maxWidth: '400px' }} className='px-3 my-5 w-100'>
                             <div className='mb-5'>
                                 <h2 className='fs-1 text-orange text-center'>
                                     {login ? 'Đăng nhập' : 'Đăng ký'}

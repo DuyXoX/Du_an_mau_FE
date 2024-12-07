@@ -3,10 +3,9 @@ import React, { useContext } from 'react';
 import '../styles/SidebarNavbar.scss';
 import { Sidebar, Menu, MenuItem } from 'react-pro-sidebar';
 import Link from 'next/link';
-import { FaUser, FaUserTie, FaRegCalendarAlt, FaMusic, FaBook, FaHeadset, FaBell } from "react-icons/fa";
+import { FaUser, FaUserTie, FaRegCalendarAlt, FaBell } from "react-icons/fa";
 import { HambergerContext } from '@/containers/context/SidebarHamberger';
-import { GiGrandPiano } from "react-icons/gi";
-
+import { IoStatsChartSharp } from "react-icons/io5";
 
 const SidebarNavbar = () => {
     const collapsed = useContext(HambergerContext);
@@ -46,7 +45,7 @@ const SidebarNavbar = () => {
                     <MenuItem icon={<FaUserTie />} component={<Link href="san-pham" />}> Sản phẩm</MenuItem>
                     <MenuItem icon={<FaUserTie />} component={<Link href="loai-san-pham" />}> Loại Sản phẩm</MenuItem>
                     <MenuItem icon={<FaRegCalendarAlt />} component={<Link href="don-hang" />}>Đơn Hàng</MenuItem>
-                    <MenuItem icon={<FaBell />} component={<Link href="thong-bao" />}> Thông Báo</MenuItem>
+                    <MenuItem icon={<IoStatsChartSharp />} component={<Link href="thong-ke" />}> Thống kê</MenuItem>
                 </Menu>
             </Sidebar>
         </>

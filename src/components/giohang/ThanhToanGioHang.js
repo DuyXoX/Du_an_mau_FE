@@ -45,6 +45,14 @@ const ThanhToanGioHang = ({ info }) => {
     }
 
     const toggleShowAddModal = (e) => {
+        if (!data.DiaChi) {
+            return showToast('warning', 'Vui lòng thêm địa chỉ nhận hàng!')
+        }
+        if (!data.SoDienThoai) {
+            return showToast('warning', 'Vui lòng thêm SĐT nhận hàng!')
+        }
+        // return console.log('check: ', data.DiaChi);
+
         const chiTietSanPhamList = cart.map(item => ({
             ChiTietSanPhamId: item.Gia.ChiTietSanPhamId, // Lấy ChiTietSanPhamId từ Gia
             Gia: item.Gia.Gia, // Lấy Gia từ Gia
@@ -59,6 +67,7 @@ const ThanhToanGioHang = ({ info }) => {
             chiTietSanPhamList: chiTietSanPhamList
         }))
         setShowAddModal(true);
+        return
     };
 
     const handlePay = async () => {
@@ -301,10 +310,15 @@ const ThanhToanGioHang = ({ info }) => {
                                     >
                                         Xác nhận
                                     </Button>
+                                    <Button variant='danger'
+                                        onClick={() => setAddressInputVisible(false)}
+                                    >
+                                        Hủy
+                                    </Button>
                                 </div>
                                 : !data?.DiaChi ?
                                     <span
-                                        onClick={handleSelectAddressSDT}
+                                        onClick={handleSelectAddress}
                                         className='ps-1 w-100 text-primary cursor'
                                     >
                                         Thêm
@@ -338,6 +352,11 @@ const ThanhToanGioHang = ({ info }) => {
                                         className=''
                                     >
                                         Xác nhận
+                                    </Button>
+                                    <Button variant='danger'
+                                        onClick={() => setAddressInputSDT(false)}
+                                    >
+                                        Hủy
                                     </Button>
                                 </div>
                                 : !data?.SoDienThoai ?

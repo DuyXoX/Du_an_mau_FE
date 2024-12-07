@@ -23,9 +23,9 @@ const DonHang = () => {
     const statusColor = {
         '': "transparent", // Không có trạng thái
         "dangxu ly": "orange",
-        'chogiaohang': 'blue',
+        'chogiaohang': '#94ff00',
         'hoantat': '#00b356',
-        'danggiao': '#ff0000',
+        'danggiao': '#12e5e5',
         'huy': '#ff5757'
     };
 

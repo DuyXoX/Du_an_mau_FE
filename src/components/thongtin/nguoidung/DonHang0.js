@@ -4,6 +4,8 @@ import styles from './DonHang.module.css';
 import { apiClient, checkLogintoken } from '@/service/apiServive';
 import Image from 'next/image';
 import DonHangStatus from './DonHangStatus';
+import { Button, Col, Container, Placeholder, Row } from 'react-bootstrap';
+
 const DonHang = () => {
     const [selectedStatus, setSelectedStatus] = useState('all');
     const [loading, setLoading] = useState(false);
@@ -16,7 +18,6 @@ const DonHang = () => {
     const handleButtonClick = (status) => {
         setSelectedStatus(status); // Cập nhật trạng thái khi nút được nhấn
     };
-
 
     // Hàm gọi API lấy giỏ hàng và đơn hàng
     // Hàm gọi API lấy đơn hàng
@@ -59,9 +60,9 @@ const DonHang = () => {
     const statusColor = {
         '': "transparent", // Không có trạng thái
         "dangxu ly": "orange",
-        'chogiaohang': 'blue',
+        'chogiaohang': '#94ff00',
         'hoantat': '#00b356',
-        'danggiao': '#ff0000',
+        'danggiao': '#12e5e5',
         'huy': '#ff5757'
     };
 
@@ -75,469 +76,163 @@ const DonHang = () => {
 
     const filterOrdersByStatus = (status) => {
         // console.log('check: ', status);
-
-        // const color = statusColor[status?.TrangThai] || "transparent";
         return orders.filter((order) => order.TrangThai === status);
     };
 
-    const filteredOrdersDangXuLy = filterOrdersByStatus('dangxu ly');
-    const filteredOrdersChoGiaoHang = filterOrdersByStatus('chogiaohang');
-    const filteredOrdersDangGiao = filterOrdersByStatus('danggiao');
-    const filteredOrdersHoanThanh = filterOrdersByStatus('hoantat');
-    const filteredOrdersHuy = filterOrdersByStatus('huy');
-
-    // console.log('check: ', statusType(filteredOrdersDangXuLy));
-    {/* <div style={{ backgroundColor: color }} className='text-center text-white rounded'>
-                {statusType[rowData?.TrangThai] || "Chưa xác định"}
-            </div> */}
+    // console.log('check: ', btnActive);
 
     return (
-        <div className={styles.DonHang}>
-            <div className={styles.buttonContainer}>
-                <button
-                    className={styles.button}
-                    onClick={() => handleButtonClick("all")}
-                >
-                    Tất Cả
-                </button>
-                <button
-                    className={styles.button}
-                    onClick={() => handleButtonClick("dangxu ly")}
-                >
-                    Chờ Xác Nhận
-                </button>
-                <button
-                    className={styles.button}
-                    onClick={() => handleButtonClick("chogiao")}
-                >
-                    Chờ Giao
-                </button>
-                <button
-                    className={styles.button}
-                    onClick={() => handleButtonClick("danggiao")}
-                >
-                    Đang Giao
-                </button>
-                <button
-                    className={styles.button}
-                    onClick={() => handleButtonClick("hoantat")}
-                >
-                    Hoàn Thành
-                </button>
-                <button
-                    className={styles.button}
-                    onClick={() => handleButtonClick("huy")}
-                >
-                    Hủy
-                </button>
-            </div>
+        <section>
+            <Container fluid='xxl'>
+                <Row>
+                    <Col>
+                        <div className='d-flex flex-wrap justify-content-between'>
+                            <Button variant='outline-success'
+                                style={{ width: '180px', maxWidth: '180px', '--bs-btn-active-bg': '#2a534f' }}
+                                className='mb-2'
+                                active={selectedStatus === 'all' ? true : false}
+                                onClick={() => handleButtonClick("all")}
+                            >
+                                Tất Cả
+                            </Button>
+                            <Button variant='outline-success'
+                                style={{ width: '180px', maxWidth: '180px', '--bs-btn-active-bg': '#2a534f' }}
+                                className='mb-2'
+                                active={selectedStatus === 'dangxu ly' ? true : false}
+                                onClick={() => handleButtonClick("dangxu ly")}
+                            >
+                                Chờ Xác Nhận
+                            </Button>
+                            <Button variant='outline-success'
+                                style={{ width: '180px', maxWidth: '180px', '--bs-btn-active-bg': '#2a534f' }}
+                                className='mb-2'
+                                active={selectedStatus === 'chogiaohang' ? true : false}
+                                onClick={() => handleButtonClick("chogiaohang")}
+                            >
+                                Chờ Giao
+                            </Button>
+                            <Button variant='outline-success'
+                                style={{ width: '180px', maxWidth: '180px', '--bs-btn-active-bg': '#2a534f' }}
+                                className='mb-2'
+                                active={selectedStatus === 'danggiao' ? true : false}
+                                onClick={() => handleButtonClick("danggiao")}
+                            >
+                                Đang Giao
+                            </Button>
+                            <Button variant='outline-success'
+                                style={{ width: '180px', maxWidth: '180px', '--bs-btn-active-bg': '#2a534f' }}
+                                className='mb-2'
+                                active={selectedStatus === 'hoantat' ? true : false}
+                                onClick={() => handleButtonClick("hoantat")}
+                            >
+                                Hoàn Thành
+                            </Button>
+                            <Button variant='outline-success'
+                                style={{ width: '180px', maxWidth: '180px', '--bs-btn-active-bg': '#2a534f' }}
+                                className='mb-2'
+                                active={selectedStatus === 'huy' ? true : false}
+                                onClick={() => handleButtonClick("huy")}
+                            >
+                                Hủy
+                            </Button>
+                        </div>
+                    </Col>
+                </Row>
+                <Row>
+                    <Col>
+                        <div className=''>
+                            {selectedStatus === "all" && (
+                                <div>
+                                    <div >
+                                        {loading &&
+                                            <Placeholder as="p" animation="glow">
+                                                <Placeholder xs={12} style={{ height: '5rem' }} className='rounded' />
+                                            </Placeholder>}
+                                        {error && (
+                                            <div className={styles.errorContainer}>
+                                                <p className={styles.errorMessage}>Đã xảy ra lỗi: {error}</p>
+                                                <button className={styles.retryButton} onClick={retryFetchOrders}>
+                                                    Thử lại
+                                                </button>
+                                            </div>
+                                        )}
 
-            {/* Hiển thị nội dung cho mỗi trạng thái */}
-            <DonHangStatus
-                selectedStatus={selectedStatus}
-                retryFetchOrders={retryFetchOrders}
-                orders={orders}
-                error={error}
-                loading={loading}
-                statusType={statusType}
-            />
-
-            {selectedStatus === "dangxu ly" && (
-                <div className={styles.contentContainer}>
-                    <div className={styles.ordersContainer}>
-                        {loading && <p className={styles.loadingText}>Loading...</p>}
-                        {error && (
-                            <div className={styles.errorContainer}>
-                                <p className={styles.errorMessage}>Đã xảy ra lỗi: {error}</p>
-                                <button className={styles.retryButton} onClick={retryFetchOrders}>
-                                    Thử lại
-                                </button>
-                            </div>
-                        )}
-
-                        {filterOrdersByStatus(selectedStatus).length === 0 ? (
-                            <p className={styles.noOrders}>Không có đơn hàng nào chờ xác nhận.</p>
-                        ) : (
-                            <div className={styles.ordersList}>
-                                {filterOrdersByStatus(selectedStatus).map((order, index) => {
-                                    const {
-                                        TrangThai,
-                                        TongTien,
-                                    } = order;
-
-                                    return (
-                                        <div key={index} className={styles.orderRow}>
-                                            <div className={styles.orderCard}>
-                                                <div className={styles.orderDetails}>
-                                                    <h4 className={styles.orderTitle}>Đơn Hàng #{index + 1}</h4>
-                                                    <div className={styles.orderDetails1}>
-                                                        <p className={styles.orderTotal}>
-                                                            <strong>Tổng Tiền:</strong> {TongTien} VND
-                                                        </p>
-                                                        <p className={styles.orderStatus}>
-                                                            <strong>Trạng Thái:</strong> {statusType[TrangThai]}
-                                                        </p>
-                                                    </div>
-                                                </div>
-                                                <div className={styles.orderProducts}>
-                                                    {order.SanPham.map((sanPham, idx) => (
-                                                        <div key={idx} className={styles.productRow}>
-                                                            <Image
-                                                                src={`http://localhost:8000/api/${sanPham.DuongDanHinh[0]}`}
-                                                                alt={sanPham.TenSanPham}
-                                                                width={70}
-                                                                height={70}
-                                                                objectFit="cover"
-                                                                className={styles.productImage}
-                                                            />
-                                                            <div className={styles.productText}>
-                                                                <div className={styles.productText1}>
-                                                                    <p className={styles.productName}>
-                                                                        <strong>Sản phẩm:</strong> {sanPham.TenSanPham}
+                                        {orders.length < 0 ? (
+                                            <p className={styles.noOrders}>Không có đơn hàng nào.</p>
+                                        ) : (
+                                            <div className={styles.ordersList}>
+                                                {orders.map((order, index) => (
+                                                    <div key={index} className={styles.orderRow}>
+                                                        <div className={styles.orderCard}>
+                                                            <div className={styles.orderDetails}>
+                                                                <h4 className={styles.orderTitle}>Đơn Hàng #{index + 1}</h4>
+                                                                <div className={styles.orderDetails1}>
+                                                                    <p className={styles.orderTotal}>
+                                                                        <strong>Tổng Tiền:</strong> {order.TongTien}    VNĐ
                                                                     </p>
-                                                                    <p className={styles.productDetail}>
-                                                                        <strong>Loại Chi Tiết:</strong> {sanPham.LoaiChiTiet}
-                                                                    </p>
-                                                                    <p className={styles.productPrice}>
-                                                                        <strong>Giá:</strong> {sanPham.Gia} VND
-                                                                    </p>
-                                                                </div>
-                                                                <div className={styles.productText2}>
-                                                                    <p className={styles.productQuantity}>
-                                                                        <strong>Số Lượng:</strong> {sanPham.SoLuong}
+                                                                    <p className={styles.orderStatus}>
+                                                                        <strong>Trạng Thái: </strong>
+                                                                        <span style={{ backgroundColor: statusColor[order.TrangThai] }} className='p-1 fs-8 text-center text-white rounded'>
+                                                                            {statusType[order.TrangThai]}
+                                                                        </span>
                                                                     </p>
                                                                 </div>
                                                             </div>
-                                                        </div>
-                                                    ))}
-                                                </div>
-                                            </div>
-                                        </div>
-                                    );
-                                })}
-                            </div>
-                        )}
-                    </div>
-                </div>
-            )}
-
-            {selectedStatus === "chogiao" && (
-                <div className={styles.contentContainer}>
-                    <div className={styles.ordersContainer}>
-                        {loading && <p className={styles.loadingText}>Loading...</p>}
-                        {error && (
-                            <div className={styles.errorContainer}>
-                                <p className={styles.errorMessage}>Đã xảy ra lỗi: {error}</p>
-                                <button className={styles.retryButton} onClick={retryFetchOrders}>
-                                    Thử lại
-                                </button>
-                            </div>
-                        )}
-
-                        {filteredOrdersChoGiaoHang.length === 0 ? (
-                            <p className={styles.noOrders}>Không có đơn hàng nào đang Chờ Giao.</p>
-                        ) : (
-                            <div className={styles.ordersList}>
-                                {filteredOrdersChoGiaoHang.map((order, index) => {
-                                    const {
-                                        TrangThai,
-                                        TongTien,
-                                    } = order;
-
-                                    return (
-                                        <div key={index} className={styles.orderRow}>
-                                            <div className={styles.orderCard}>
-                                                <div className={styles.orderDetails}>
-                                                    <h4 className={styles.orderTitle}>Đơn Hàng #{index + 1}</h4>
-                                                    <div className={styles.orderDetails1}>
-                                                        <p className={styles.orderTotal}>
-                                                            <strong>Tổng Tiền:</strong> {TongTien} VND
-                                                        </p>
-                                                        <p className={styles.orderStatus}>
-                                                            <strong>Trạng Thái:</strong> {TrangThai}
-                                                        </p>
-                                                    </div>
-                                                </div>
-                                                <div className={styles.orderProducts}>
-                                                    {order.SanPham.map((sanPham, idx) => (
-                                                        <div key={idx} className={styles.productRow}>
-                                                            <Image
-                                                                src={`http://localhost:8000/api/${sanPham.DuongDanHinh[0]}`}
-                                                                alt={sanPham.TenSanPham}
-                                                                width={70}
-                                                                height={70}
-                                                                objectFit="cover"
-                                                                className={styles.productImage}
-                                                            />
-                                                            <div className={styles.productText}>
-                                                                <div className={styles.productText1}>
-                                                                    <p className={styles.productName}>
-                                                                        <strong>Sản phẩm:</strong> {sanPham.TenSanPham}
-                                                                    </p>
-                                                                    <p className={styles.productDetail}>
-                                                                        <strong>Loại Chi Tiết:</strong> {sanPham.LoaiChiTiet}
-                                                                    </p>
-                                                                    <p className={styles.productPrice}>
-                                                                        <strong>Giá:</strong> {sanPham.Gia} VND
-                                                                    </p>
-                                                                </div>
-                                                                <div className={styles.productText2}>
-                                                                    <p className={styles.productQuantity}>
-                                                                        <strong>Số Lượng:</strong> {sanPham.SoLuong}
-                                                                    </p>
-                                                                </div>
+                                                            <div className={styles.orderProducts}>
+                                                                {order.SanPham.map((sanPham, idx) => (
+                                                                    <div key={idx} className={styles.productRow}>
+                                                                        <Image
+                                                                            src={`${process.env.NEXT_PUBLIC_API_URL}/${sanPham.DuongDanHinh[0]}`}
+                                                                            alt={sanPham.TenSanPham}
+                                                                            width={70}
+                                                                            height={70}
+                                                                            objectFit="cover"
+                                                                            className={styles.productImage}
+                                                                        />
+                                                                        <div className={styles.productText}>
+                                                                            <div className={styles.productText1}>
+                                                                                <p className={styles.productName}>
+                                                                                    <strong>Sản phẩm:</strong> {sanPham.TenSanPham}
+                                                                                </p>
+                                                                                <p className={styles.productDetail}>
+                                                                                    <strong>Loại Chi Tiết:</strong> {sanPham.LoaiChiTiet}
+                                                                                </p>
+                                                                                <p className={styles.productPrice}>
+                                                                                    <strong>Giá:</strong> {sanPham.Gia} VNĐ
+                                                                                </p>
+                                                                                <p className={styles.productQuantity}>
+                                                                                    <strong>Số Lượng:</strong> {sanPham.SoLuong}
+                                                                                </p>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                ))}
                                                             </div>
                                                         </div>
-                                                    ))}
-                                                </div>
-                                            </div>
-                                        </div>
-                                    );
-                                })}
-                            </div>
-                        )}
-                    </div>
-                </div>
-            )}
-
-            {selectedStatus === "danggiao" && (
-                <div className={styles.contentContainer}>
-                    <div className={styles.ordersContainer}>
-                        {loading && <p className={styles.loadingText}>Loading...</p>}
-                        {error && (
-                            <div className={styles.errorContainer}>
-                                <p className={styles.errorMessage}>Đã xảy ra lỗi: {error}</p>
-                                <button className={styles.retryButton} onClick={retryFetchOrders}>
-                                    Thử lại
-                                </button>
-                            </div>
-                        )}
-
-                        {filteredOrdersDangGiao.length === 0 ? (
-                            <p className={styles.noOrders}>Không có đơn hàng nào đang xử lý.</p>
-                        ) : (
-                            <div className={styles.ordersList}>
-                                {filteredOrdersDangGiao.map((order, index) => {
-                                    const {
-                                        TrangThai,
-                                        TongTien,
-                                    } = order;
-
-                                    return (
-                                        <div key={index} className={styles.orderRow}>
-                                            <div className={styles.orderCard}>
-                                                <div className={styles.orderDetails}>
-                                                    <h4 className={styles.orderTitle}>Đơn Hàng #{index + 1}</h4>
-                                                    <div className={styles.orderDetails1}>
-                                                        <p className={styles.orderTotal}>
-                                                            <strong>Tổng Tiền:</strong> {TongTien} VND
-                                                        </p>
-                                                        <p className={styles.orderStatus}>
-                                                            <strong>Trạng Thái:</strong> {TrangThai}
-                                                        </p>
                                                     </div>
-                                                </div>
-                                                <div className={styles.orderProducts}>
-                                                    {order.SanPham.map((sanPham, idx) => (
-                                                        <div key={idx} className={styles.productRow}>
-                                                            <Image
-                                                                src={`http://localhost:8000/api/${sanPham.DuongDanHinh[0]}`}
-                                                                alt={sanPham.TenSanPham}
-                                                                width={70}
-                                                                height={70}
-                                                                objectFit="cover"
-                                                                className={styles.productImage}
-                                                            />
-                                                            <div className={styles.productText}>
-                                                                <div className={styles.productText1}>
-                                                                    <p className={styles.productName}>
-                                                                        <strong>Sản phẩm:</strong> {sanPham.TenSanPham}
-                                                                    </p>
-                                                                    <p className={styles.productDetail}>
-                                                                        <strong>Loại Chi Tiết:</strong> {sanPham.LoaiChiTiet}
-                                                                    </p>
-                                                                    <p className={styles.productPrice}>
-                                                                        <strong>Giá:</strong> {sanPham.Gia} VND
-                                                                    </p>
-                                                                </div>
-                                                                <div className={styles.productText2}>
-                                                                    <p className={styles.productQuantity}>
-                                                                        <strong>Số Lượng:</strong> {sanPham.SoLuong}
-                                                                    </p>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    ))}
-                                                </div>
+                                                ))}
                                             </div>
-                                        </div>
-                                    );
-                                })}
-                            </div>
-                        )}
-                    </div>
-                </div>
-            )}
+                                        )}
+                                    </div>
+                                </div>
+                            )}
 
-            {selectedStatus === "hoantat" && (
-                <div className={styles.contentContainer}>
-                    <div className={styles.ordersContainer}>
-                        {loading && <p className={styles.loadingText}>Loading...</p>}
-                        {error && (
-                            <div className={styles.errorContainer}>
-                                <p className={styles.errorMessage}>Đã xảy ra lỗi: {error}</p>
-                                <button className={styles.retryButton} onClick={retryFetchOrders}>
-                                    Thử lại
-                                </button>
-                            </div>
-                        )}
-
-                        {filteredOrdersHoanThanh.length === 0 ? (
-                            <p className={styles.noOrders}>Không có đơn hàng nào Hoàn Thành.</p>
-                        ) : (
-                            <div className={styles.ordersList}>
-                                {filteredOrdersHoanThanh.map((order, index) => {
-                                    const {
-                                        TrangThai,
-                                        TongTien,
-                                    } = order;
-
-                                    return (
-                                        <div key={index} className={styles.orderRow}>
-                                            <div className={styles.orderCard}>
-                                                <div className={styles.orderDetails}>
-                                                    <h4 className={styles.orderTitle}>Đơn Hàng #{index + 1}</h4>
-                                                    <div className={styles.orderDetails1}>
-                                                        <p className={styles.orderTotal}>
-                                                            <strong>Tổng Tiền:</strong> {TongTien} VND
-                                                        </p>
-                                                        <p className={styles.orderStatus}>
-                                                            <strong>Trạng Thái:</strong> {TrangThai}
-                                                        </p>
-                                                    </div>
-                                                </div>
-                                                <div className={styles.orderProducts}>
-                                                    {order.SanPham.map((sanPham, idx) => (
-                                                        <div key={idx} className={styles.productRow}>
-                                                            <Image
-                                                                src={`http://localhost:8000/api/${sanPham.DuongDanHinh[0]}`}
-                                                                alt={sanPham.TenSanPham}
-                                                                width={70}
-                                                                height={70}
-                                                                objectFit="cover"
-                                                                className={styles.productImage}
-                                                            />
-                                                            <div className={styles.productText}>
-                                                                <div className={styles.productText1}>
-                                                                    <p className={styles.productName}>
-                                                                        <strong>Sản phẩm:</strong> {sanPham.TenSanPham}
-                                                                    </p>
-                                                                    <p className={styles.productDetail}>
-                                                                        <strong>Loại Chi Tiết:</strong> {sanPham.LoaiChiTiet}
-                                                                    </p>
-                                                                    <p className={styles.productPrice}>
-                                                                        <strong>Giá:</strong> {sanPham.Gia} VND
-                                                                    </p>
-                                                                </div>
-                                                                <div className={styles.productText2}>
-                                                                    <p className={styles.productQuantity}>
-                                                                        <strong>Số Lượng:</strong> {sanPham.SoLuong}
-                                                                    </p>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    ))}
-                                                </div>
-                                            </div>
-                                        </div>
-                                    );
-                                })}
-                            </div>
-                        )}
-                    </div>
-                </div>
-            )}
-
-            {selectedStatus === "huy" && (
-                <div className={styles.contentContainer}>
-                    <div className={styles.ordersContainer}>
-                        {loading && <p className={styles.loadingText}>Loading...</p>}
-                        {error && (
-                            <div className={styles.errorContainer}>
-                                <p className={styles.errorMessage}>Đã xảy ra lỗi: {error}</p>
-                                <button className={styles.retryButton} onClick={retryFetchOrders}>
-                                    Thử lại
-                                </button>
-                            </div>
-                        )}
-
-                        {filteredOrdersHuy.length === 0 ? (
-                            <p className={styles.noOrders}>Không có đơn hàng nào Hủy.</p>
-                        ) : (
-                            <div className={styles.ordersList}>
-                                {filteredOrdersHuy.map((order, index) => {
-                                    const {
-                                        TrangThai,
-                                        TongTien,
-                                    } = order;
-
-                                    return (
-                                        <div key={index} className={styles.orderRow}>
-                                            <div className={styles.orderCard}>
-                                                <div className={styles.orderDetails}>
-                                                    <h4 className={styles.orderTitle}>Đơn Hàng #{index + 1}</h4>
-                                                    <div className={styles.orderDetails1}>
-                                                        <p className={styles.orderTotal}>
-                                                            <strong>Tổng Tiền:</strong> {TongTien} VND
-                                                        </p>
-                                                        <p className={styles.orderStatus}>
-                                                            <strong>Trạng Thái:</strong> {TrangThai}
-                                                        </p>
-                                                    </div>
-                                                </div>
-                                                <div className={styles.orderProducts}>
-                                                    {order.SanPham.map((sanPham, idx) => (
-                                                        <div key={idx} className={styles.productRow}>
-                                                            <Image
-                                                                src={`http://localhost:8000/api/${sanPham.DuongDanHinh[0]}`}
-                                                                alt={sanPham.TenSanPham}
-                                                                width={70}
-                                                                height={70}
-                                                                objectFit="cover"
-                                                                className={styles.productImage}
-                                                            />
-                                                            <div className={styles.productText}>
-                                                                <div className={styles.productText1}>
-                                                                    <p className={styles.productName}>
-                                                                        <strong>Sản phẩm:</strong> {sanPham.TenSanPham}
-                                                                    </p>
-                                                                    <p className={styles.productDetail}>
-                                                                        <strong>Loại Chi Tiết:</strong> {sanPham.LoaiChiTiet}
-                                                                    </p>
-                                                                    <p className={styles.productPrice}>
-                                                                        <strong>Giá:</strong> {sanPham.Gia} VND
-                                                                    </p>
-                                                                </div>
-                                                                <div className={styles.productText2}>
-                                                                    <p className={styles.productQuantity}>
-                                                                        <strong>Số Lượng:</strong> {sanPham.SoLuong}
-                                                                    </p>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    ))}
-                                                </div>
-                                            </div>
-                                        </div>
-                                    );
-                                })}
-                            </div>
-                        )}
-                    </div>
-                </div>
-            )}
-
-        </div>
+                            {/* Hiển thị nội dung cho mỗi trạng thái */}
+                            <DonHangStatus
+                                selectedStatus={selectedStatus}
+                                filterOrdersByStatus={filterOrdersByStatus}
+                                retryFetchOrders={retryFetchOrders}
+                                orders={orders}
+                                error={error}
+                                loading={loading}
+                                statusType={statusType}
+                                statusColor={statusColor}
+                            />
+                        </div>
+                    </Col>
+                </Row>
+            </Container>
+        </section>
     );
 };
 
