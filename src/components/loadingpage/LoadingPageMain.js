@@ -136,14 +136,15 @@ const LoadingPageMain = () => {
                             limitedData.map((item, idx) => {
                                 return (
                                     <Col sm={6} lg={3} className='py-2' key={idx}>
-                                        <ScrollAnimation animationClass='animation-bottom h-100 border border1 bg-white'>
-                                            <Image src={`${process.env.NEXT_PUBLIC_API_URL}/${item.HinhAnh[0]?.DuongDanHinh}`}
-                                                style={{ maxHeight: '250px', objectFit: 'cover' }}
-                                                className='w-100 d-block mx-auto'
-                                                width={250}
-                                                height={250}
-                                                alt={item.TenSanPham}
-                                            />
+                                        <ScrollAnimation animationClass='animation-bottom border rounded bg-white'>
+                                            <div className='ratio ratio-4x3'>
+                                                <Image src={`${process.env.NEXT_PUBLIC_API_URL}/${item.HinhAnh[0]?.DuongDanHinh}`}
+                                                    className='rounded-top object-fit-cover'
+                                                    width={250}
+                                                    height={250}
+                                                    alt={item.TenSanPham}
+                                                />
+                                            </div>
                                             <Link href={`san-pham/${item.SanPhamId}`} style={{ bottom: '1%' }}
                                                 className='py-3 nav-link fw-bold text-center'
                                             >

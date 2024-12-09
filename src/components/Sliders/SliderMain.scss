@@ -1,27 +1,25 @@
-.slider-teacher {
-    .slick-slider {
+.slick-slider {
 
-        .slick-prev,
-        .slick-next {
-            width: 80px;
-            height: 80px;
+    .slick-prev,
+    .slick-next {
+        width: 80px;
+        height: 80px;
 
-            &:before {
-                font-size: 50px; //Kích thước nút nhấn trái phải
-            }
+        &:before {
+            font-size: 50px; //Kích thước nút nhấn trái phải
         }
-
-        .slick-prev {
-            left: 0px;
-            z-index: 1;
-        }
-
-        .slick-next {
-            right: 0px;
-            z-index: 1;
-        }
-
     }
+
+    .slick-prev {
+        left: 0px;
+        z-index: 1;
+    }
+
+    .slick-next {
+        right: 0px;
+        z-index: 1;
+    }
+
 }
 
 .teacher {

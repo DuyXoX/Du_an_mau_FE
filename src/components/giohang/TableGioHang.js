@@ -96,7 +96,7 @@ const TableGioHang = () => {
                                     {item.TenDonVi} - {item.Gia.LoaiChiTiet}
                                 </td>
                                 <td>
-                                    <div className="d-flex">
+                                    <div className="d-flex justify-content-center">
                                         <Button
                                             variant="+"
                                             style={{ "--bs-btn-color": "#8f8f8f" }}

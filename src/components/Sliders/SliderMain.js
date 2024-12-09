@@ -48,42 +48,42 @@ const SliderMain = () => {
     return (
         <section style={{ paddingTop: '0px' }}>
             <Container fluid='xxl'>
-                <div className='w-100 d-block mx-auto slider-teacher'>
+                <div className='w-100 d-block mx-auto'>
                     <Slider {...settings}>
                         <div className=''>
                             <Image src={slider1}
                                 className="w-100 h-auto"
-                                alt="images-shrimp"
+                                alt="images-slider"
                             />
                         </div>
                         <div className=''>
                             <Image src={slider2}
                                 className="img-fluid"
-                                alt="images-shrimp"
+                                alt="images-slider"
                             />
                         </div>
                         <div className=''>
                             <Image src={slider1}
                                 className="img-fluid"
-                                alt="images-shrimp"
+                                alt="images-slider"
                             />
                         </div>
                         <div className=''>
                             <Image src={slider2}
                                 className="img-fluid"
-                                alt="images-shrimp"
+                                alt="images-slider"
                             />
                         </div>
                         <div className=''>
                             <Image src={slider1}
                                 className="img-fluid"
-                                alt="images-shrimp"
+                                alt="images-slider"
                             />
                         </div>
                         <div className=''>
                             <Image src={slider2}
                                 className="img-fluid"
-                                alt="images-shrimp"
+                                alt="images-slider"
                             />
                         </div>
                     </Slider>

@@ -43,18 +43,20 @@ const SanPhamTuongTu = () => {
                     {limitedData?.map((item, idx) => (
                         <Col key={idx}>
                             <div className="">
-                                <Image
-                                    src={`${process.env.NEXT_PUBLIC_API_URL}/${item.HinhAnh[0]?.DuongDanHinh}`}
-                                    style={{ objectFit: "cover" }}
-                                    className="mb-4 w-100 shadow-custom rounded cursor"
-                                    alt="Ảnh sản phẩm"
-                                    width={250}
-                                    height={250}
-                                    onClick={() => router.push(`${item.SanPhamId}`)}
-                                />
+                                <div className='ratio ratio-4x3'>
+                                    <Image
+                                        src={`${process.env.NEXT_PUBLIC_API_URL}/${item.HinhAnh[0]?.DuongDanHinh}`}
+                                        style={{ objectFit: "cover" }}
+                                        className="mb-4 shadow-custom rounded cursor"
+                                        alt="Ảnh sản phẩm"
+                                        width={250}
+                                        height={250}
+                                        onClick={() => router.push(`${item.SanPhamId}`)}
+                                    />
+                                </div>
                                 <div className="d-flex card-product">
                                     <Col xs={7} lg={8}>
-                                        <div className="">
+                                        <div className="pt-2">
                                             <h6 className="text-truncate">
                                                 {item.TenSanPham}
                                             </h6>
@@ -105,7 +107,6 @@ const SanPhamTuongTu = () => {
                                                 :
                                                 <Button
                                                     variant="green"
-                                                    style={{}}
                                                     className="border"
                                                     aria-label="Mua sản phẩm"
                                                     onClick={() => handleAddToCart()}

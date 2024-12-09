@@ -56,8 +56,7 @@ const DonHangStatus = ({ selectedStatus, filterOrdersByStatus, statusType, statu
                                                                 alt={sanPham.TenSanPham}
                                                                 width={70}
                                                                 height={70}
-                                                                objectFit="cover"
-                                                                className={styles.productImage}
+                                                                className='object-fit-cover'
                                                             />
                                                             <div className={styles.productText}>
                                                                 <div className={styles.productText1}>

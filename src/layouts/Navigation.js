@@ -49,7 +49,6 @@ const Navigation = () => {
                             <Link href='/gioi-thieu' className='nav-link'>Giới thiệu</Link>
                             <Link href='/san-pham' className='nav-link'>Sản phẩm</Link>
                             <Link href='/tin-tuc' className='nav-link'>Tin tức</Link>
-                            <Link href='/hoat-dong' className='nav-link'>Hoạt động</Link>
                             <div className="me-lg-1 d-flex flex-wrap gap-2 align-items-center justify-content-between">
                                 <div className='pe-1 w-100 border border-1 rounded-3 d-flex bg-white'>
                                     <Button variant='white' className=''>

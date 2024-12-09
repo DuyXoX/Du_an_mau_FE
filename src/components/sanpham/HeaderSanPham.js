@@ -48,13 +48,17 @@ const HeaderSanPham = ({ products }) => {
                         >
                             <Col md={5}>
                                 <div className="p-3">
-                                    <Image
-                                        src={`${process.env.NEXT_PUBLIC_API_URL}/${products.HinhAnh[0].DuongDanHinh}`}
-                                        alt={products.TenSanPham}
-                                        width={400}
-                                        height={400}
-                                        className="w-100 object-fit-cover rounded"
-                                    />
+                                    <div className='ratio ratio-4x3'>
+                                        <Image
+                                            src={`${process.env.NEXT_PUBLIC_API_URL}/${products.HinhAnh[0].DuongDanHinh}`}
+                                            alt={products.TenSanPham}
+                                            width={300}
+                                            height={300}
+                                            //loading="lazy" // Hoãn tải ảnh
+                                            //priority // Ưu tiên tải ảnh
+                                            className="object-fit-cover rounded"
+                                        />
+                                    </div>
                                 </div>
                             </Col>
                             <Col md={7} className="d-flex align-items-center">
