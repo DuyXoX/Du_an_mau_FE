@@ -157,7 +157,7 @@ const DonHang = () => {
                                             </div>
                                         )}
 
-                                        {orders.length < 0 ? (
+                                        {orders.length === 0 ? (
                                             <p className={styles.noOrders}>Không có đơn hàng nào.</p>
                                         ) : (
                                             <div className={styles.ordersList}>

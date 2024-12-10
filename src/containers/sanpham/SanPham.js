@@ -61,7 +61,13 @@ const SanPham = () => {
         setBtnAcvite(categoryId);
     };
 
-    // { console.log('check: ', searchResults) }
+    const handleRemoveFilter = () => {
+        setSelectedCategoryId('');
+        setBtnAcvite('');
+        setSearchResults([...productData]);
+    }
+
+    // console.log('check: ', searchResults)
 
     return (
         <section>
@@ -188,13 +194,13 @@ const SanPham = () => {
                                 </div>
                                 <Button variant='green'
                                     className=''
-                                    onClick={handleFilterClick}
+                                    onClick={() => handleFilterClick()}
                                 >
                                     Lọc
                                 </Button>
                                 <Button variant='outline-success'
                                     className=''
-                                    onClick={() => setSearchResults(productData)}
+                                    onClick={() => handleRemoveFilter()}
                                 >
                                     Bỏ Lọc
                                 </Button>

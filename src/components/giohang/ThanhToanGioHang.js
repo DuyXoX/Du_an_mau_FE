@@ -8,7 +8,7 @@ import Cookies from 'js-cookie';
 import { setCookie } from '../reuses/Cookie';
 
 const ThanhToanGioHang = ({ info }) => {
-    const { data, isLoading, error, mutate } = useGetData(`/user/${info.decoded?.id}`);
+    const { data, isLoading, error, mutate } = useGetData(`/user/${info.decoded?.NguoiDungId}`);
     const { cart, updateData } = useContext(InfoCartContext);
     const [isAddressInputVisible, setAddressInputVisible] = useState(false);
     const [isAddressInputSDT, setAddressInputSDT] = useState(false);
@@ -62,7 +62,7 @@ const ThanhToanGioHang = ({ info }) => {
 
         setFormData(preData => ({
             ...preData,
-            NguoiDungId: info.decoded?.id,
+            NguoiDungId: info.decoded?.NguoiDungId,
             TongTien: totalAmount,
             chiTietSanPhamList: chiTietSanPhamList
         }))
@@ -156,7 +156,7 @@ const ThanhToanGioHang = ({ info }) => {
                 }));
 
                 const orderData = {
-                    NguoiDungId: info.decoded?.id,
+                    NguoiDungId: info.decoded?.NguoiDungId,
                     TongTien: totalAmount,
                     chiTietSanPhamList: chiTietSanPhamList,
                     TrangThai: trangThaiThanhToans,

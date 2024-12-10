@@ -16,7 +16,7 @@ const DeleteModal = ({ item, updateData }) => {
         };
 
         try {
-            await deleteData(`/${sanphamToUpdate.SanPhamId}/${sanphamToUpdate.ChiTietSanPhamId}`, sanphamToUpdate);
+            await deleteData(`/cart/${sanphamToUpdate.SanPhamId}/${sanphamToUpdate.ChiTietSanPhamId}`, sanphamToUpdate);
             await updateData();
             return toggleShowDeleteModal(false);
         } catch (error) {

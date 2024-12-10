@@ -9,7 +9,7 @@ import NguoiDungMatKhau from './NguoiDungMatKhau';
 
 const NguoiDungMain = () => {
     const ss_account = Cookies.get('ss_account');
-    const Id = jwtVerify(ss_account)?.id;
+    const Id = jwtVerify(ss_account)?.NguoiDungId;
     const { data, mutate } = useGetData(`/user/${Id}`);
 
     // console.log('check: ', Id);
