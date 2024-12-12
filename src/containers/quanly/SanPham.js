@@ -13,7 +13,7 @@ import ValidateSanPham from '../validations/ValidateSanPham';
 
 const SanPham = () => {
     const { toggleHeadTitle } = useContext(HeadeTitleContext);
-    const { data, error, isLoading, mutate } = useGetData('/sanpham');
+    const { data, error, isLoading, mutate } = useGetData('/v2/sanpham');
 
     const ss_account = Cookies.get('ss_account');
     const typeData = {

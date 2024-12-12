@@ -1,6 +1,6 @@
 import { InfoCartContext } from '@/containers/context/InFoCart';
 import { apiClient, postData, putData, useGetData } from '@/service/apiServive';
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext, useEffect, useMemo, useState } from 'react';
 import { Button, Col, Modal, Row, Table } from 'react-bootstrap';
 import showToast from '../reuses/Toast';
 import { toast } from 'react-toastify';
@@ -18,7 +18,27 @@ const ThanhToanGioHang = ({ info }) => {
     const [address, setAddress] = useState("");
     const [checkError, setCheckError] = useState(true);
     const [showAddModal, setShowAddModal] = useState(false);
+    const [shippingMessage, setShippingMessage] = useState("");
+    const [shippingMessage1, setShippingMessage1] = useState("");
     const appTransId = Cookies.get('app_trans_id');
+    const districtsInDakLak = [
+        "Thành phố Buôn Ma Thuột", "TP Buôn Ma Thuột", "tp Buôn Ma Thuột", "tp buôn ma thuột", "Thành Phố Buôn Ma Thuột", "thành phố Buôn Ma Thuột", "thành phố buôn ma thuột",
+        "Thành Phố Buôn Ma Thuột", "Buôn Ma Thuột", "buon ma thuot", "buôn ma thuột", "buon ma thuột",
+        "Huyện Krông Pắc", "Huyện Krong Pac", "huyện Krông Pắc", "huyện Krông Pắc", "Krông Pắc", "Krong Pac", "krong pac",
+        "Huyện Cư Kuin", "Huyện Cư Kuin", "huyện Cư Kuin", "Huyện cu kuin", "Cư Kuin", "Cư kuin", "cu kuin",
+        "Huyện Ea Kar", "Huyện Ea Kar", "huyện Ea Kar", "Ea Kar", "ea kar", "Ea kar", "Eakar", "eakar",
+        "Huyện Cư M’gar", "Huyện Cư M'gar", "huyện Cư M’gar", "Cư M’gar", "Cư M'gar", "cu mgar", "Cư M’gar", "Cư Mgar",
+        "Huyện Ea H’leo", "Huyện Ea H'leo", "Ea H’leo", "Ea Hleo", "ea h'leo", "Ea Hleo",
+        "Thị xã Buôn Hồ", "Thị Xã Buôn Hồ", "thị xã Buôn Hồ", "Buôn Hồ", "Buon Ho", "buon ho", "buôn hồ",
+        "Huyện Krông Năng", "Huyện Krong Nang", "Huyện Krông Năng", "Krông Năng", "Krông Năng", "krong nang",
+        "Huyện Krông Bông", "Huyện Krong Bong", "Krông Bông", "Krong Bong", "krong bong", "Krông Bông",
+        "Huyện Krông Ana", "Huyện Krong Ana", "Krông Ana", "Krong Ana", "krong ana", "Huyện Krông Ana", "huyện Krông Ana",
+        "Huyện M’Drắk", "Huyện M'Drắk", "Huyện M’Drắk", "M’Drắk", "M'Drắk", "m'drăk",
+        "Huyện Lắk", "Huyện Lắk", "Lắk", "Lak", "lắk", "lák",
+        "Huyện Buôn Đôn", "Huyện Buon Don", "Buôn Đôn", "Buon Don", "buon don", "Buôn Đôn",
+        "Huyện Ea Sup", "Huyện Ea Sup", "Ea Sup", "ea sup", "Ea Sup", "ea sup",
+        "Huyện Krông Búk", "Huyện Krong Buk", "Krông Búk", "Krong Buk", "krong buk", "Krông Búk"
+    ];
 
     useEffect(() => {
         if (cart && cart.length > 0) {
@@ -28,6 +48,28 @@ const ThanhToanGioHang = ({ info }) => {
         }
 
     }, [cart])
+
+    useEffect(() => {
+        // Kiểm tra xem địa chỉ có chứa các huyện Đắk Lắk không
+        if (data.DiaChi) {
+            const addressLowerCase = data.DiaChi.toLowerCase(); // Chuyển thành chữ thường
+            const isInDakLak = districtsInDakLak.some(district =>
+                addressLowerCase.includes(district.toLowerCase())
+            );
+
+            if (isInDakLak) {
+                setShippingMessage("Thời gian vận chuyển: 1-2 ngày.");
+                setShippingMessage1(""); // Nếu có thông báo lỗi trước đó, xóa nó đi
+                localStorage.setItem("shippingMessage", "Thời gian vận chuyển: 1-2 ngày.");
+                localStorage.setItem("shippingMessage1", ""); // Đảm bảo không có lỗi
+            } else {
+                setShippingMessage(""); // Nếu không phải Đắk Lắk, xóa thông báo thời gian vận chuyển
+                setShippingMessage1("Không thể vận chuyển đến Tỉnh Huyện ngoài tỉnh Đắk Lắk");
+                localStorage.setItem("shippingMessage", ""); // Xóa thông báo hợp lệ
+                localStorage.setItem("shippingMessage1", "Không thể vận chuyển đến Tỉnh Huyện ngoài tỉnh Đắk Lắk");
+            }
+        }
+    }, [data.DiaChi]);
 
     const totalAmount = cart?.reduce((total, item) => {
         return total + (parseInt(item.Gia.Gia) * item.SoLuong);
@@ -44,7 +86,7 @@ const ThanhToanGioHang = ({ info }) => {
         setCheckError(false);
     }
 
-    const toggleShowAddModal = (e) => {
+    const toggleShowAddModal = () => {
         if (!data.DiaChi) {
             return showToast('warning', 'Vui lòng thêm địa chỉ nhận hàng!')
         }
@@ -66,15 +108,17 @@ const ThanhToanGioHang = ({ info }) => {
             TongTien: totalAmount,
             chiTietSanPhamList: chiTietSanPhamList
         }))
-        setShowAddModal(true);
-        return
+        return setShowAddModal(true);
     };
+
+    // console.log('check: ', formData);
 
     const handlePay = async () => {
         const loading = toast.loading('Đang xử lý yêu cầu.');
         if (!typePay) {
             showToast('warning', 'Vui lòng chọn phương thức thanh toán.', loading);
-            return setCheckError(true);
+            setCheckError(true);
+            return;
         }
         setCheckError(true);
 
@@ -110,10 +154,10 @@ const ThanhToanGioHang = ({ info }) => {
                     Gia: item.Gia.Gia,
                     SoLuong: item.SoLuong,
                 }));
-
+                // Yêu cầu thanh toán qua ZaloPay
                 const res = await postData('/paymentzalo', {
                     amount: totalAmount,
-                    orderId: `temp-${Date.now()}`,
+                    orderId: `temp-${Date.now()}`, // ID đơn hàng tạm thời
                     items: items,
                 });
 
@@ -129,7 +173,7 @@ const ThanhToanGioHang = ({ info }) => {
             }
         } catch (error) {
             toast.update(loading, { render: 'Có lỗi xảy ra khi gửi yêu cầu.', type: 'error', isLoading: false, autoClose: 3000 });
-            console.error('check error: ', error);
+            console.error('Lỗi xử lý thanh toán:', error);
             return;
         }
     };
@@ -207,7 +251,8 @@ const ThanhToanGioHang = ({ info }) => {
         }
     }, [cart, appTransId])
 
-    const handleSelectAddressSDT = () => {
+    const handleSelectSDT = (e) => {
+        setSDT(e)
         setAddressInputSDT(true); // Hiện input nhập địa chỉ
     };
 
@@ -244,13 +289,30 @@ const ThanhToanGioHang = ({ info }) => {
     };
 
     // Nhập địa chỉ
-    const handleSelectAddress = () => {
+    const handleSelectAddress = (e) => {
+        setAddress(e);
         setAddressInputVisible(true); // Hiện input nhập địa chỉ
     };
 
     const handleAddressChange = (e) => {
-        setAddress(e.target.value);
+        const newAddress = e.target.value;
+        setAddress(newAddress);
     };
+
+    useEffect(() => {
+        // Đọc từ localStorage
+        const savedShippingMessage = localStorage.getItem("shippingMessage");
+        const savedShippingMessage1 = localStorage.getItem("shippingMessage1");
+
+        if (savedShippingMessage) {
+            setShippingMessage(savedShippingMessage);
+        }
+
+        if (savedShippingMessage1) {
+            setShippingMessage1(savedShippingMessage1);
+        }
+    }, []); // Chỉ chạy một lần khi component được render
+
 
     const handleAddressConfirm = async () => {
         const loading = toast.loading('Đang xử lý yêu cầu.');
@@ -280,6 +342,7 @@ const ThanhToanGioHang = ({ info }) => {
         }
     };
     // console.log('check: ', address);
+
 
     return (
         <>
@@ -325,7 +388,7 @@ const ThanhToanGioHang = ({ info }) => {
                                     </span>
                                     :
                                     <span
-                                        onClick={handleSelectAddress}
+                                        onClick={() => handleSelectAddress(data.DiaChi)}
                                         className='ps-1 text-primary cursor'
                                     >
                                         Thay đổi
@@ -361,14 +424,14 @@ const ThanhToanGioHang = ({ info }) => {
                                 </div>
                                 : !data?.SoDienThoai ?
                                     <span
-                                        onClick={handleSelectAddressSDT}
+                                        onClick={handleSelectSDT}
                                         className='ps-1 text-primary cursor'
                                     >
                                         Thêm
                                     </span>
                                     :
                                     <span
-                                        onClick={handleSelectAddressSDT}
+                                        onClick={() => handleSelectSDT(data.SoDienThoai)}
                                         className='ps-1 text-primary cursor'
                                     >
                                         Thay đổi
@@ -377,17 +440,40 @@ const ThanhToanGioHang = ({ info }) => {
                         </td>
                     </tr>
                     <tr>
+                        <td>Phí giao hàng:</td>
+                        <td>
+                            {totalAmount < 100000
+                                ? '30.000 VNĐ'
+                                : totalAmount >= 100000 && totalAmount <= 500000
+                                    ? '25.000 VNĐ'
+                                    : 'Miễn phí'}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Thời Gian Vận Chuyển</td>
+                        <td>
+                            {shippingMessage && <p>{shippingMessage}</p>} {/* Hiển thị nếu có thông báo hợp lệ */}
+                            {shippingMessage1 && <p>{shippingMessage1}</p>} {/* Hiển thị nếu có thông báo lỗi */}
+                        </td>
+                    </tr>
+                    <tr>
                         <td>
                             <strong>Tổng tiền:</strong>
                         </td>
-                        <td>{totalAmount?.toLocaleString("vi-VN")} VNĐ</td>
+                        <td>
+                            {totalAmount && totalAmount < 100000
+                                ? (totalAmount + 30000).toLocaleString("vi-VN")
+                                : totalAmount >= 100000 && totalAmount <= 500000
+                                    ? (totalAmount + 25000).toLocaleString("vi-VN")
+                                    : totalAmount?.toLocaleString("vi-VN")} VNĐ
+                        </td>
                     </tr>
                     <tr>
                         <td colSpan={2} >
-                            <div className='d-flex justify-content-betwen'>
+                            <div className='d-flex justify-content-center'>
                                 <Button variant='green'
                                     onClick={() => toggleShowAddModal()}
-                                    disabled={checkError}
+                                    disabled={shippingMessage == "Thời gian vận chuyển: 1-2 ngày" || shippingMessage1 !== ""}
                                 >
                                     Thanh toán
                                 </Button>

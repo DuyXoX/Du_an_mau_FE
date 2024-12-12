@@ -1,3 +1,4 @@
+import BackToTop from "@/components/backto/BackToTop";
 import Footer from "@/layouts/Footer";
 import Navigation from "@/layouts/Navigation";
 
@@ -11,6 +12,7 @@ export default function NestedLayout({ children }) {
         <>
             <Navigation />
             {children}
+            <BackToTop />
             <Footer />
         </>
     );

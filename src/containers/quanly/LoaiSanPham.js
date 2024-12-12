@@ -13,7 +13,7 @@ import ValidateLoaiSanPham from '../validations/ValidateLoaiSanPham';
 
 const LoaiSanPham = () => {
     const { toggleHeadTitle } = useContext(HeadeTitleContext);
-    const { data, error, isLoading, mutate } = useGetData('/loaisp');
+    const { data, error, isLoading, mutate } = useGetData('/v2/loaisp');
 
     const ss_account = Cookies.get('ss_account');
     const typeData = {

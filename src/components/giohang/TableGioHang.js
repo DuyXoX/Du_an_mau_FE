@@ -40,7 +40,7 @@ const TableGioHang = () => {
     }
 
     const handleSubmitEdit = async (item) => {
-        const updatedQuantity = quantities[item.SanPhamId] || item.SoLuong; // Lấy số lượng mới từ state
+        const updatedQuantity = quantities[item.Gia.ChiTietSanPhamId] || item.SoLuong; // Lấy số lượng mới từ state
         const sanphamToUpdate = {
             SanPhamId: item.SanPhamId,
             ChiTietSanPhamId: item.Gia.ChiTietSanPhamId,
@@ -105,16 +105,17 @@ const TableGioHang = () => {
                                         >
                                             <FaPlus size={10} className="" />
                                         </Button>
+                                        {/* {console.log('check: ', item)} */}
                                         <input
                                             style={{ width: "50px" }}
                                             className="border rounded text-center"
                                             type="number"
-                                            value={quantities[item.SanPhamId] || item.SoLuong}
+                                            value={quantities[item.Gia.ChiTietSanPhamId] || item.SoLuong}
                                             onChange={(e) => {
                                                 const newValue = Math.max(1, Math.min(99, e.target.value)); // Giới hạn số lượng từ 1 đến 99
                                                 setQuantities(prev => ({
                                                     ...prev,
-                                                    [item.SanPhamId]: newValue
+                                                    [item.Gia.ChiTietSanPhamId]: newValue
                                                 }));
                                             }}
                                         />
