@@ -5,14 +5,7 @@ import { useGetData } from '@/service/apiServive';
 import React from 'react';
 import { Col, Container, Row } from 'react-bootstrap';
 
-const ThongKee = () => {
-    const { data: nguoiDung } = useGetData('/user')
-    const { data: sanPham } = useGetData('/v2/sanpham')
-    const { data: donHang, isLoading, error, mutate } = useGetData('/donhangall')
-
-    if (isLoading) return <div>Loading...</div>;
-    if (error) return <div>Error: {error.message}</div>;
-
+const ThongKee = ({ nguoiDung, sanPham, donHang }) => {
     const hoaDonTheoTrangThai = (status) => {
         return donHang.filter(order => order.TrangThai === status);
     }
@@ -54,7 +47,7 @@ const ThongKee = () => {
                         Danh Sách Thống Kê
                     </h3>
                 </div>
-                <Row xs={2} sm={3} md={4} lg={5} className='g-3 mb-3'>
+                <Row xs={2} sm={3} lg={6} className='g-3 mb-3'>
                     <Col>
                         <div className='p-3 text-white h-100 rounded shadow-sm bg-info'>
                             <h3 className=''>
@@ -94,22 +87,19 @@ const ThongKee = () => {
                             </h4>
                         </div>
                     </Col>
-                    {/* <Col>
-                        <div className='p-3 h-100 text-white rounded bg-warning bg-opacity-75'>
+                    <Col>
+                        <div className='p-3 h-100 text-white rounded bg-success bg-opacity-75'>
                             <h4 className=''>
-                                Top Bán Chạy
+                                {nguoiDung.length === 0 ?
+                                    0
+                                    : nguoiDung.length
+                                }
+                                <span className='fs-6'>
+                                    {' '} Người dùng
+                                </span>
                             </h4>
-                            <span className='fs-8'>
-                                Top 1:
-                            </span>
-                            <span className='fs-8'>
-                                Top 2:
-                            </span>
-                            <span className='fs-8'>
-                                Top 3:
-                            </span>
                         </div>
-                    </Col> */}
+                    </Col>
                     <Col>
                         <div className='p-3 text-white h-100 rounded shadow-sm bg-warning bg-opacity-75'>
                             <h4 className=''>
@@ -137,7 +127,6 @@ const ThongKee = () => {
                             </h4>
                         </div>
                     </Col>
-
                 </Row>
 
                 <Row className='g-3'>

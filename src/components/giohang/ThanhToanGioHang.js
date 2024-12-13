@@ -51,7 +51,7 @@ const ThanhToanGioHang = ({ info }) => {
 
     useEffect(() => {
         // Kiểm tra xem địa chỉ có chứa các huyện Đắk Lắk không
-        if (data.DiaChi) {
+        if (data?.DiaChi) {
             const addressLowerCase = data.DiaChi.toLowerCase(); // Chuyển thành chữ thường
             const isInDakLak = districtsInDakLak.some(district =>
                 addressLowerCase.includes(district.toLowerCase())
@@ -69,7 +69,7 @@ const ThanhToanGioHang = ({ info }) => {
                 localStorage.setItem("shippingMessage1", "Không thể vận chuyển đến Tỉnh Huyện ngoài tỉnh Đắk Lắk");
             }
         }
-    }, [data.DiaChi]);
+    }, [data?.DiaChi]);
 
     const totalAmount = cart?.reduce((total, item) => {
         return total + (parseInt(item.Gia.Gia) * item.SoLuong);

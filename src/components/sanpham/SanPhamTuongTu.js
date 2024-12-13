@@ -63,10 +63,10 @@ const SanPhamTuongTu = () => {
                                             <div className="price d-flex justify-content-between">
                                                 <div className="d-flex justify-content-center align-items-center">
                                                     <div className="fs-8 text-truncate text-secondary text-decoration-line-through">
-                                                        {item.PhanLoai[item.PhanLoai.length - 1].Gia?.toLocaleString("vi-VN")} VNĐ
+                                                        {Number(item.PhanLoai[item.PhanLoai.length - 1].Gia)?.toLocaleString("vi-VN")} VNĐ
                                                     </div>
                                                     <div className="fs-8 ms-1 text-truncate">
-                                                        {item.PhanLoai[0].Gia?.toLocaleString("vi-VN")} VNĐ
+                                                        {Number(item.PhanLoai[0].Gia)?.toLocaleString("vi-VN")} VNĐ
                                                     </div>
                                                 </div>
                                                 <div

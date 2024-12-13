@@ -1,22 +1,32 @@
 'use client'
 import Image from 'next/image';
 import Link from 'next/link';
-import React, { useEffect, useState } from 'react';
-import { Button, Container, Nav, Navbar } from 'react-bootstrap';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
+import { Button, Container, ListGroup, Nav, Navbar } from 'react-bootstrap';
 import Logo from '../assets/imgs/Screenshot 2023-07-29 172851.png';
 import '../styles/Navigation.scss';
 import { IoMdSearch } from 'react-icons/io';
 import Cookies from 'js-cookie';
-import { clearCookiesAndRedirect } from '@/components/reuses/Cookie';
 import GioHangNavigation from '@/components/giohang/GioHangNavigation';
 import { InfoUser } from '@/containers/context/InfoUser';
 import { InFoCart } from '@/containers/context/InFoCart';
 import LogOutNavbar from '@/components/header/LogOutNavbar';
+import { apiClient } from '@/service/apiServive';
 
 const Navigation = () => {
+    const [keySearch, setKeySearch] = useState('');
+    const [product, setProduct] = useState([]);
+    const timeoutRef = useRef(null);
+    const dropdownRef = useRef(null);
+    const [dropdown, setDropDown] = useState(false);
     const [isAuthenticated, setIsAuthenticated] = useState(null);
     const ss_account = Cookies.get('ss_account');
     const account_user = Cookies.get('account_user');
+
+    const handleDropdown = () => {
+        setDropDown(prevState => !prevState);
+    };
+
 
     useEffect(() => {
         if (ss_account && account_user) {
@@ -26,7 +36,27 @@ const Navigation = () => {
         }
     }, [ss_account, account_user]);
 
-    // console.log('check isAuthenticated', isAuthenticated);
+    useEffect(() => {
+        if (keySearch) {
+            const fetchData = async () => {
+                const response = await apiClient.get(`/search/${keySearch}`);
+                return setProduct(response.data);
+            }
+            // console.log('check re render');
+            fetchData();
+        }
+    }, [keySearch]);
+
+    const handleSearch = useCallback((searchTerm) => {
+        clearTimeout(timeoutRef.current);
+        timeoutRef.current = setTimeout(() => {
+            setKeySearch(searchTerm);
+            // console.log('check re render');
+        }, 300);
+    }, [setKeySearch]);
+
+    // console.log('check', product && product);
+    // console.log('check: ', keySearch);
 
     return (
         <>
@@ -49,20 +79,51 @@ const Navigation = () => {
                             <Link href='/gioi-thieu' className='nav-link'>Giới thiệu</Link>
                             <Link href='/san-pham' className='nav-link'>Sản phẩm</Link>
                             <Link href='/tin-tuc' className='nav-link'>Tin tức</Link>
-                            {/* <div className="me-lg-1 d-flex flex-wrap gap-2 align-items-center justify-content-between">
+                            <div className="me-lg-1 d-flex flex-wrap gap-2 align-items-center justify-content-between position-relative">
                                 <div className='pe-1 w-100 border border-1 rounded-3 d-flex bg-white'>
                                     <Button variant='white' className=''>
                                         <IoMdSearch className='fs-5' />
                                     </Button>
                                     <input type="search"
-                                        // onInput={(e) => handleSearch(e.target.value)}
+                                        onChange={(e) => handleSearch(e.target.value)}
+                                        ref={dropdownRef}
+                                        onClick={handleDropdown}
                                         placeholder="Tìm kiếm..."
                                         className='form-control border border-0'
                                     />
                                 </div>
-                            </div> */}
-                            {/* <Link href='/gio-hang' className='nav-link'>Giỏ Hàng </Link> */}
-
+                                <ListGroup style={{ height: '350px' }}
+                                    className={`mt-2 z-1 w-100 overflow-auto position-absolute top-100 ${!dropdown && 'd-none'}`}
+                                >
+                                    {product.length > 0 ?
+                                        product.map((item, idx) => (
+                                            <ListGroup.Item key={idx}>
+                                                <Link href={`/san-pham/${item.SanPhamId}`}
+                                                    className='fs-8 text-black text-decoration-none d-flex'
+                                                    onClick={() => setDropDown(false)}
+                                                >
+                                                    <Image src={`${process.env.NEXT_PUBLIC_API_URL}/${item.HinhAnh[0]?.DuongDanHinh}`}
+                                                        width={35}
+                                                        height={35}
+                                                        alt='Ảnh sản phẩm'
+                                                    />
+                                                    <div className='ps-1'>
+                                                        <span>
+                                                            {item.SanPham[0]?.LoaiChiTiet}
+                                                        </span>
+                                                        <br />
+                                                        <span className='fw-bold text-green'>
+                                                            {Number(item.SanPham[0]?.Gia).toLocaleString("vi-VN")} VNĐ
+                                                        </span>
+                                                    </div>
+                                                </Link>
+                                            </ListGroup.Item>
+                                        ))
+                                        :
+                                        <ListGroup.Item>Không có sản phẩm nào được tìm thấy.</ListGroup.Item>
+                                    }
+                                </ListGroup>
+                            </div>
                         </Nav>
                         {!isAuthenticated ?
                             <div className='d-flex'>

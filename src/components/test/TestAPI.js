@@ -4,12 +4,13 @@ import { memo } from "react";
 import { Button } from "react-bootstrap";
 
 const TestAPI = (() => {
-    // const test = async () => {
-    //     const reponse = await apiClient.get("/users");
-    //     console.log('check call api', reponse);
-    // };
-    const { data, error, isLoading, mutate } = useGetData('/users');
-    console.log('check call api', data);
+    const keySearch = 'Rau';
+    const test = async () => {
+        const reponse = await apiClient.get(`/search/${keySearch}`);
+        console.log('check call api', reponse);
+    };
+    // const { data, error, isLoading, mutate } = useGetData('/user');
+    // console.log('check call api', data);
 
     return <>
         <Button onClick={() => { test() }}>
