@@ -2,11 +2,7 @@ import React, { memo, useCallback, useContext, useRef, useState } from 'react';
 import { Column } from 'primereact/column';
 import { DataTable } from 'primereact/datatable';
 import TableTitle from '../TableTitle';
-import UpdateModal from '@/components/modals/cruds/UpdateModal';
-import DeleteModal from '@/components/modals/cruds/DeleteModal';
-import { TableInfoContext } from '@/containers/context/getdata/TableInfo';
 import { TableContext } from '@/containers/context/getdata/TableData';
-import Image from 'next/image';
 import ViewDonHangChiTiet from '@/components/modals/cruds/chitietdonhang/ViewDonHangChiTiet';
 import { Button, Form } from 'react-bootstrap';
 import showToast from '@/components/reuses/Toast';
@@ -45,15 +41,6 @@ const DonHang = () => {
         }, 300);
     }, []);
 
-    const status = (rowData) => {
-        const color = statusColor[rowData?.TrangThai] || "transparent"; // Mặc định là trong suốt nếu không có trạng thái
-        return (
-            <div style={{ backgroundColor: color }} className='text-center text-white rounded'>
-                {statusType[rowData?.TrangThai] || "Chưa xác định"}
-            </div>
-        );
-    }
-
     // Thực hiện lấy data của hàng và thực hiện trức năng (logic lấy data đc thư viện PrimeReact thực hiện từ DataTable)
     const viewChiTiet = useCallback((rowData) => {
         return (<>
@@ -66,10 +53,12 @@ const DonHang = () => {
 
     const statusTemplate = (rowData) => {
         const isEditing = showUpdateStatus === rowData.DonHangId; // Kiểm tra xem hàng này có đang được chỉnh sửa không
+        const trangThai = rowData.TrangThai;
+        // console.log('check: ', rowData);
 
         return (
             <>
-                {isEditing ? (
+                {isEditing && trangThai !== 'hoantat' ? (
                     <>
                         <Form.Select size="sm"
                             className='p-1'

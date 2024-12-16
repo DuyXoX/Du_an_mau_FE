@@ -114,12 +114,12 @@ const LoginSignupTwo = ({ login, formData, errors, checkError, handleChange, han
                         Đăng nhập tài khoản.
                     </Link>
                 }
-                <Link
+                {/* <Link
                     className='text-green nav-link'
                     href={'/quen-mat-khau'}
                 >
                     Quên mật khẩu?
-                </Link>
+                </Link> */}
             </div>
 
             <div className='d-flex justify-content-center'>

@@ -1,3 +1,5 @@
+'use client'
+
 import { InfoCartContext } from '@/containers/context/InFoCart';
 import { apiClient, postData, putData, useGetData } from '@/service/apiServive';
 import React, { useContext, useEffect, useMemo, useState } from 'react';
@@ -21,7 +23,7 @@ const ThanhToanGioHang = ({ info }) => {
     const [shippingMessage, setShippingMessage] = useState("");
     const [shippingMessage1, setShippingMessage1] = useState("");
     const appTransId = Cookies.get('app_trans_id');
-    const districtsInDakLak = [
+    const [districtsInDakLak, setDistrictsInDakLak] = useState([
         "Thành phố Buôn Ma Thuột", "TP Buôn Ma Thuột", "tp Buôn Ma Thuột", "tp buôn ma thuột", "Thành Phố Buôn Ma Thuột", "thành phố Buôn Ma Thuột", "thành phố buôn ma thuột",
         "Thành Phố Buôn Ma Thuột", "Buôn Ma Thuột", "buon ma thuot", "buôn ma thuột", "buon ma thuột",
         "Huyện Krông Pắc", "Huyện Krong Pac", "huyện Krông Pắc", "huyện Krông Pắc", "Krông Pắc", "Krong Pac", "krong pac",
@@ -38,7 +40,19 @@ const ThanhToanGioHang = ({ info }) => {
         "Huyện Buôn Đôn", "Huyện Buon Don", "Buôn Đôn", "Buon Don", "buon don", "Buôn Đôn",
         "Huyện Ea Sup", "Huyện Ea Sup", "Ea Sup", "ea sup", "Ea Sup", "ea sup",
         "Huyện Krông Búk", "Huyện Krong Buk", "Krông Búk", "Krong Buk", "krong buk", "Krông Búk"
-    ];
+    ]);
+
+    const totalAmount = cart?.reduce((total, item) => {
+        return total + (parseInt(item.Gia.Gia) * item.SoLuong);
+    }, 0);
+
+    const tongTien = () => {
+        return totalAmount < 100000 ?
+            totalAmount + 30000
+            : totalAmount >= 100000
+                && totalAmount <= 500000 ?
+                totalAmount + 25000 : totalAmount
+    };
 
     useEffect(() => {
         if (cart && cart.length > 0) {
@@ -53,8 +67,8 @@ const ThanhToanGioHang = ({ info }) => {
         // Kiểm tra xem địa chỉ có chứa các huyện Đắk Lắk không
         if (data?.DiaChi) {
             const addressLowerCase = data.DiaChi.toLowerCase(); // Chuyển thành chữ thường
-            const isInDakLak = districtsInDakLak.some(district =>
-                addressLowerCase.includes(district.toLowerCase())
+            const isInDakLak = districtsInDakLak?.some(district =>
+                addressLowerCase?.includes(district.toLowerCase())
             );
 
             if (isInDakLak) {
@@ -69,11 +83,7 @@ const ThanhToanGioHang = ({ info }) => {
                 localStorage.setItem("shippingMessage1", "Không thể vận chuyển đến Tỉnh Huyện ngoài tỉnh Đắk Lắk");
             }
         }
-    }, [data?.DiaChi]);
-
-    const totalAmount = cart?.reduce((total, item) => {
-        return total + (parseInt(item.Gia.Gia) * item.SoLuong);
-    }, 0);
+    }, [data?.DiaChi, districtsInDakLak]);
 
     const handleClose = (() => {
         setFormData({});
@@ -154,9 +164,12 @@ const ThanhToanGioHang = ({ info }) => {
                     Gia: item.Gia.Gia,
                     SoLuong: item.SoLuong,
                 }));
+
+                const amount = tongTien();
+
                 // Yêu cầu thanh toán qua ZaloPay
                 const res = await postData('/paymentzalo', {
-                    amount: totalAmount,
+                    amount,
                     orderId: `temp-${Date.now()}`, // ID đơn hàng tạm thời
                     items: items,
                 });
@@ -243,13 +256,13 @@ const ThanhToanGioHang = ({ info }) => {
             console.error('check error: ', error.message);
             return;
         }
-    }
+    };
 
     useEffect(() => {
         if (cart && appTransId) {
             handleZaloPay();
         }
-    }, [cart, appTransId])
+    }, [cart, appTransId]);
 
     const handleSelectSDT = (e) => {
         setSDT(e)
@@ -524,7 +537,7 @@ const ThanhToanGioHang = ({ info }) => {
                                     {data?.DiaChi}
                                 </p>
                                 <strong>
-                                    {totalAmount?.toLocaleString("vi-VN")} VNĐ
+                                    {tongTien()?.toLocaleString("vi-VN")} VNĐ
                                 </strong>
                                 <div className='mt-2 d-flex'>
                                     <div style={{ backgroundColor: '' }}

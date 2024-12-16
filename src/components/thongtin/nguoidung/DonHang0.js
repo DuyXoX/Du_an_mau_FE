@@ -53,6 +53,7 @@ const DonHang = () => {
     useEffect(() => {
         fetchOrders(); // Gọi hàm khi component mount
     }, []);
+
     const retryFetchOrders = () => {
         fetchOrders(); // Hàm lấy danh sách đơn hàng
     };
@@ -83,7 +84,7 @@ const DonHang = () => {
 
     return (
         <section>
-            <Container fluid='xxl'>
+            <Container fluid='xxl' style={{ minHeight: '55vh' }}>
                 <Row>
                     <Col>
                         <div className='d-flex flex-wrap justify-content-between'>
