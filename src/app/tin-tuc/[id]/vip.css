@@ -1,0 +1,130 @@
+/* Đảm bảo toàn bộ nội dung được căn giữa */
+.container {
+    width: 80%;
+    margin: 0 auto;
+    text-align: center;
+  }
+  
+  .tin-tuc-detail {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    border-radius: 8px;
+  }
+  
+  .article-title {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-bottom: 20px;
+  }
+  
+  .article-date {
+    font-size: 1rem;
+    color: #555;
+    margin-bottom: 20px;
+  }
+  
+  .article-image-detail {
+    width: 100%;
+    height: auto;
+    max-width: 700px;
+    margin-bottom: 20px;
+    border-radius: 8px;
+  }
+  
+  .article-content-detail {
+    text-align: left;
+    font-size: 1.1rem;
+    line-height: 1.6;
+  }
+  
+  .article-content-detail p {
+    margin-bottom: 20px;
+  }
+  
+  .article-content-detail img {
+    max-width: 100%;
+    height: auto;
+  }
+  
+
+  /* Mục tin tức liên quan */
+.related-articles {
+    margin-top: 40px;
+  }
+  
+  .related-articles h2 {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-bottom: 20px;
+  }
+  
+  .related-articles-list {
+    display: flex;
+    overflow-x: auto;
+    gap: 20px;
+  }
+  
+  .related-article-item {
+    padding: 15px;
+    border-radius: 8px;
+    width: 200px;
+    box-sizing: border-box;
+    flex-shrink: 0;
+    text-align: center;
+  }
+  
+  .related-article-item h3 {
+    font-size: 1rem;
+    margin-bottom: 10px;
+  }
+  
+  .related-article-item p {
+    font-size: 0.9rem;
+    margin-bottom: 10px;
+    color: #555;
+  }
+  
+  .related-article-image {
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+    margin-bottom: 10px;
+  }
+  
+  .related-article-link {
+    font-size: 0.9rem;
+    color: #007bff;
+    text-decoration: none;
+  }
+  
+  .related-article-link:hover {
+    text-decoration: underline;
+  }
+  
+  /* Pagination */
+  .pagination {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 20px;
+  }
+  
+  .pagination-btn {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #fff;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  .pagination-btn:hover {
+    background-color: #f0f0f0;
+  }
+  
+  .pagination-btn.active {
+    background-color: #007bff;
+    color: #fff;
+  }
+  
