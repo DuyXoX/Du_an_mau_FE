@@ -201,7 +201,7 @@ const ThanhToanGioHang = ({ info }) => {
             let trangThaiThanhToans = response.data.return_message || "Không rõ trạng thái";
 
             if (trangThaiThanhToans === "Giao dịch thành công") {
-                trangThaiThanhToans = "hoantat";
+                trangThaiThanhToans = "dangxu ly";
                 Cookies.remove('app_trans_id', { path: '/' });
 
                 // Tạo đơn hàng sau khi xác nhận thanh toán
@@ -227,7 +227,7 @@ const ThanhToanGioHang = ({ info }) => {
                     const paymentData = {
                         DonHangId: donhangId,
                         PhuongThuc: "Zalo Pay",
-                        TrangThaiThanhToan: trangThaiThanhToans
+                        TrangThaiThanhToan: 'hoantat'
                     };
 
                     const paymentResponses = await postData('/thanh-toan', paymentData);
@@ -354,7 +354,7 @@ const ThanhToanGioHang = ({ info }) => {
             return;
         }
     };
-    // console.log('check: ', address);
+    console.log('check: ', totalAmount);
 
 
     return (
@@ -455,11 +455,20 @@ const ThanhToanGioHang = ({ info }) => {
                     <tr>
                         <td>Phí giao hàng:</td>
                         <td>
-                            {totalAmount < 100000
+                            {totalAmount
+                                ? totalAmount < 100000
+                                    ? '30.000 VNĐ'
+                                    : totalAmount >= 100000 && totalAmount <= 500000
+                                        ? '25.000 VNĐ'
+                                        : 'Miễn phí'
+                                : '0 VNĐ'}
+                            {/* {totalAmount < 100000
                                 ? '30.000 VNĐ'
                                 : totalAmount >= 100000 && totalAmount <= 500000
                                     ? '25.000 VNĐ'
-                                    : 'Miễn phí'}
+                                    : 'Miễn phí'
+                                    
+                                    } */}
                         </td>
                     </tr>
                     <tr>
@@ -486,7 +495,7 @@ const ThanhToanGioHang = ({ info }) => {
                             <div className='d-flex justify-content-center'>
                                 <Button variant='green'
                                     onClick={() => toggleShowAddModal()}
-                                    disabled={shippingMessage == "Thời gian vận chuyển: 1-2 ngày" || shippingMessage1 !== ""}
+                                    disabled={totalAmount <= 0 ? true : false}
                                 >
                                     Thanh toán
                                 </Button>
